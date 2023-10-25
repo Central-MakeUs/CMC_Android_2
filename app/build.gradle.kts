@@ -5,7 +5,12 @@ plugins {
 
 android {
     namespace = "com.cmc.android"
-    compileSdk = 33
+    compileSdk = 34
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
 
     defaultConfig {
         applicationId = "com.cmc.android"

@@ -1,8 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.CMC_Android" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.CMC_Android" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Titlebar 제거 부분 -->
+        <item name="windowNoTitle">true</item>
+        <!-- 상태바 투명 설정 부분 -->
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
     <style name="Theme.CMC_Android" parent="Base.Theme.CMC_Android" />
