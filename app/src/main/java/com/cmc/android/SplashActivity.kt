@@ -10,11 +10,13 @@ import com.cmc.android.databinding.ActivitySplashBinding
 class SplashActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashBinding
+    private var autoLogin: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
 
+        // UPDATE: 로그인 OR 홈 (자동 로그인)
         splashAnimation()
 
         setContentView(binding.root)
@@ -23,7 +25,10 @@ class SplashActivity : AppCompatActivity() {
     private fun splashAnimation() {
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed({
-            changeActivity(MainActivity::class.java)
+            if (autoLogin) {
+                changeActivity(MainActivity::class.java)
+            } else changeActivity(LoginActivity::class.java)
+
             finish()
         }, 1500)
     }

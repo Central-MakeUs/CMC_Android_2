@@ -1,6 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_gradient"
+    android:fitsSystemWindows="true" >
+
+    <TextView
+        android:id="@+id/login_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="수익형 앱 런칭을 위한 최고의\nIT 연합 동아리"
+        android:fontFamily="@font/pretendard_bold"
+        android:textSize="24sp"
+        android:textColor="@color/main"
+        android:textAlignment="center"
+        android:lineHeight="36sp"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/login_logo_iv"/>
+
+    <ImageView
+        android:id="@+id/login_logo_iv"
+        android:layout_width="108dp"
+        android:layout_height="112dp"
+        android:src="@drawable/ic_logo"
+        android:layout_marginTop="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_title_tv"
+        app:layout_constraintBottom_toTopOf="@id/login_btn" />
+    
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="로그인"
+        android:fontFamily="@font/pretendard_bold"
+        android:textSize="18sp"
+        android:textColor="@color/gray_50"
+        android:textAlignment="center"
+        android:paddingVertical="16dp"
+        android:background="@drawable/login_round_5_o"
+        android:backgroundTint="@color/main"
+        android:layout_marginTop="84dp"
+        android:layout_marginHorizontal="24dp"
+        app:layout_constraintTop_toBottomOf="@id/login_logo_iv"
+        app:layout_constraintBottom_toTopOf="@id/signup_btn" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/signup_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="회원가입"
+        android:fontFamily="@font/pretendard_bold"
+        android:textSize="18sp"
+        android:textColor="@color/gray_400"
+        android:textAlignment="center"
+        android:paddingVertical="16dp"
+        android:background="@drawable/login_round_5_stroke"
+        android:layout_marginTop="28dp"
+        android:layout_marginHorizontal="24dp"
+        app:layout_constraintTop_toBottomOf="@id/login_btn"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

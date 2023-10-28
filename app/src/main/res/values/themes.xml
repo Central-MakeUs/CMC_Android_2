@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.CMC_Android" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="Base.Theme.CMC_Android" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Titlebar 제거 부분 -->
         <item name="windowNoTitle">true</item>
         <!-- 상태바 투명 설정 부분 -->
