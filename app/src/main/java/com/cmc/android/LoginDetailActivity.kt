@@ -39,6 +39,17 @@ class LoginDetailActivity: AppCompatActivity() {
             binding.loginDetailPwdEt.transformationMethod = transformationMethod
             binding.loginDetailPwdEt.setSelection(binding.loginDetailPwdEt.text.length)
         }
+
+        binding.loginDetailFindIdTv.setOnClickListener {
+            var bottomSheetFindId = BottomSheetFindId()
+            bottomSheetFindId.show(supportFragmentManager, "BottomSheetLoginFail")
+        }
+
+        binding.loginDetailLoginBtn.setOnClickListener {
+            // UPDATE: API 연동 후 변경
+            var bottomSheetLoginFail = BottomSheetLoginFail()
+            bottomSheetLoginFail.show(supportFragmentManager, "BottomSheetLoginFail")
+        }
     }
 
     private fun initFocusListener() {
