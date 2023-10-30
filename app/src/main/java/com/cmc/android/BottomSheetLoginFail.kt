@@ -5,21 +5,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.cmc.android.databinding.BottomSheetLoginFailBinding
+import com.cmc.android.databinding.BottomSheetTitleContentBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomSheetLoginFail: BottomSheetDialogFragment() {
 
-    private lateinit var binding: BottomSheetLoginFailBinding
+    private lateinit var binding: BottomSheetTitleContentBinding
+    private var title: String = ""
+    private var content: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = BottomSheetLoginFailBinding.inflate(layoutInflater)
+        binding = BottomSheetTitleContentBinding.inflate(layoutInflater)
+
+        title = requireArguments().getString("title").toString()
+        content = requireArguments().getString("content").toString()
+
+        binding.bottomSheetTitleTv.text = title
+        binding.bottomSheetContentTv.text = content
 
         initClickListener()
 
@@ -44,7 +52,7 @@ class BottomSheetLoginFail: BottomSheetDialogFragment() {
     }
 
     private fun initClickListener() {
-        binding.loginFailBtn.setOnClickListener {
+        binding.bottomSheetTitleContentBtn.setOnClickListener {
             dismiss()
         }
     }

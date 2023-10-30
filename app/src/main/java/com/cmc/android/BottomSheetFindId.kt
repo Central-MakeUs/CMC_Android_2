@@ -5,21 +5,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.cmc.android.databinding.BottomSheetFindIdBinding
+import com.cmc.android.databinding.BottomSheetTopBottomTitleBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomSheetFindId: BottomSheetDialogFragment() {
 
-    private lateinit var binding: BottomSheetFindIdBinding
+    private lateinit var binding: BottomSheetTopBottomTitleBinding
+    private var topTitle: String = ""
+    private var bottomTitle: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = BottomSheetFindIdBinding.inflate(layoutInflater)
+        binding = BottomSheetTopBottomTitleBinding.inflate(layoutInflater)
+
+        topTitle = requireArguments().getString("topTitle").toString()
+        bottomTitle = requireArguments().getString("bottomTitle").toString()
+
+        binding.bottomSheetTopTitleTv.text = topTitle
+        binding.bottomSheetBottomTitleTv.text = bottomTitle
 
         initClickListener()
 
@@ -44,7 +52,7 @@ class BottomSheetFindId: BottomSheetDialogFragment() {
     }
 
     private fun initClickListener() {
-        binding.findIdBtn.setOnClickListener {
+        binding.bottomSheetTopBottomBtn.setOnClickListener {
             dismiss()
         }
     }

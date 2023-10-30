@@ -6,10 +6,10 @@
     android:background="@color/gray_900">
 
     <TextView
-        android:id="@+id/login_fail_tv1"
+        android:id="@+id/bottom_sheet_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="존재하지 않는 계정이에요"
+        android:text=""
         android:textColor="@color/gray_50"
         android:textSize="18sp"
         android:lineHeight="23sp"
@@ -20,10 +20,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/login_fail_tv2"
+        android:id="@+id/bottom_sheet_content_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="아이디 또는 비밀번호를 확인해주세요!"
+        android:text=""
         android:textColor="@color/gray_600"
         android:textSize="13sp"
         android:lineHeight="17sp"
@@ -31,10 +31,10 @@
         android:layout_marginTop="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_fail_tv1" />
+        app:layout_constraintTop_toBottomOf="@id/bottom_sheet_title_tv" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/login_fail_btn"
+        android:id="@+id/bottom_sheet_title_content_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="확인"
@@ -48,7 +48,7 @@
         android:layout_marginTop="55dp"
         android:layout_marginBottom="20dp"
         android:layout_marginHorizontal="24dp"
-        app:layout_constraintTop_toBottomOf="@id/login_fail_tv2"
+        app:layout_constraintTop_toBottomOf="@id/bottom_sheet_content_tv"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

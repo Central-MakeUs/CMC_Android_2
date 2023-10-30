@@ -42,12 +42,20 @@ class LoginDetailActivity: AppCompatActivity() {
 
         binding.loginDetailFindIdTv.setOnClickListener {
             var bottomSheetFindId = BottomSheetFindId()
-            bottomSheetFindId.show(supportFragmentManager, "BottomSheetLoginFail")
+            var bundle = Bundle()
+            bundle.putString("topTitle", "아이디 찾기는")
+            bundle.putString("bottomTitle", "운영진에게 문의해주세요 :)")
+            bottomSheetFindId.arguments = bundle
+            bottomSheetFindId.show(supportFragmentManager, "BottomSheetFindId")
         }
 
         binding.loginDetailLoginBtn.setOnClickListener {
             // UPDATE: API 연동 후 변경
             var bottomSheetLoginFail = BottomSheetLoginFail()
+            var bundle = Bundle()
+            bundle.putString("title", "존재하지 않는 계정이에요")
+            bundle.putString("content", "아이디 또는 비밀번호를 확인해주세요!")
+            bottomSheetLoginFail.arguments = bundle
             bottomSheetLoginFail.show(supportFragmentManager, "BottomSheetLoginFail")
         }
     }
