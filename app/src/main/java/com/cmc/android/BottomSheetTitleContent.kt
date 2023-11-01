@@ -10,11 +10,22 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomSheetLoginFail: BottomSheetDialogFragment() {
+class BottomSheetTitleContent: BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomSheetTitleContentBinding
     private var title: String = ""
     private var content: String = ""
+    private lateinit var dialogFinishListener: OnDialogFinishListener
+    private var result: Boolean? = null
+
+    interface OnDialogFinishListener {
+        fun finish(result: Boolean?)
+    }
+
+    fun setOnDialogFinishListener(listener: OnDialogFinishListener) {
+        dialogFinishListener = listener
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,6 +65,14 @@ class BottomSheetLoginFail: BottomSheetDialogFragment() {
     private fun initClickListener() {
         binding.bottomSheetTitleContentBtn.setOnClickListener {
             dismiss()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        if (binding.bottomSheetTitleTv.text == "인증번호를 전송했어요") {
+            dialogFinishListener.finish(true)
         }
     }
 }

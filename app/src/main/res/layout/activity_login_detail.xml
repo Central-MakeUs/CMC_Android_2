@@ -14,6 +14,7 @@
         app:layout_constraintTop_toTopOf="parent">
         
         <ImageView
+            android:id="@+id/login_detail_back_iv"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@drawable/ic_arrow_left"
@@ -186,7 +187,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/login_round_5_x"
         android:fontFamily="@font/pretendard_bold"
         android:paddingVertical="16dp"
@@ -195,8 +196,7 @@
         android:textColor="@color/gray_700"
         android:textSize="18sp"
         android:enabled="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="24dp" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <TextView
         android:id="@+id/login_go_signup_tv"

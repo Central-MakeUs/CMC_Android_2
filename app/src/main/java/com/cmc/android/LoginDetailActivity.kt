@@ -1,12 +1,11 @@
 package com.cmc.android
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
-import android.text.InputType
 import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.cmc.android.databinding.ActivityLoginDetailBinding
@@ -41,22 +40,27 @@ class LoginDetailActivity: AppCompatActivity() {
         }
 
         binding.loginDetailFindIdTv.setOnClickListener {
-            var bottomSheetFindId = BottomSheetFindId()
+            var bottomSheetTopBottomTitle = BottomSheetTopBottomTitle()
             var bundle = Bundle()
             bundle.putString("topTitle", "아이디 찾기는")
             bundle.putString("bottomTitle", "운영진에게 문의해주세요 :)")
-            bottomSheetFindId.arguments = bundle
-            bottomSheetFindId.show(supportFragmentManager, "BottomSheetFindId")
+            bottomSheetTopBottomTitle.arguments = bundle
+            bottomSheetTopBottomTitle.show(supportFragmentManager, "BottomSheetFindId")
+        }
+
+        binding.loginDetailFindPwdTv.setOnClickListener {
+            var intent = Intent(this, FindPwdActivity::class.java)
+            startActivity(intent)
         }
 
         binding.loginDetailLoginBtn.setOnClickListener {
             // UPDATE: API 연동 후 변경
-            var bottomSheetLoginFail = BottomSheetLoginFail()
+            var bottomSheetTitleContent = BottomSheetTitleContent()
             var bundle = Bundle()
             bundle.putString("title", "존재하지 않는 계정이에요")
             bundle.putString("content", "아이디 또는 비밀번호를 확인해주세요!")
-            bottomSheetLoginFail.arguments = bundle
-            bottomSheetLoginFail.show(supportFragmentManager, "BottomSheetLoginFail")
+            bottomSheetTitleContent.arguments = bundle
+            bottomSheetTitleContent.show(supportFragmentManager, "BottomSheetLoginFail")
         }
     }
 

@@ -10,7 +10,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomSheetFindId: BottomSheetDialogFragment() {
+class BottomSheetTopBottomTitle: BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomSheetTopBottomTitleBinding
     private var topTitle: String = ""
