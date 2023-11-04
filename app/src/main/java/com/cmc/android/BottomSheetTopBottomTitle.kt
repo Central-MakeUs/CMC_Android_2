@@ -15,6 +15,16 @@ class BottomSheetTopBottomTitle: BottomSheetDialogFragment() {
     private lateinit var binding: BottomSheetTopBottomTitleBinding
     private var topTitle: String = ""
     private var bottomTitle: String = ""
+    private lateinit var dialogFinishListener: OnDialogFinishListener
+    private var result: Boolean? = null
+
+    interface OnDialogFinishListener {
+        fun finish(result: Boolean?)
+    }
+
+    fun setOnDialogFinishListener(listener: OnDialogFinishListener) {
+        dialogFinishListener = listener
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,6 +64,14 @@ class BottomSheetTopBottomTitle: BottomSheetDialogFragment() {
     private fun initClickListener() {
         binding.bottomSheetTopBottomBtn.setOnClickListener {
             dismiss()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        if (binding.bottomSheetTopTitleTv.text == "비밀번호가 변경되었어요") {
+            dialogFinishListener.finish(true)
         }
     }
 }

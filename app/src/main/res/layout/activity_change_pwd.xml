@@ -1,12 +1,282 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background_1"
+    android:fitsSystemWindows="true" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/change_pwd_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/change_pwd_back_iv"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_arrow_left"
+            android:layout_marginStart="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tint="@color/gray_50" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
+        android:id="@+id/change_pwd_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비밀번호 재설정"
+        android:textSize="26sp"
+        android:fontFamily="@font/pretendard_bold"
+        android:textColor="@color/gray_50"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="31dp"
+        app:layout_constraintTop_toBottomOf="@id/change_pwd_top_bar"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/change_pwd_cl_1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="비밀번호 재설정" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/change_pwd_title_tv"
+        android:paddingHorizontal="24dp">
+
+        <TextView
+            android:id="@+id/change_pwd_tv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="비밀번호"
+            android:textSize="14sp"
+            android:fontFamily="@font/pretendard_bold"
+            android:textColor="@color/gray_500"
+            android:layout_marginTop="7dp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/change_pwd_et_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="비밀번호를 입력해주세요"
+            android:textColor="@color/gray_200"
+            android:textColorHint="@color/gray_700"
+            android:fontFamily="@font/pretendard_medium"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="0dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            app:layout_constraintTop_toBottomOf="@id/change_pwd_tv_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/change_pwd_mode_iv_1" />
+
+        <ImageView
+            android:id="@+id/change_pwd_mode_iv_1"
+            android:layout_width="48dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_hide"
+            android:paddingHorizontal="12dp"
+            android:scaleType="center"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toEndOf="@id/change_pwd_et_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/change_pwd_et_1"
+            app:layout_constraintBottom_toBottomOf="@id/change_pwd_et_1" />
+
+        <View
+            android:id="@+id/change_pwd_line_1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_700"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintTop_toBottomOf="@id/change_pwd_et_1" />
+
+        <ImageView
+            android:id="@+id/change_pwd_eng_iv"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_check_x"
+            android:layout_marginStart="5dp"
+            android:layout_marginVertical="9.5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/change_pwd_line_1"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/change_pwd_eng_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="영문"
+            android:textSize="14sp"
+            android:textColor="@color/gray_700"
+            android:fontFamily="@font/pretendard_medium"
+            android:background="@android:color/transparent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="@id/change_pwd_eng_iv"
+            app:layout_constraintBottom_toBottomOf="@id/change_pwd_eng_iv"
+            app:layout_constraintStart_toEndOf="@id/change_pwd_eng_iv" />
+
+        <ImageView
+            android:id="@+id/change_pwd_num_iv"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_check_x"
+            android:layout_marginStart="14dp"
+            app:layout_constraintStart_toEndOf="@id/change_pwd_eng_tv"
+            app:layout_constraintTop_toTopOf="@id/change_pwd_eng_iv"
+            app:layout_constraintBottom_toBottomOf="@id/change_pwd_eng_iv" />
+
+        <TextView
+            android:id="@+id/change_pwd_num_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="숫자"
+            android:textSize="14sp"
+            android:textColor="@color/gray_700"
+            android:fontFamily="@font/pretendard_medium"
+            android:background="@android:color/transparent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="@id/change_pwd_num_iv"
+            app:layout_constraintBottom_toBottomOf="@id/change_pwd_num_iv"
+            app:layout_constraintStart_toEndOf="@id/change_pwd_num_iv" />
+
+        <ImageView
+            android:id="@+id/change_pwd_length_iv"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_check_x"
+            android:layout_marginStart="14dp"
+            app:layout_constraintStart_toEndOf="@id/change_pwd_num_tv"
+            app:layout_constraintTop_toTopOf="@id/change_pwd_eng_iv"
+            app:layout_constraintBottom_toBottomOf="@id/change_pwd_eng_iv" />
+
+        <TextView
+            android:id="@+id/change_pwd_length_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="8~16자"
+            android:textSize="14sp"
+            android:textColor="@color/gray_700"
+            android:fontFamily="@font/pretendard_medium"
+            android:background="@android:color/transparent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="@id/change_pwd_length_iv"
+            app:layout_constraintBottom_toBottomOf="@id/change_pwd_length_iv"
+            app:layout_constraintStart_toEndOf="@id/change_pwd_length_iv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/change_pwd_cl_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/change_pwd_cl_1"
+        android:paddingHorizontal="24dp">
+
+        <TextView
+            android:id="@+id/change_pwd_tv_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="비밀번호 확인"
+            android:textSize="14sp"
+            android:fontFamily="@font/pretendard_bold"
+            android:textColor="@color/gray_500"
+            android:layout_marginTop="7dp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/change_pwd_et_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="비밀번호를 재입력해주세요"
+            android:textColor="@color/gray_200"
+            android:textColorHint="@color/gray_700"
+            android:fontFamily="@font/pretendard_medium"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="0dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            app:layout_constraintTop_toBottomOf="@id/change_pwd_tv_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/change_pwd_mode_iv_2" />
+
+        <ImageView
+            android:id="@+id/change_pwd_mode_iv_2"
+            android:layout_width="48dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_hide"
+            android:paddingHorizontal="12dp"
+            android:scaleType="center"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toEndOf="@id/change_pwd_et_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/change_pwd_et_2"
+            app:layout_constraintBottom_toBottomOf="@id/change_pwd_et_2" />
+
+        <View
+            android:id="@+id/change_pwd_line_2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_700"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintTop_toBottomOf="@id/change_pwd_et_2" />
+
+        <ImageView
+            android:id="@+id/change_pwd_check_iv"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_check_x"
+            android:layout_marginStart="5dp"
+            android:layout_marginVertical="9.5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/change_pwd_line_2"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/change_pwd_check_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="비밀번호 일치"
+            android:textSize="14sp"
+            android:textColor="@color/gray_700"
+            android:fontFamily="@font/pretendard_medium"
+            android:background="@android:color/transparent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="@id/change_pwd_check_iv"
+            app:layout_constraintBottom_toBottomOf="@id/change_pwd_check_iv"
+            app:layout_constraintStart_toEndOf="@id/change_pwd_check_iv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/change_pwd_next_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/login_round_5_x"
+        android:fontFamily="@font/pretendard_bold"
+        android:paddingVertical="16dp"
+        android:text="다음"
+        android:textAlignment="center"
+        android:textColor="@color/gray_700"
+        android:textSize="18sp"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

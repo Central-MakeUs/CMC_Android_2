@@ -26,7 +26,6 @@ class BottomSheetTitleContent: BottomSheetDialogFragment() {
         dialogFinishListener = listener
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

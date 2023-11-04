@@ -49,7 +49,6 @@ class FindPwdNumberActivity: AppCompatActivity() {
 
         binding.findPwdChangeBtn.setOnClickListener {
             // UPDATE: API 연동 후 수정
-            Log.d("TEST", "checkNumber = $checkNumber")
             if (checkNumber) {
                 // MEMO: If 인증번호가 맞았다면
                 var intent = Intent(this@FindPwdNumberActivity, ChangePwdActivity::class.java)
