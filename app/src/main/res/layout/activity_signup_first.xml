@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background_1"
+    android:fitsSystemWindows="true" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/signup_first_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/signup_first_back_iv"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_arrow_left"
+            android:layout_marginStart="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tint="@color/gray_50" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1/3"
+            android:fontFamily="@font/pretendard_bold"
+            android:textColor="@color/gray_700"
+            android:textSize="14sp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/signup_first_top_bar"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <View
+            android:id="@+id/signup_first_progress_line1"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:background="@color/main"
+            app:layout_constraintHorizontal_weight="0.333"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/signup_first_progress_line2" />
+
+        <View
+            android:id="@+id/signup_first_progress_line2"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintHorizontal_weight="0.333"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/signup_first_progress_line1"
+            app:layout_constraintEnd_toStartOf="@id/signup_first_progress_line3" />
+
+        <View
+            android:id="@+id/signup_first_progress_line3"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintHorizontal_weight="0.334"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/signup_first_progress_line2"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/signup_first_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="약관동의"
+        android:textSize="26sp"
+        android:fontFamily="@font/pretendard_bold"
+        android:textColor="@color/gray_50"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/signup_first_top_bar"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/signup_first_all_iv"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_radio_off"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signup_first_title_tv" />
+
+    <TextView
+        android:id="@+id/signup_first_all_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="전체 동의"
+        android:textSize="18sp"
+        android:fontFamily="@font/pretendard_bold"
+        android:textColor="@color/gray_50"
+        app:layout_constraintTop_toTopOf="@id/signup_first_all_iv"
+        app:layout_constraintBottom_toBottomOf="@id/signup_first_all_iv"
+        app:layout_constraintStart_toEndOf="@id/signup_first_all_iv" />
+
+    <View
+        android:id="@+id/signup_first_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_800"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/signup_first_all_iv"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/signup_first_service_iv"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_radio_off"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@id/signup_first_all_iv"
+        app:layout_constraintTop_toBottomOf="@id/signup_first_line" />
+
+    <TextView
+        android:id="@+id/signup_first_service_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="서비스 이용약관(필수)"
+        android:textSize="14sp"
+        android:fontFamily="@font/pretendard_bold"
+        android:textColor="@color/gray_50"
+        app:layout_constraintTop_toTopOf="@id/signup_first_service_iv"
+        app:layout_constraintBottom_toBottomOf="@id/signup_first_service_iv"
+        app:layout_constraintStart_toEndOf="@id/signup_first_service_iv" />
+
+    <ImageView
+        android:id="@+id/signup_first_service_arrow"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_arrow_right"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/signup_first_service_iv"
+        app:layout_constraintBottom_toBottomOf="@id/signup_first_service_iv" />
+
+    <ImageView
+        android:id="@+id/signup_first_personal_iv"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_radio_off"
+        android:layout_marginTop="2dp"
+        app:layout_constraintStart_toStartOf="@id/signup_first_service_iv"
+        app:layout_constraintTop_toBottomOf="@id/signup_first_service_iv" />
+
+    <TextView
+        android:id="@+id/signup_first_personal_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="개인정보 수집/이용 (필수)"
+        android:textSize="14sp"
+        android:fontFamily="@font/pretendard_bold"
+        android:textColor="@color/gray_50"
+        app:layout_constraintTop_toTopOf="@id/signup_first_personal_iv"
+        app:layout_constraintBottom_toBottomOf="@id/signup_first_personal_iv"
+        app:layout_constraintStart_toEndOf="@id/signup_first_personal_iv" />
+
+    <ImageView
+        android:id="@+id/signup_first_personal_arrow"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_arrow_right"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/signup_first_personal_iv"
+        app:layout_constraintBottom_toBottomOf="@id/signup_first_personal_iv" />
+
+    <ImageView
+        android:id="@+id/signup_first_location_iv"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_radio_off"
+        android:layout_marginTop="2dp"
+        app:layout_constraintStart_toStartOf="@id/signup_first_personal_iv"
+        app:layout_constraintTop_toBottomOf="@id/signup_first_personal_iv" />
+
+    <TextView
+        android:id="@+id/signup_first_location_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="위치정보 이용 동의(선택)"
+        android:textSize="14sp"
+        android:fontFamily="@font/pretendard_bold"
+        android:textColor="@color/gray_50"
+        app:layout_constraintTop_toTopOf="@id/signup_first_location_iv"
+        app:layout_constraintBottom_toBottomOf="@id/signup_first_location_iv"
+        app:layout_constraintStart_toEndOf="@id/signup_first_location_iv" />
+
+    <ImageView
+        android:id="@+id/signup_first_location_arrow"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_arrow_right"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/signup_first_location_iv"
+        app:layout_constraintBottom_toBottomOf="@id/signup_first_location_iv" />
+
+    <ImageView
+        android:id="@+id/signup_first_marketing_iv"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_radio_off"
+        android:layout_marginTop="2dp"
+        app:layout_constraintStart_toStartOf="@id/signup_first_location_iv"
+        app:layout_constraintTop_toBottomOf="@id/signup_first_location_iv" />
+
+    <TextView
+        android:id="@+id/signup_first_marketing_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="마케팅 정보 수신 동의(선택)"
+        android:textSize="14sp"
+        android:fontFamily="@font/pretendard_bold"
+        android:textColor="@color/gray_50"
+        app:layout_constraintTop_toTopOf="@id/signup_first_marketing_iv"
+        app:layout_constraintBottom_toBottomOf="@id/signup_first_marketing_iv"
+        app:layout_constraintStart_toEndOf="@id/signup_first_marketing_iv" />
+
+    <ImageView
+        android:id="@+id/signup_first_marketing_arrow"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_arrow_right"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/signup_first_marketing_iv"
+        app:layout_constraintBottom_toBottomOf="@id/signup_first_marketing_iv" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/signup_first_next_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/login_round_5_x"
+        android:fontFamily="@font/pretendard_bold"
+        android:paddingVertical="16dp"
+        android:text="다음"
+        android:textAlignment="center"
+        android:textColor="@color/gray_700"
+        android:textSize="18sp"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
