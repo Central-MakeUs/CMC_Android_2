@@ -178,7 +178,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/signup_second_cl_1"
+                android:id="@+id/signup_second_pwd_cl_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -186,7 +186,7 @@
                 android:paddingHorizontal="24dp">
 
                 <TextView
-                    android:id="@+id/signup_second_tv_1"
+                    android:id="@+id/signup_second_pwd_tv_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="비밀번호"
@@ -199,7 +199,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <EditText
-                    android:id="@+id/signup_second_et_1"
+                    android:id="@+id/signup_second_pwd_et_1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="비밀번호를 입력해주세요"
@@ -212,31 +212,31 @@
                     android:background="@android:color/transparent"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    app:layout_constraintTop_toBottomOf="@id/signup_second_tv_1"
+                    app:layout_constraintTop_toBottomOf="@id/signup_second_pwd_tv_1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/signup_second_mode_iv_1" />
+                    app:layout_constraintEnd_toStartOf="@id/signup_second_pwd_mode_iv_1" />
 
                 <ImageView
-                    android:id="@+id/signup_second_mode_iv_1"
+                    android:id="@+id/signup_second_pwd_mode_iv_1"
                     android:layout_width="48dp"
                     android:layout_height="0dp"
                     android:src="@drawable/ic_hide"
                     android:paddingHorizontal="12dp"
                     android:scaleType="center"
                     app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintStart_toEndOf="@id/signup_second_et_1"
+                    app:layout_constraintStart_toEndOf="@id/signup_second_pwd_et_1"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/signup_second_et_1"
-                    app:layout_constraintBottom_toBottomOf="@id/signup_second_et_1" />
+                    app:layout_constraintTop_toTopOf="@id/signup_second_pwd_et_1"
+                    app:layout_constraintBottom_toBottomOf="@id/signup_second_pwd_et_1" />
 
                 <View
-                    android:id="@+id/signup_second_line_1"
+                    android:id="@+id/signup_second_pwd_line_1"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/gray_700"
                     android:layout_marginTop="14dp"
                     android:layout_marginBottom="4dp"
-                    app:layout_constraintTop_toBottomOf="@id/signup_second_et_1" />
+                    app:layout_constraintTop_toBottomOf="@id/signup_second_pwd_et_1" />
 
                 <ImageView
                     android:id="@+id/signup_second_eng_iv"
@@ -246,7 +246,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginVertical="9.5dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/signup_second_line_1"
+                    app:layout_constraintTop_toBottomOf="@id/signup_second_pwd_line_1"
                     app:layout_constraintBottom_toBottomOf="parent" />
 
                 <TextView
@@ -314,15 +314,15 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/signup_second_cl_2"
+                android:id="@+id/signup_second_pwd_cl_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                app:layout_constraintTop_toBottomOf="@id/signup_second_cl_1"
+                app:layout_constraintTop_toBottomOf="@id/signup_second_pwd_cl_1"
                 android:paddingHorizontal="24dp">
 
                 <TextView
-                    android:id="@+id/signup_second_tv_2"
+                    android:id="@+id/signup_second_pwd_tv_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="비밀번호 확인"
@@ -335,7 +335,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <EditText
-                    android:id="@+id/signup_second_et_2"
+                    android:id="@+id/signup_second_pwd_et_2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="비밀번호를 재입력해주세요"
@@ -348,31 +348,31 @@
                     android:background="@android:color/transparent"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    app:layout_constraintTop_toBottomOf="@id/signup_second_tv_2"
+                    app:layout_constraintTop_toBottomOf="@id/signup_second_pwd_tv_2"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/signup_second_mode_iv_2" />
+                    app:layout_constraintEnd_toStartOf="@id/signup_second_pwd_mode_iv_2" />
 
                 <ImageView
-                    android:id="@+id/signup_second_mode_iv_2"
+                    android:id="@+id/signup_second_pwd_mode_iv_2"
                     android:layout_width="48dp"
                     android:layout_height="0dp"
                     android:src="@drawable/ic_hide"
                     android:paddingHorizontal="12dp"
                     android:scaleType="center"
                     app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintStart_toEndOf="@id/signup_second_et_2"
+                    app:layout_constraintStart_toEndOf="@id/signup_second_pwd_et_2"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/signup_second_et_2"
-                    app:layout_constraintBottom_toBottomOf="@id/signup_second_et_2" />
+                    app:layout_constraintTop_toTopOf="@id/signup_second_pwd_et_2"
+                    app:layout_constraintBottom_toBottomOf="@id/signup_second_pwd_et_2" />
 
                 <View
-                    android:id="@+id/signup_second_line_2"
+                    android:id="@+id/signup_second_pwd_line_2"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/gray_700"
                     android:layout_marginTop="14dp"
                     android:layout_marginBottom="4dp"
-                    app:layout_constraintTop_toBottomOf="@id/signup_second_et_2" />
+                    app:layout_constraintTop_toBottomOf="@id/signup_second_pwd_et_2" />
 
                 <ImageView
                     android:id="@+id/signup_second_check_iv"
@@ -382,7 +382,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginVertical="9.5dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/signup_second_line_2"
+                    app:layout_constraintTop_toBottomOf="@id/signup_second_pwd_line_2"
                     app:layout_constraintBottom_toBottomOf="parent" />
 
                 <TextView
@@ -406,7 +406,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:layout_constraintTop_toBottomOf="@id/signup_second_cl_2"
+                app:layout_constraintTop_toBottomOf="@id/signup_second_pwd_cl_2"
                 android:paddingHorizontal="24dp">
 
                 <TextView

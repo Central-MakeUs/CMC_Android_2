@@ -28,6 +28,7 @@
         <activity android:name=".ChangePwdActivity" />
         <activity android:name=".SignupFirstActivity" />
         <activity android:name=".SignupSecondActivity" />
+        <activity android:name=".SignupThirdActivity" />
         <activity android:name=".MainActivity" />
     </application>
 

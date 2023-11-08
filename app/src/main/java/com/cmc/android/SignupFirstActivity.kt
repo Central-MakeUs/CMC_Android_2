@@ -71,6 +71,8 @@ class SignupFirstActivity: AppCompatActivity() {
             imageArray[index].setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_radio_off))
             imageArray[0].setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_radio_off))
         }
+
+        checkNext()
     }
 
     private fun changeAllRadio() {
@@ -81,6 +83,20 @@ class SignupFirstActivity: AppCompatActivity() {
 
             if (radioStatus[0]) imageArray[i].setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_radio_on))
             else imageArray[i].setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_radio_off))
+        }
+
+        checkNext()
+    }
+
+    private fun checkNext() {
+        if (radioStatus[1] && radioStatus[2]) {
+            binding.signupFirstNextBtn.setBackgroundResource(R.drawable.login_round_5_o)
+            binding.signupFirstNextBtn.setTextColor(ContextCompat.getColor(this@SignupFirstActivity, R.color.gray_50))
+            binding.signupFirstNextBtn.isEnabled = true
+        } else {
+            binding.signupFirstNextBtn.setBackgroundResource(R.drawable.login_round_5_x)
+            binding.signupFirstNextBtn.setTextColor(ContextCompat.getColor(this@SignupFirstActivity, R.color.gray_700))
+            binding.signupFirstNextBtn.isEnabled = false
         }
     }
 }
