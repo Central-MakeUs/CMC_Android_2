@@ -46,33 +46,165 @@
 
         <View
             android:id="@+id/signup_third_progress_line1"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="3dp"
             android:background="@color/main"
-            app:layout_constraintHorizontal_weight="0.333"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/signup_third_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CMC 정보를 입력해주세요"
+        android:textSize="26sp"
+        android:fontFamily="@font/pretendard_bold"
+        android:textColor="@color/gray_50"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signup_third_top_bar"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/signup_third_nickname_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:paddingHorizontal="24dp"
+        app:layout_constraintTop_toBottomOf="@id/signup_third_title_tv">
+
+        <TextView
+            android:id="@+id/signup_third_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="7dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="닉네임"
+            android:textColor="@color/gray_500"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/signup_third_progress_line2" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/signup_third_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/pretendard_medium"
+            android:hint="닉네임을 입력해주세요"
+            android:maxLines="1"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="0dp"
+            android:textColor="@color/gray_200"
+            android:textColorHint="@color/gray_700"
+            android:textCursorDrawable="@drawable/bg_et_cursor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signup_third_name_tv" />
 
         <View
-            android:id="@+id/signup_third_progress_line2"
-            android:layout_width="0dp"
-            android:layout_height="3dp"
-            android:background="@android:color/transparent"
-            app:layout_constraintHorizontal_weight="0.333"
+            android:id="@+id/signup_third_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="14dp"
+            android:background="@color/gray_700"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signup_third_name_et" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/signup_third_order_num_cl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        app:layout_constraintTop_toBottomOf="@id/signup_third_nickname_layout"
+        android:paddingHorizontal="24dp">
+
+        <TextView
+            android:id="@+id/signup_third_order_num_tv"
+            android:layout_width="312dp"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="기수를 선택해주세요"
+            android:textColor="@color/gray_50"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@id/signup_third_order_num_mode_iv"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/signup_third_progress_line1"
-            app:layout_constraintEnd_toStartOf="@id/signup_third_progress_line3" />
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ImageView
+            android:id="@+id/signup_third_order_num_mode_iv"
+            android:layout_width="48dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_arrow_down"
+            android:paddingHorizontal="12dp"
+            android:scaleType="center"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toEndOf="@id/signup_third_order_num_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/signup_third_order_num_tv"
+            app:layout_constraintBottom_toBottomOf="@id/signup_third_order_num_tv" />
 
         <View
-            android:id="@+id/signup_third_progress_line3"
-            android:layout_width="0dp"
-            android:layout_height="3dp"
-            android:background="@android:color/transparent"
-            app:layout_constraintHorizontal_weight="0.334"
+            android:id="@+id/signup_third_order_num_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_700"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintTop_toBottomOf="@id/signup_third_order_num_mode_iv"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/signup_third_position_cl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        app:layout_constraintTop_toBottomOf="@id/signup_third_order_num_cl"
+        android:paddingHorizontal="24dp">
+
+        <TextView
+            android:id="@+id/signup_third_position_tv"
+            android:layout_width="312dp"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="포지션을 선택해주세요"
+            android:textColor="@color/gray_50"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@id/signup_third_position_mode_iv"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/signup_third_progress_line2"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ImageView
+            android:id="@+id/signup_third_position_mode_iv"
+            android:layout_width="48dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_arrow_down"
+            android:paddingHorizontal="12dp"
+            android:scaleType="center"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toEndOf="@id/signup_third_position_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/signup_third_position_tv"
+            app:layout_constraintBottom_toBottomOf="@id/signup_third_position_tv" />
+
+        <View
+            android:id="@+id/signup_third_position_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_700"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintTop_toBottomOf="@id/signup_third_position_mode_iv"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
