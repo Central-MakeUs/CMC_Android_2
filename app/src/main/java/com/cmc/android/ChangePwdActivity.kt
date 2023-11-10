@@ -21,7 +21,6 @@ class ChangePwdActivity: AppCompatActivity() {
     private lateinit var binding: ActivityChangePwdBinding
     private var firstPwdMode = false
     private var secondPwdMode = false
-    private var nextButton = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -17,7 +17,7 @@ class BottomSheetOrderNum: BottomSheetDialogFragment() {
     private var orderNum: String = ""
 
     interface OnDialogFinishListener {
-        fun finish(position: String)
+        fun finish(orderNum: String)
     }
 
     fun setOnDialogFinishListener(listener: OnDialogFinishListener) {

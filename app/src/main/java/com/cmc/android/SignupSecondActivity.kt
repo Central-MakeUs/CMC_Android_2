@@ -55,7 +55,9 @@ class SignupSecondActivity: AppCompatActivity() {
         }
 
         binding.signupSecondNextBtn.setOnClickListener {
-            startActivity(Intent(this, SignupThirdActivity::class.java))
+            var intent = Intent(this, SignupThirdActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
         }
     }
 

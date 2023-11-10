@@ -76,7 +76,7 @@
         app:layout_constraintTop_toBottomOf="@id/signup_third_title_tv">
 
         <TextView
-            android:id="@+id/signup_third_name_tv"
+            android:id="@+id/signup_third_nickname_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -89,7 +89,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/signup_third_name_et"
+            android:id="@+id/signup_third_nickname_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -103,16 +103,16 @@
             android:textColorHint="@color/gray_700"
             android:textCursorDrawable="@drawable/bg_et_cursor"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/signup_third_name_tv" />
+            app:layout_constraintTop_toBottomOf="@id/signup_third_nickname_tv" />
 
         <View
-            android:id="@+id/signup_third_line"
+            android:id="@+id/signup_third_nickname_line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="14dp"
             android:background="@color/gray_700"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/signup_third_name_et" />
+            app:layout_constraintTop_toBottomOf="@id/signup_third_nickname_et" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

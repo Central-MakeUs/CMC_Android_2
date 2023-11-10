@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background_1"
+    android:fitsSystemWindows="true" >
+
+    <TextView
+        android:id="@+id/signup_complete_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="회원가입 신청이\n완료되었어요"
+        android:textSize="26sp"
+        android:fontFamily="@font/pretendard_bold"
+        android:textColor="@color/gray_50"
+        android:lineHeight="38sp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/signup_complete_content_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="신청이 수락될 때까지 조금만 기다려주세요 :)"
+        android:textSize="14sp"
+        android:lineHeight="19sp"
+        android:textColor="@color/gray_700"
+        android:fontFamily="@font/pretendard_medium"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="14dp"
+        app:layout_constraintTop_toBottomOf="@id/signup_complete_title_tv"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_signup_logo"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signup_complete_content_tv" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/signup_complete_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/login_round_5_o"
+        android:fontFamily="@font/pretendard_bold"
+        android:paddingVertical="16dp"
+        android:text="확인"
+        android:textAlignment="center"
+        android:textColor="@color/gray_50"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
