@@ -24,13 +24,13 @@ class SignupThirdActivity: AppCompatActivity() {
     }
 
     private fun initClickListener() {
-        binding.signupThirdOrderNumCl.setOnClickListener {
-            var bottomSheetOrderNum = BottomSheetOrderNum()
-            bottomSheetOrderNum.show(supportFragmentManager, "BottomSheetOrderNum")
-            bottomSheetOrderNum.setOnDialogFinishListener(object: BottomSheetOrderNum.OnDialogFinishListener {
-                override fun finish(orderNum: String) {
-                    if (orderNum != "") {
-                        binding.signupThirdOrderNumTv.text = orderNum
+        binding.signupThirdGenerationCl.setOnClickListener {
+            var bottomSheetGeneration = BottomSheetGeneration()
+            bottomSheetGeneration.show(supportFragmentManager, "BottomSheetGeneration")
+            bottomSheetGeneration.setOnDialogFinishListener(object: BottomSheetGeneration.OnDialogFinishListener {
+                override fun finish(generation: String) {
+                    if (generation != "") {
+                        binding.signupThirdGenerationTv.text = generation
 
                     }
 
@@ -39,13 +39,13 @@ class SignupThirdActivity: AppCompatActivity() {
             })
         }
 
-        binding.signupThirdPositionCl.setOnClickListener {
-            var bottomSheetPosition = BottomSheetPosition()
-            bottomSheetPosition.show(supportFragmentManager, "BottomSheetPosition")
-            bottomSheetPosition.setOnDialogFinishListener(object: BottomSheetPosition.OnDialogFinishListener {
-                override fun finish(position: String) {
-                    if (position != "") {
-                        binding.signupThirdPositionTv.text = position
+        binding.signupThirdPartCl.setOnClickListener {
+            var bottomSheetPart = BottomSheetPart()
+            bottomSheetPart.show(supportFragmentManager, "BottomSheetPart")
+            bottomSheetPart.setOnDialogFinishListener(object: BottomSheetPart.OnDialogFinishListener {
+                override fun finish(part: String) {
+                    if (part != "") {
+                        binding.signupThirdPartTv.text = part
                     }
 
                     checkNext()
@@ -78,8 +78,8 @@ class SignupThirdActivity: AppCompatActivity() {
 
     private fun checkNext() {
         if (binding.signupThirdNicknameEt.text.isNotEmpty()
-            && binding.signupThirdOrderNumTv.text != "기수를 선택해주세요"
-            && binding.signupThirdPositionTv.text != "포지션을 선택해주세요") {
+            && binding.signupThirdGenerationTv.text != "기수를 선택해주세요"
+            && binding.signupThirdPartTv.text != "포지션을 선택해주세요") {
             binding.signupThirdSignupBtn.setBackgroundResource(R.drawable.login_round_5_o)
             binding.signupThirdSignupBtn.setTextColor(ContextCompat.getColor(this@SignupThirdActivity, R.color.gray_50))
             binding.signupThirdSignupBtn.isEnabled = true

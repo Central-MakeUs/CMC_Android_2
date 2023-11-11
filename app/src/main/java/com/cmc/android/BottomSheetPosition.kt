@@ -5,20 +5,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.cmc.android.databinding.BottomSheetOrderNumBinding
-import com.cmc.android.databinding.BottomSheetPositionBinding
+import com.cmc.android.databinding.BottomSheetPartBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomSheetPosition: BottomSheetDialogFragment() {
+class BottomSheetPart: BottomSheetDialogFragment() {
 
-    private lateinit var binding: BottomSheetPositionBinding
+    private lateinit var binding: BottomSheetPartBinding
     private lateinit var dialogFinishListener: OnDialogFinishListener
-    private var position: String = ""
+    private var part: String = ""
 
     interface OnDialogFinishListener {
-        fun finish(position: String)
+        fun finish(part: String)
     }
 
     fun setOnDialogFinishListener(listener: OnDialogFinishListener) {
@@ -30,7 +29,7 @@ class BottomSheetPosition: BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = BottomSheetPositionBinding.inflate(layoutInflater)
+        binding = BottomSheetPartBinding.inflate(layoutInflater)
 
         initClickListener()
 
@@ -56,37 +55,37 @@ class BottomSheetPosition: BottomSheetDialogFragment() {
 
     private fun initClickListener() {
         binding.bottomSheetPlanCl.setOnClickListener {
-            position = "Plan"
+            part = "Plan"
             dismiss()
         }
         binding.bottomSheetDesignCl.setOnClickListener {
-            position = "Design"
+            part = "Design"
             dismiss()
         }
         binding.bottomSheetWebCl.setOnClickListener {
-            position = "Web"
+            part = "Web"
             dismiss()
         }
         binding.bottomSheetIosCl.setOnClickListener {
-            position = "iOS"
+            part = "iOS"
             dismiss()
         }
         binding.bottomSheetAndroidCl.setOnClickListener {
-            position = "Android"
+            part = "Android"
             dismiss()
         }
         binding.bottomSheetServerCl.setOnClickListener {
-            position = "Server"
+            part = "Server"
             dismiss()
         }
 
-        binding.bottomSheetPositionCancelBtn.setOnClickListener {
+        binding.bottomSheetPartCancelBtn.setOnClickListener {
             dismiss()
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        dialogFinishListener.finish(position)
+        dialogFinishListener.finish(part)
     }
 }

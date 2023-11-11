@@ -5,19 +5,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.cmc.android.databinding.BottomSheetOrderNumBinding
+import com.cmc.android.databinding.BottomSheetGenerationBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomSheetOrderNum: BottomSheetDialogFragment() {
+class BottomSheetGeneration: BottomSheetDialogFragment() {
 
-    private lateinit var binding: BottomSheetOrderNumBinding
+    private lateinit var binding: BottomSheetGenerationBinding
     private lateinit var dialogFinishListener: OnDialogFinishListener
-    private var orderNum: String = ""
+    private var generation: String = ""
 
     interface OnDialogFinishListener {
-        fun finish(orderNum: String)
+        fun finish(generation: String)
     }
 
     fun setOnDialogFinishListener(listener: OnDialogFinishListener) {
@@ -29,7 +29,7 @@ class BottomSheetOrderNum: BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = BottomSheetOrderNumBinding.inflate(layoutInflater)
+        binding = BottomSheetGenerationBinding.inflate(layoutInflater)
 
         initClickListener()
 
@@ -55,29 +55,29 @@ class BottomSheetOrderNum: BottomSheetDialogFragment() {
 
     private fun initClickListener() {
         binding.bottomSheet14thCl.setOnClickListener {
-            orderNum = "14기"
+            generation = "14기"
             dismiss()
         }
         binding.bottomSheet13thCl.setOnClickListener {
-            orderNum = "13기"
+            generation = "13기"
             dismiss()
         }
         binding.bottomSheet12thCl.setOnClickListener {
-            orderNum = "12기"
+            generation = "12기"
             dismiss()
         }
         binding.bottomSheet11thCl.setOnClickListener {
-            orderNum = "11기"
+            generation = "11기"
             dismiss()
         }
 
-        binding.bottomSheetOrderNumCancelBtn.setOnClickListener {
+        binding.bottomSheetGenerationCancelBtn.setOnClickListener {
             dismiss()
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        dialogFinishListener.finish(orderNum)
+        dialogFinishListener.finish(generation)
     }
 }
