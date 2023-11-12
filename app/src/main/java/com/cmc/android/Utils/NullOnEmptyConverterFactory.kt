@@ -1,4 +1,4 @@
-package com.cmc.android.utils
+package com.cmc.android.Utils
 
 import okhttp3.ResponseBody
 import retrofit2.Converter

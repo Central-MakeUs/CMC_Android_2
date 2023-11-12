@@ -1,9 +1,8 @@
-package com.cmc.android.utils
+package com.cmc.android.Utils
 
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.core.content.ContextCompat
 import com.cmc.android.BuildConfig
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

@@ -1,7 +1,7 @@
-package com.cmc.android.utils
+package com.cmc.android.Utils
 
 import android.util.Log
-import com.cmc.android.utils.ApplicationClass.Companion.mSharedPreferences
+import com.cmc.android.Utils.ApplicationClass.Companion.mSharedPreferences
 
 fun saveJwt(jwt: String){
     Log.d("jwt", jwt)
