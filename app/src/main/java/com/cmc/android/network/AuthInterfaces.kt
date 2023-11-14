@@ -9,6 +9,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface AuthInterfaces {
     @POST("auth/logIn")
@@ -16,13 +17,13 @@ interface AuthInterfaces {
         @Body loginRequest: LoginRequest
     ): Call<AuthResponse>
 
-    @POST("/auth/signup")
+    @POST("/auth/signUp")
     fun signup(
         @Body signupRequest: SignupRequest
     ): Call<AuthResponse>
 
     @GET("/auth/email")
     fun checkEmail(
-        email: String
+        @Query("email") email : String
     ): Call<EmailResponse>
 }

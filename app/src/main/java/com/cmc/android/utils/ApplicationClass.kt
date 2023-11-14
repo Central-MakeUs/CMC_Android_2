@@ -22,10 +22,13 @@ class ApplicationClass: Application() {
     override fun onCreate() {
         super.onCreate()
 
+        var sharedPreferences = applicationContext.getSharedPreferences(TAG, Context.MODE_PRIVATE)
+        mSharedPreferences = sharedPreferences
+
         val client: OkHttpClient = OkHttpClient.Builder()
-            .readTimeout(100, TimeUnit.SECONDS)
-            .writeTimeout(100, TimeUnit.SECONDS)
-            .connectTimeout(100, TimeUnit.SECONDS)
+            .readTimeout(30000, TimeUnit.MILLISECONDS)
+            .connectTimeout(30000, TimeUnit.MILLISECONDS)
+            // .addNetworkInterceptor(AuthorizationTokenInterceptor())
             .build()
 
         retrofit = Retrofit.Builder()
@@ -33,7 +36,5 @@ class ApplicationClass: Application() {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-
-        mSharedPreferences = applicationContext.getSharedPreferences(TAG, Context.MODE_PRIVATE)
     }
 }

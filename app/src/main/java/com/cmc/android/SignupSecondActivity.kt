@@ -12,10 +12,13 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.cmc.android.databinding.ActivitySignupSecondBinding
+import com.cmc.android.network.AuthService
+import com.cmc.android.network.EmailView
 
-class SignupSecondActivity: AppCompatActivity() {
+class SignupSecondActivity: AppCompatActivity(), EmailView {
 
     lateinit var binding: ActivitySignupSecondBinding
+    private lateinit var emailService: AuthService
     private var firstPwdMode = false
     private var secondPwdMode = false
     private var validationCheck = arrayListOf(false, false, false)
@@ -24,6 +27,7 @@ class SignupSecondActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupSecondBinding.inflate(layoutInflater)
 
+        initService()
         initClickListener()
         initFocusListener()
         initChangeListener()
@@ -31,7 +35,16 @@ class SignupSecondActivity: AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    private fun initService() {
+        emailService = AuthService()
+        emailService.setEmailView(this)
+    }
+
     private fun initClickListener() {
+        binding.signupSecondEmailCheckTv.setOnClickListener {
+            emailService.checkEmail(binding.signupSecondEmailEt.text.toString())
+        }
+
         binding.signupSecondPwdModeIv1.setOnClickListener {
             firstPwdMode = !firstPwdMode
 
@@ -57,6 +70,9 @@ class SignupSecondActivity: AppCompatActivity() {
         binding.signupSecondNextBtn.setOnClickListener {
             var intent = Intent(this, SignupThirdActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            intent.putExtra("email", binding.signupSecondEmailEt.text.toString())
+            intent.putExtra("password", binding.signupSecondPwdEt1.text.toString())
+            intent.putExtra("name", binding.signupSecondNameEt.text.toString())
             startActivity(intent)
         }
     }
@@ -82,7 +98,7 @@ class SignupSecondActivity: AppCompatActivity() {
     private fun initChangeListener() {
         binding.signupSecondEmailEt.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { checkEmail() }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { validationCheck[0] = false }
             override fun afterTextChanged(p0: Editable?) { }
         })
         binding.signupSecondPwdEt1.addTextChangedListener(object: TextWatcher {
@@ -100,13 +116,6 @@ class SignupSecondActivity: AppCompatActivity() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { checkName() }
             override fun afterTextChanged(p0: Editable?) { }
         })
-    }
-
-    private fun checkEmail() {
-        // UPDATE: API 연동 후 수정
-        validationCheck[0] = binding.signupSecondEmailEt.text.isNotEmpty()
-
-        checkNext()
     }
 
     private fun checkPwd() {
@@ -156,5 +165,14 @@ class SignupSecondActivity: AppCompatActivity() {
             binding.signupSecondNextBtn.setTextColor(ContextCompat.getColor(this@SignupSecondActivity, R.color.gray_700))
             binding.signupSecondNextBtn.isEnabled = false
         }
+    }
+
+    override fun emailSuccessView(result: String) {
+        validationCheck[0] = true
+        checkNext()
+    }
+
+    override fun emailFailureView(message: String) {
+        validationCheck[1] = false
     }
 }

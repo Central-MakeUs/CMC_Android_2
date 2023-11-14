@@ -67,9 +67,7 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
         }
 
         binding.loginDetailLoginBtn.setOnClickListener {
-            Log.d("API-ERROR", "Btn Click")
             var request = LoginRequest(binding.loginDetailEmailEt.text.toString(), binding.loginDetailPwdEt.text.toString())
-            Log.d("API-ERROR", "request = $request")
             authService.login(request)
 
 //            // UPDATE: API 연동 후 변경

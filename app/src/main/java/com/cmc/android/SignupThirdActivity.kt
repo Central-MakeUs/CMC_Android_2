@@ -4,18 +4,34 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.cmc.android.data.AuthResult
+import com.cmc.android.data.SignupRequest
 import com.cmc.android.databinding.ActivitySignupThirdBinding
+import com.cmc.android.network.AuthService
+import com.cmc.android.network.SignupView
 
-class SignupThirdActivity: AppCompatActivity() {
+class SignupThirdActivity: AppCompatActivity(), SignupView {
 
     lateinit var binding: ActivitySignupThirdBinding
+    lateinit var signupService: AuthService
+    lateinit var email: String
+    lateinit var password: String
+    lateinit var name: String
+    var generation: String = ""
+    var part: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupThirdBinding.inflate(layoutInflater)
 
+        email = intent.getStringExtra("email").toString()
+        password = intent.getStringExtra("password").toString()
+        name = intent.getStringExtra("name").toString()
+
+        initService()
         initClickListener()
         initFocusListener()
         initChangeListener()
@@ -23,15 +39,20 @@ class SignupThirdActivity: AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    private fun initService() {
+        signupService = AuthService()
+        signupService.setSignupView(this)
+    }
+
     private fun initClickListener() {
         binding.signupThirdGenerationCl.setOnClickListener {
             var bottomSheetGeneration = BottomSheetGeneration()
             bottomSheetGeneration.show(supportFragmentManager, "BottomSheetGeneration")
             bottomSheetGeneration.setOnDialogFinishListener(object: BottomSheetGeneration.OnDialogFinishListener {
-                override fun finish(generation: String) {
-                    if (generation != "") {
-                        binding.signupThirdGenerationTv.text = generation
-
+                override fun finish(generationData: String) {
+                    if (generationData != "") {
+                        binding.signupThirdGenerationTv.text = generationData
+                        generation = generationData.substring(0, generationData.length - 1)
                     }
 
                     checkNext()
@@ -43,9 +64,10 @@ class SignupThirdActivity: AppCompatActivity() {
             var bottomSheetPart = BottomSheetPart()
             bottomSheetPart.show(supportFragmentManager, "BottomSheetPart")
             bottomSheetPart.setOnDialogFinishListener(object: BottomSheetPart.OnDialogFinishListener {
-                override fun finish(part: String) {
-                    if (part != "") {
-                        binding.signupThirdPartTv.text = part
+                override fun finish(partData: String) {
+                    if (partData != "") {
+                        binding.signupThirdPartTv.text = partData
+                        part = partData.substring(0, partData.length - 1)
                     }
 
                     checkNext()
@@ -54,7 +76,7 @@ class SignupThirdActivity: AppCompatActivity() {
         }
 
         binding.signupThirdSignupBtn.setOnClickListener {
-            startActivity(Intent(this, SignupCompleteActivity::class.java))
+            signupService.signup(SignupRequest(email, password, binding.signupThirdNicknameEt.text.toString(), name, generation.toInt(), part))
         }
     }
 
@@ -88,5 +110,14 @@ class SignupThirdActivity: AppCompatActivity() {
             binding.signupThirdSignupBtn.setTextColor(ContextCompat.getColor(this@SignupThirdActivity, R.color.gray_700))
             binding.signupThirdSignupBtn.isEnabled = false
         }
+    }
+
+    override fun signupSuccessView(result: AuthResult) {
+        Log.d("API-ERROR", "result = $result")
+        startActivity(Intent(this, SignupCompleteActivity::class.java))
+    }
+
+    override fun signupFailureView(message: String) {
+
     }
 }
