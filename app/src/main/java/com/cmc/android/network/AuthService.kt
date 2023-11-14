@@ -1,11 +1,11 @@
-package com.cmc.android.Network
+package com.cmc.android.network
 
 import android.util.Log
-import com.cmc.android.Data.AuthResponse
-import com.cmc.android.Data.EmailResponse
-import com.cmc.android.Data.LoginRequest
-import com.cmc.android.Data.SignupRequest
-import com.cmc.android.Utils.NetworkModule
+import com.cmc.android.data.AuthResponse
+import com.cmc.android.data.EmailResponse
+import com.cmc.android.data.LoginRequest
+import com.cmc.android.data.SignupRequest
+import com.cmc.android.utils.NetworkModule
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,9 +18,20 @@ class AuthService {
     private lateinit var signupView: SignupView
     private lateinit var emailView: EmailView
 
+    fun setLoginView(loginView: LoginView) {
+        this.loginView = loginView
+    }
+    fun setSignupView(signupView: SignupView) {
+        this.signupView = signupView
+    }
+    fun setEmailView(emailView: EmailView) {
+        this.emailView = emailView
+    }
+
     fun login(loginRequest: LoginRequest) {
         authService?.login(loginRequest)?.enqueue(object: Callback<AuthResponse> {
             override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
+                Log.d("API-ERROR", "response = $response")
                 if (response.isSuccessful) {
                     val authResponse = response.body()
                     if (authResponse?.isSuccess == true) {
@@ -31,7 +42,8 @@ class AuthService {
                 }
             }
             override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
-                Log.d("API-ERROR", "AuthService_login_failure")
+                Log.d("API-ERROR", "onFailure")
+                Log.d("API-ERROR", "AuthService_login_failure\nt=$t\ncall=$call")
             }
         })
     }

@@ -1,4 +1,4 @@
-package com.cmc.android.Data
+package com.cmc.android.data
 
 data class LoginRequest(
     var email: String,

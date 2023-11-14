@@ -1,4 +1,4 @@
-package com.cmc.android.Utils
+package com.cmc.android.utils
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient

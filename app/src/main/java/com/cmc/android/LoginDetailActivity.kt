@@ -6,25 +6,37 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.cmc.android.data.AuthResult
+import com.cmc.android.data.LoginRequest
+import com.cmc.android.network.AuthService
+import com.cmc.android.network.LoginView
 import com.cmc.android.databinding.ActivityLoginDetailBinding
 
 
-class LoginDetailActivity: AppCompatActivity() {
+class LoginDetailActivity: AppCompatActivity(), LoginView {
 
     private lateinit var binding: ActivityLoginDetailBinding
+    private lateinit var authService: AuthService
     private var pwdMode = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginDetailBinding.inflate(layoutInflater)
 
+        initService()
         initClickListener()
         initFocusListener()
         initChangeListener()
 
         setContentView(binding.root)
+    }
+
+    private fun initService() {
+        authService = AuthService()
+        authService.setLoginView(this)
     }
 
     private fun initClickListener() {
@@ -55,13 +67,18 @@ class LoginDetailActivity: AppCompatActivity() {
         }
 
         binding.loginDetailLoginBtn.setOnClickListener {
-            // UPDATE: API 연동 후 변경
-            var bottomSheetTitleContent = BottomSheetTitleContent()
-            var bundle = Bundle()
-            bundle.putString("title", "존재하지 않는 계정이에요")
-            bundle.putString("content", "아이디 또는 비밀번호를 확인해주세요!")
-            bottomSheetTitleContent.arguments = bundle
-            bottomSheetTitleContent.show(supportFragmentManager, "BottomSheetLoginFail")
+            Log.d("API-ERROR", "Btn Click")
+            var request = LoginRequest(binding.loginDetailEmailEt.text.toString(), binding.loginDetailPwdEt.text.toString())
+            Log.d("API-ERROR", "request = $request")
+            authService.login(request)
+
+//            // UPDATE: API 연동 후 변경
+//            var bottomSheetTitleContent = BottomSheetTitleContent()
+//            var bundle = Bundle()
+//            bundle.putString("title", "존재하지 않는 계정이에요")
+//            bundle.putString("content", "아이디 또는 비밀번호를 확인해주세요!")
+//            bottomSheetTitleContent.arguments = bundle
+//            bottomSheetTitleContent.show(supportFragmentManager, "BottomSheetLoginFail")
         }
     }
 
@@ -106,5 +123,15 @@ class LoginDetailActivity: AppCompatActivity() {
             binding.loginDetailLoginBtn.setTextColor(ContextCompat.getColor(this@LoginDetailActivity, R.color.gray_700))
             binding.loginDetailLoginBtn.isEnabled = false
         }
+    }
+
+    override fun loginSuccessView(result: AuthResult) {
+        Log.d("API-ERROR", "result = $result")
+
+        startActivity(Intent(this, MainActivity::class.java))
+    }
+
+    override fun loginFailureView(message: String) {
+        Log.d("API-ERROR", "loginFailureView message = $message")
     }
 }

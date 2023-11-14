@@ -1,4 +1,4 @@
-package com.cmc.android.Utils
+package com.cmc.android.utils
 
 import android.app.Application
 import android.content.Context
@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 
 class ApplicationClass: Application() {
     companion object {
-        const val Authorization_TOKEN: String = "Authorization"
+        const val Authorization_TOKEN: String = "X-AUTH-TOKEN"
         const val BASE_URL = BuildConfig.base_url
         const val TAG: String = "cmc-pref"
 
@@ -22,12 +22,10 @@ class ApplicationClass: Application() {
     override fun onCreate() {
         super.onCreate()
 
-        var sharedPreferences = applicationContext.getSharedPreferences(TAG, Context.MODE_PRIVATE)
-        mSharedPreferences = sharedPreferences
-
         val client: OkHttpClient = OkHttpClient.Builder()
-            .readTimeout(30000, TimeUnit.MILLISECONDS)
-            .connectTimeout(30000, TimeUnit.MILLISECONDS)
+            .readTimeout(100, TimeUnit.SECONDS)
+            .writeTimeout(100, TimeUnit.SECONDS)
+            .connectTimeout(100, TimeUnit.SECONDS)
             .build()
 
         retrofit = Retrofit.Builder()
@@ -35,5 +33,7 @@ class ApplicationClass: Application() {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
+        mSharedPreferences = applicationContext.getSharedPreferences(TAG, Context.MODE_PRIVATE)
     }
 }
