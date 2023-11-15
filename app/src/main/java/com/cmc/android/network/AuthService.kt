@@ -37,13 +37,13 @@ class AuthService {
                     val authResponse = response.body()
                     if (authResponse?.isSuccess == true) {
                         loginView.loginSuccessView(authResponse.result!!)
-                    } else {
-                        loginView.loginFailureView(response.body()!!.message)
                     }
                 } else {
                     val gson = Gson()
                     val errorResponse = gson.fromJson(response.errorBody()?.string(), ErrorResponse::class.java)
                     Log.d("API-ERROR", "errorResponse = $errorResponse")
+
+                    loginView.loginFailureView()
                 }
             }
             override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
@@ -59,13 +59,13 @@ class AuthService {
                     val authResponse = response.body()
                     if (authResponse?.isSuccess == true) {
                         signupView.signupSuccessView(authResponse.result!!)
-                    } else {
-                        signupView.signupFailureView(response.body()!!.message)
                     }
                 } else {
                     val gson = Gson()
                     val errorResponse = gson.fromJson(response.errorBody()?.string(), ErrorResponse::class.java)
                     Log.d("API-ERROR", "errorResponse = $errorResponse")
+
+                    signupView.signupFailureView(response.body()!!.message)
                 }
             }
             override fun onFailure(call: Call<AuthResponse>, t: Throwable) {

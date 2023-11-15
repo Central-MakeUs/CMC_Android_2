@@ -4,7 +4,7 @@ import com.cmc.android.data.AuthResult
 
 interface LoginView {
     fun loginSuccessView(result: AuthResult)
-    fun loginFailureView(message: String)
+    fun loginFailureView()
 }
 
 interface SignupView {

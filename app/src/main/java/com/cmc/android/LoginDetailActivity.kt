@@ -69,14 +69,6 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
         binding.loginDetailLoginBtn.setOnClickListener {
             var request = LoginRequest(binding.loginDetailEmailEt.text.toString(), binding.loginDetailPwdEt.text.toString())
             authService.login(request)
-
-//            // UPDATE: API 연동 후 변경
-//            var bottomSheetTitleContent = BottomSheetTitleContent()
-//            var bundle = Bundle()
-//            bundle.putString("title", "존재하지 않는 계정이에요")
-//            bundle.putString("content", "아이디 또는 비밀번호를 확인해주세요!")
-//            bottomSheetTitleContent.arguments = bundle
-//            bottomSheetTitleContent.show(supportFragmentManager, "BottomSheetLoginFail")
         }
     }
 
@@ -124,12 +116,15 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
     }
 
     override fun loginSuccessView(result: AuthResult) {
-        Log.d("API-ERROR", "result = $result")
-
         startActivity(Intent(this, MainActivity::class.java))
     }
 
-    override fun loginFailureView(message: String) {
-        Log.d("API-ERROR", "loginFailureView message = $message")
+    override fun loginFailureView() {
+        var bottomSheetTitleContent = BottomSheetTitleContent()
+        var bundle = Bundle()
+        bundle.putString("title", "존재하지 않는 계정이에요")
+        bundle.putString("content", "아이디 또는 비밀번호를 확인해주세요!")
+        bottomSheetTitleContent.arguments = bundle
+        bottomSheetTitleContent.show(supportFragmentManager, "BottomSheetLoginFail")
     }
 }
