@@ -64,4 +64,8 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.6.4")
     implementation("com.squareup.retrofit2:converter-gson:2.6.4")
     implementation("com.squareup.retrofit2:converter-scalars:2.6.4")
+
+    // QR Code
+    implementation("com.journeyapps:zxing-android-embedded:4.3.0") { isTransitive = false }
+    implementation("com.google.zxing:core:3.4.0")
 }
