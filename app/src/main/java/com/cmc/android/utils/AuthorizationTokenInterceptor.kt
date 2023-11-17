@@ -10,8 +10,8 @@ class AuthorizationTokenInterceptor: Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val builder: Request.Builder = chain.request().newBuilder()
 
-        if (getJwt() != null) {
-            builder.addHeader(Authorization_TOKEN, "${getJwt()}")
+        if (getAccessToken() != null) {
+            builder.addHeader(Authorization_TOKEN, "${getAccessToken()}")
         }
 
         return chain.proceed(builder.build())

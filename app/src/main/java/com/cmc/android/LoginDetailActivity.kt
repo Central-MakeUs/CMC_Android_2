@@ -14,6 +14,8 @@ import com.cmc.android.data.LoginRequest
 import com.cmc.android.network.AuthService
 import com.cmc.android.network.LoginView
 import com.cmc.android.databinding.ActivityLoginDetailBinding
+import com.cmc.android.utils.saveAccessToken
+import com.cmc.android.utils.saveRefreshToken
 
 
 class LoginDetailActivity: AppCompatActivity(), LoginView {
@@ -116,6 +118,8 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
     }
 
     override fun loginSuccessView(result: AuthResult) {
+        saveAccessToken(result.accessToken)
+        saveRefreshToken(result.refreshToken)
         startActivity(Intent(this, MainActivity::class.java))
     }
 

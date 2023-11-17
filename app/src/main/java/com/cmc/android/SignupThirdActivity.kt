@@ -12,6 +12,9 @@ import com.cmc.android.data.SignupRequest
 import com.cmc.android.databinding.ActivitySignupThirdBinding
 import com.cmc.android.network.AuthService
 import com.cmc.android.network.SignupView
+import com.cmc.android.utils.partConvert
+import com.cmc.android.utils.saveAccessToken
+import com.cmc.android.utils.saveRefreshToken
 
 class SignupThirdActivity: AppCompatActivity(), SignupView {
 
@@ -67,7 +70,7 @@ class SignupThirdActivity: AppCompatActivity(), SignupView {
                 override fun finish(partData: String) {
                     if (partData != "") {
                         binding.signupThirdPartTv.text = partData
-                        part = partData.substring(0, partData.length - 1)
+                        part = partConvert(partData)
                     }
 
                     checkNext()
@@ -113,7 +116,9 @@ class SignupThirdActivity: AppCompatActivity(), SignupView {
     }
 
     override fun signupSuccessView(result: AuthResult) {
-        Log.d("API-ERROR", "result = $result")
+        Log.d("SIGNUP-SUCCESS", "result = $result")
+        saveAccessToken(result.accessToken)
+        saveRefreshToken(result.refreshToken)
         startActivity(Intent(this, SignupCompleteActivity::class.java))
     }
 
