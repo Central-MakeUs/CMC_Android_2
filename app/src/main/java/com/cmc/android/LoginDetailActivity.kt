@@ -69,7 +69,8 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
         }
 
         binding.loginDetailLoginBtn.setOnClickListener {
-            var request = LoginRequest(binding.loginDetailEmailEt.text.toString(), binding.loginDetailPwdEt.text.toString())
+            var request = LoginRequest("luna123@naver.com", "12345qwe")
+            // var request = LoginRequest(binding.loginDetailEmailEt.text.toString(), binding.loginDetailPwdEt.text.toString())
             authService.login(request)
         }
     }
@@ -121,6 +122,7 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
         saveAccessToken(result.accessToken)
         saveRefreshToken(result.refreshToken)
         startActivity(Intent(this, MainActivity::class.java))
+        finishAffinity()
     }
 
     override fun loginFailureView() {

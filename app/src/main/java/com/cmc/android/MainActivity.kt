@@ -1,21 +1,22 @@
 package com.cmc.android
 
 import android.content.Intent
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.widget.Toast
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.cmc.android.databinding.ActivityMainBinding
-import com.cmc.android.databinding.ActivitySplashBinding
+import com.google.zxing.client.android.Intents
+import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,43 +25,14 @@ class MainActivity : AppCompatActivity() {
     private var generation: Int = 0
     private lateinit var part: String
 
-    private val barcodeLauncher = registerForActivityResult(
-        ScanContract()
-    ) { result: ScanIntentResult ->
-        // result : 스캔된 결과
-
-        // 내용이 없다면
-        if (result.contents == null) {
-            Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
-        }
-        else { // 내용이 있다면
-
-            // 1. Toast 메시지 출력.
-            Toast.makeText(
-                this,
-                "Scanned: " + result.contents,
-                Toast.LENGTH_LONG
-            ).show()
-
-            // 3. 웹 사이트 주소이면 ? 웹 뷰로 연결하자
-            if ( result.contents.toString().startsWith("http") ) {
-                val intent = Intent(this, QRActivity::class.java)
-                intent.putExtra("url", result.contents.toString())
-                startActivity(intent)
-            }
-        }
-    }
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
+        // UPDATE: 파트 글자 보라색 설정 코드
         nickname = "루나"
         generation = 12
         part = "Android"
-
-        binding.mainTitle.text = "${nickname}는\nCMC ${generation}기 ${part}로\n참여중이에요"
 
         val textData = "${nickname}은\nCMC ${generation}기 ${part}로\n참여중이에요"
         val builder = SpannableStringBuilder(textData)
@@ -73,10 +45,38 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    private val barcodeLauncher = registerForActivityResult(ScanContract()) { result: ScanIntentResult ->
+        if (result.contents == null) {
+            val originalIntent = result.originalIntent
+            if (originalIntent.hasExtra(Intents.Scan.MISSING_CAMERA_PERMISSION)) {
+                Toast.makeText(this@MainActivity, "카메라를 인식할 수 없습니다.", Toast.LENGTH_LONG).show()
+            }
+        } else {
+            Toast.makeText(this@MainActivity, result.contents, Toast.LENGTH_LONG).show()
+        }
+    }
+
     private fun initClickListener() {
         binding.mainAttendCl.setOnClickListener {
-            // startActivity(Intent(this, QRActivity::class.java))
-            barcodeLauncher.launch(ScanOptions())
+            val integrator = IntentIntegrator(this)
+            integrator.captureActivity = QRActivity::class.java
+            integrator.initiateScan()
+
+            val options = ScanOptions().setOrientationLocked(false).setCaptureActivity(
+                QRActivity::class.java
+            )
+
+            options.setBarcodeImageEnabled(true)
+            options.setBeepEnabled(false)
+            barcodeLauncher.launch(options)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
+        super.onActivityResult(requestCode, resultCode, intent)
+        if (resultCode == RESULT_OK) {
+            val scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent)
+            Toast.makeText(this, scanResult.contents, Toast.LENGTH_LONG).show()
         }
     }
 }
