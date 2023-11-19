@@ -74,6 +74,7 @@
             android:background="@android:color/transparent"
             android:inputType="textPassword"
             android:maxLines="1"
+            android:textSize="15sp"
             app:layout_constraintTop_toBottomOf="@id/change_pwd_tv_1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/change_pwd_mode_iv_1" />
@@ -210,6 +211,7 @@
             android:background="@android:color/transparent"
             android:inputType="textPassword"
             android:maxLines="1"
+            android:textSize="15sp"
             app:layout_constraintTop_toBottomOf="@id/change_pwd_tv_2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/change_pwd_mode_iv_2" />

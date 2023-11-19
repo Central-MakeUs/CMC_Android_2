@@ -6,8 +6,6 @@ import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.widget.Toast
-import androidx.activity.result.ActivityResultCallback
-import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.cmc.android.databinding.ActivityMainBinding
@@ -57,6 +55,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initClickListener() {
+        // UPDATE: Deprecated 함수들 수정
         binding.mainAttendCl.setOnClickListener {
             val integrator = IntentIntegrator(this)
             integrator.captureActivity = QRActivity::class.java

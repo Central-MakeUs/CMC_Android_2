@@ -73,6 +73,7 @@
             android:background="@android:color/transparent"
             android:textCursorDrawable="@drawable/bg_et_cursor"
             android:maxLines="1"
+            android:textSize="15sp"
             app:layout_constraintTop_toBottomOf="@id/login_detail_email_tv"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -123,6 +124,7 @@
             android:background="@android:color/transparent"
             android:inputType="textPassword"
             android:maxLines="1"
+            android:textSize="15sp"
             app:layout_constraintTop_toBottomOf="@id/login_detail_pwd_tv"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/login_detail_pwd_mode_iv" />

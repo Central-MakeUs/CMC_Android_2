@@ -88,6 +88,7 @@
             android:background="@android:color/transparent"
             android:inputType="numberDecimal"
             android:maxLines="1"
+            android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/find_pwd_number_number_tv"
             app:layout_constraintEnd_toStartOf="@id/find_pwd_number_number_time_tv"/>
