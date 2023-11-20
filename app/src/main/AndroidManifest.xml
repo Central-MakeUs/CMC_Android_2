@@ -33,9 +33,9 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".LoginDetailActivity" />
-        <activity android:name=".FindPwdActivity" />
-        <activity android:name=".FindPwdNumberActivity" />
-        <activity android:name=".ChangePwdActivity" />
+        <activity android:name=".ChangePwdFirstActivity" />
+        <activity android:name=".ChangePwdSecondActivity" />
+        <activity android:name=".ChangePwdThirdActivity" />
         <activity android:name=".SignupFirstActivity" />
         <activity android:name=".SignupSecondActivity" />
         <activity android:name=".SignupThirdActivity" />

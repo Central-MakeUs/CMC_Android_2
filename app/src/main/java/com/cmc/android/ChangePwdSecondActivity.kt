@@ -2,29 +2,25 @@ package com.cmc.android
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.cmc.android.databinding.ActivityFindPwdBinding
-import com.cmc.android.databinding.ActivityFindPwdNumberBinding
+import com.cmc.android.databinding.ActivityChangePwdSecondBinding
 import java.text.DecimalFormat
 import java.util.Timer
 import kotlin.concurrent.timer
 
-class FindPwdNumberActivity: AppCompatActivity() {
+class ChangePwdSecondActivity: AppCompatActivity() {
 
-    private lateinit var binding: ActivityFindPwdNumberBinding
+    private lateinit var binding: ActivityChangePwdSecondBinding
     private var timer: Timer? = null
     private var remainTime = 180
     private var checkNumber = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityFindPwdNumberBinding.inflate(layoutInflater)
+        binding = ActivityChangePwdSecondBinding.inflate(layoutInflater)
 
         initClickListener()
         initFocusListener()
@@ -51,8 +47,9 @@ class FindPwdNumberActivity: AppCompatActivity() {
             // UPDATE: API 연동 후 수정
             if (checkNumber) {
                 // MEMO: If 인증번호가 맞았다면
-                var intent = Intent(this@FindPwdNumberActivity, ChangePwdActivity::class.java)
+                var intent = Intent(this@ChangePwdSecondActivity, ChangePwdThirdActivity::class.java)
                 startActivity(intent)
+                finish()
             } else {
                 // MEMO: If 인증번호가 틀렸다면
                 var bottomSheetTitleContent = BottomSheetTitleContent()
@@ -92,11 +89,11 @@ class FindPwdNumberActivity: AppCompatActivity() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (binding.findPwdNumberNumberEt.text.isNotEmpty()) {
                     binding.findPwdChangeBtn.setBackgroundResource(R.drawable.login_round_5_o)
-                    binding.findPwdChangeBtn.setTextColor(ContextCompat.getColor(this@FindPwdNumberActivity, R.color.gray_50))
+                    binding.findPwdChangeBtn.setTextColor(ContextCompat.getColor(this@ChangePwdSecondActivity, R.color.gray_50))
                     binding.findPwdChangeBtn.isEnabled = true
                 } else {
                     binding.findPwdChangeBtn.setBackgroundResource(R.drawable.login_round_5_x)
-                    binding.findPwdChangeBtn.setTextColor(ContextCompat.getColor(this@FindPwdNumberActivity, R.color.gray_700))
+                    binding.findPwdChangeBtn.setTextColor(ContextCompat.getColor(this@ChangePwdSecondActivity, R.color.gray_700))
                     binding.findPwdChangeBtn.isEnabled = false
                 }
             }

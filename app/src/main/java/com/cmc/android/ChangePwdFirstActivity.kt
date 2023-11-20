@@ -6,17 +6,16 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.cmc.android.databinding.ActivityFindPwdBinding
-import java.util.Timer
+import com.cmc.android.databinding.ActivityChangePwdFirstBinding
 
-class FindPwdActivity: AppCompatActivity() {
+class ChangePwdFirstActivity: AppCompatActivity() {
 
-    private lateinit var binding: ActivityFindPwdBinding
+    private lateinit var binding: ActivityChangePwdFirstBinding
     private var account = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityFindPwdBinding.inflate(layoutInflater)
+        binding = ActivityChangePwdFirstBinding.inflate(layoutInflater)
 
         initClickListener()
         initFocusListener()
@@ -49,8 +48,9 @@ class FindPwdActivity: AppCompatActivity() {
             bottomSheetTitleContent.setOnDialogFinishListener(object: BottomSheetTitleContent.OnDialogFinishListener {
                 override fun finish(result: Boolean?) {
                     if (result == true) {
-                        var intent = Intent(this@FindPwdActivity, FindPwdNumberActivity::class.java)
+                        var intent = Intent(this@ChangePwdFirstActivity, ChangePwdSecondActivity::class.java)
                         startActivity(intent)
+                        finish()
                     }
                 }
             })
@@ -76,11 +76,11 @@ class FindPwdActivity: AppCompatActivity() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (binding.findPwdEmailEt.text.isNotEmpty()) {
                     binding.findPwdEmailBtn.setBackgroundResource(R.drawable.login_round_5_o)
-                    binding.findPwdEmailBtn.setTextColor(ContextCompat.getColor(this@FindPwdActivity, R.color.gray_50))
+                    binding.findPwdEmailBtn.setTextColor(ContextCompat.getColor(this@ChangePwdFirstActivity, R.color.gray_50))
                     binding.findPwdEmailBtn.isEnabled = true
                 } else {
                     binding.findPwdEmailBtn.setBackgroundResource(R.drawable.login_round_5_x)
-                    binding.findPwdEmailBtn.setTextColor(ContextCompat.getColor(this@FindPwdActivity, R.color.gray_700))
+                    binding.findPwdEmailBtn.setTextColor(ContextCompat.getColor(this@ChangePwdFirstActivity, R.color.gray_700))
                     binding.findPwdEmailBtn.isEnabled = false
                 }
             }

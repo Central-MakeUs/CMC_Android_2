@@ -1,30 +1,26 @@
 package com.cmc.android
 
-import android.R.id.input
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.cmc.android.databinding.ActivityChangePwdBinding
-import java.util.regex.Pattern
+import com.cmc.android.databinding.ActivityChangePwdThirdBinding
 
+class ChangePwdThirdActivity: AppCompatActivity() {
 
-class ChangePwdActivity: AppCompatActivity() {
-
-    private lateinit var binding: ActivityChangePwdBinding
+    private lateinit var binding: ActivityChangePwdThirdBinding
     private var firstPwdMode = false
     private var secondPwdMode = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityChangePwdBinding.inflate(layoutInflater)
+        binding = ActivityChangePwdThirdBinding.inflate(layoutInflater)
 
         initClickListener()
         initFocusListener()
@@ -34,6 +30,10 @@ class ChangePwdActivity: AppCompatActivity() {
     }
 
     private fun initClickListener() {
+        binding.changePwdBackIv.setOnClickListener {
+            finish()
+        }
+
         binding.changePwdModeIv1.setOnClickListener {
             firstPwdMode = !firstPwdMode
 
@@ -67,7 +67,7 @@ class ChangePwdActivity: AppCompatActivity() {
             bottomSheetTopBottomTitle.setOnDialogFinishListener(object: BottomSheetTopBottomTitle.OnDialogFinishListener {
                 override fun finish(result: Boolean?) {
                     if (result == true) {
-                        startActivity(Intent(this@ChangePwdActivity, LoginActivity::class.java))
+                        startActivity(Intent(this@ChangePwdThirdActivity, LoginActivity::class.java))
                         finishAffinity()
                     }
                 }
@@ -123,11 +123,11 @@ class ChangePwdActivity: AppCompatActivity() {
 
         if (checkEng && checkNum && checkLength && checkSame) {
             binding.changePwdNextBtn.setBackgroundResource(R.drawable.login_round_5_o)
-            binding.changePwdNextBtn.setTextColor(ContextCompat.getColor(this@ChangePwdActivity, R.color.gray_50))
+            binding.changePwdNextBtn.setTextColor(ContextCompat.getColor(this@ChangePwdThirdActivity, R.color.gray_50))
             binding.changePwdNextBtn.isEnabled = true
         } else {
             binding.changePwdNextBtn.setBackgroundResource(R.drawable.login_round_5_x)
-            binding.changePwdNextBtn.setTextColor(ContextCompat.getColor(this@ChangePwdActivity, R.color.gray_700))
+            binding.changePwdNextBtn.setTextColor(ContextCompat.getColor(this@ChangePwdThirdActivity, R.color.gray_700))
             binding.changePwdNextBtn.isEnabled = false
         }
     }

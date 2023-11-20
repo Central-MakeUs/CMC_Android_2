@@ -48,6 +48,10 @@ class SignupThirdActivity: AppCompatActivity(), SignupView {
     }
 
     private fun initClickListener() {
+        binding.signupThirdBackIv.setOnClickListener {
+            finish()
+        }
+
         binding.signupThirdGenerationCl.setOnClickListener {
             var bottomSheetGeneration = BottomSheetGeneration()
             bottomSheetGeneration.show(supportFragmentManager, "BottomSheetGeneration")
@@ -120,6 +124,7 @@ class SignupThirdActivity: AppCompatActivity(), SignupView {
         saveAccessToken(result.accessToken)
         saveRefreshToken(result.refreshToken)
         startActivity(Intent(this, SignupCompleteActivity::class.java))
+        finishAffinity()
     }
 
     override fun signupFailureView(message: String) {

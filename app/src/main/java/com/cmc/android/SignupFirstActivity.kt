@@ -30,6 +30,10 @@ class SignupFirstActivity: AppCompatActivity() {
     }
 
     private fun initClickListener() {
+        binding.signupFirstBackIv.setOnClickListener {
+            finish()
+        }
+
         binding.signupFirstAllIv.setOnClickListener {
             changeAllRadio()
         }

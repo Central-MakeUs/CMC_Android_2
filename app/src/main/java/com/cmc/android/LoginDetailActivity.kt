@@ -6,7 +6,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.cmc.android.data.AuthResult
@@ -42,6 +41,10 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
     }
 
     private fun initClickListener() {
+        binding.loginDetailBackIv.setOnClickListener {
+            finish()
+        }
+
         binding.loginDetailPwdModeIv.setOnClickListener {
             pwdMode = !pwdMode
 
@@ -64,7 +67,7 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
 
         binding.loginDetailFindPwdTv.setOnClickListener {
             // UPDATE : 화면 변경
-            var intent = Intent(this, FindPwdActivity::class.java)
+            var intent = Intent(this, ChangePwdFirstActivity::class.java)
             startActivity(intent)
         }
 

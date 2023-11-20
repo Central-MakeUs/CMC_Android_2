@@ -41,6 +41,10 @@ class SignupSecondActivity: AppCompatActivity(), EmailView {
     }
 
     private fun initClickListener() {
+        binding.signupSecondBackIv.setOnClickListener {
+            finish()
+        }
+
         binding.signupSecondEmailCheckTv.setOnClickListener {
             emailService.checkEmail(binding.signupSecondEmailEt.text.toString())
         }
