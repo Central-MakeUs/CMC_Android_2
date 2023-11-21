@@ -39,7 +39,7 @@
         <activity android:name=".SignupFirstActivity" />
         <activity android:name=".SignupSecondActivity" />
         <activity android:name=".SignupThirdActivity" />
-        <activity android:name=".SignupCompleteActivity" />
+        <activity android:name=".ResultActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"

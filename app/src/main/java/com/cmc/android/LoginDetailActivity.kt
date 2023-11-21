@@ -66,7 +66,11 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
         }
 
         binding.loginDetailFindPwdTv.setOnClickListener {
-            // UPDATE : 화면 변경
+            var intent = Intent(this, ChangePwdFirstActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.loginGoSignupTv.setOnClickListener {
             var intent = Intent(this, ChangePwdFirstActivity::class.java)
             startActivity(intent)
         }

@@ -25,6 +25,8 @@ class SplashActivity : AppCompatActivity() {
     private fun splashAnimation() {
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed({
+            // UPDATE: 이 부분 삭제하기!
+            autoLogin = true
             if (autoLogin) {
                 changeActivity(MainActivity::class.java)
             } else changeActivity(LoginActivity::class.java)

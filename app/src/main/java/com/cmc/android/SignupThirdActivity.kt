@@ -123,7 +123,12 @@ class SignupThirdActivity: AppCompatActivity(), SignupView {
         Log.d("SIGNUP-SUCCESS", "result = $result")
         saveAccessToken(result.accessToken)
         saveRefreshToken(result.refreshToken)
-        startActivity(Intent(this, SignupCompleteActivity::class.java))
+
+        var intent = Intent(this@SignupThirdActivity, ResultActivity::class.java)
+        intent.putExtra("title", "회원가입 신청이\n완료되었어요!")
+        intent.putExtra("content", "신청이 수락될 때까지 조금만 기다려주세요 :)")
+        intent.putExtra("btnText", "확인")
+        startActivity(intent)
         finishAffinity()
     }
 

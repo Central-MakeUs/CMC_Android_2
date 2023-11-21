@@ -78,6 +78,7 @@ class SignupSecondActivity: AppCompatActivity(), EmailView {
             intent.putExtra("password", binding.signupSecondPwdEt1.text.toString())
             intent.putExtra("name", binding.signupSecondNameEt.text.toString())
             startActivity(intent)
+            finish()
         }
     }
 

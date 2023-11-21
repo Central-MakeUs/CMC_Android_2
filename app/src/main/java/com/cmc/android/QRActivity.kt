@@ -1,5 +1,6 @@
 package com.cmc.android
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
@@ -15,14 +16,38 @@ class QRActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityQrBinding.inflate(layoutInflater)
 
+        initQRSetting(savedInstanceState)
+        initClickListener()
+
+        setContentView(binding.root)
+    }
+
+    private fun initQRSetting(savedInstanceState: Bundle?) {
         capture = CaptureManager(this, binding.zxingBarcodeScanner)
         capture!!.initializeFromIntent(intent, savedInstanceState)
         capture!!.setShowMissingCameraPermissionDialog(true)
         capture!!.decode()
 
         binding.zxingBarcodeScanner.viewFinder.setLaserVisibility(false)
+    }
 
-        setContentView(binding.root)
+    private fun initClickListener() {
+        binding.qrBottomTv.setOnClickListener {
+            var bottomSheetNum = BottomSheetNum()
+            bottomSheetNum.show(supportFragmentManager, "BottomSheetNum")
+            bottomSheetNum.setOnDialogFinishListener(object : BottomSheetNum.OnDialogFinishListener {
+                override fun finish(result: Boolean) {
+                    if (result) {
+                        var intent = Intent(this@QRActivity, ResultActivity::class.java)
+                        intent.putExtra("title", "00님의 \n출석이 완료되었어요!")
+                        intent.putExtra("content", "잠시 후 시작되는 세션에 집중해주세요 :)")
+                        intent.putExtra("btnText", "완료")
+                        startActivity(intent)
+                        finish()
+                    }
+                }
+            })
+        }
     }
 
     override fun onResume() {

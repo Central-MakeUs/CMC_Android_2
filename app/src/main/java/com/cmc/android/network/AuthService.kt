@@ -41,7 +41,7 @@ class AuthService {
                 } else {
                     val gson = Gson()
                     val errorResponse = gson.fromJson(response.errorBody()?.string(), ErrorResponse::class.java)
-                    Log.d("API-ERROR", "errorResponse = $errorResponse")
+                    Log.d("API-ERROR", "login errorResponse = $errorResponse")
 
                     loginView.loginFailureView()
                 }
@@ -63,7 +63,7 @@ class AuthService {
                 } else {
                     val gson = Gson()
                     val errorResponse = gson.fromJson(response.errorBody()?.string(), ErrorResponse::class.java)
-                    Log.d("API-ERROR", "errorResponse = $errorResponse")
+                    Log.d("API-ERROR", "signup errorResponse = $errorResponse")
 
                     signupView.signupFailureView(response.body()!!.message)
                 }
@@ -87,7 +87,7 @@ class AuthService {
                 } else {
                     val gson = Gson()
                     val errorResponse = gson.fromJson(response.errorBody()?.string(), ErrorResponse::class.java)
-                    Log.d("API-ERROR", "errorResponse = $errorResponse")
+                    Log.d("API-ERROR", "checkEmail errorResponse = $errorResponse")
                 }
             }
             override fun onFailure(call: Call<EmailResponse>, t: Throwable) {

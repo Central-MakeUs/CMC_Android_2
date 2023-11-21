@@ -25,6 +25,10 @@ class ChangePwdFirstActivity: AppCompatActivity() {
     }
 
     private fun initClickListener() {
+        binding.findPwdBackIv.setOnClickListener {
+            finish()
+        }
+
         binding.findPwdEmailBtn.setOnClickListener {
             // UPDATE: API 연동 후 수정
             var bottomSheetTitleContent = BottomSheetTitleContent()
@@ -50,7 +54,6 @@ class ChangePwdFirstActivity: AppCompatActivity() {
                     if (result == true) {
                         var intent = Intent(this@ChangePwdFirstActivity, ChangePwdSecondActivity::class.java)
                         startActivity(intent)
-                        finish()
                     }
                 }
             })

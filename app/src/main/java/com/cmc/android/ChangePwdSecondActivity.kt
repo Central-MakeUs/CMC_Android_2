@@ -31,16 +31,18 @@ class ChangePwdSecondActivity: AppCompatActivity() {
     }
 
     private fun initClickListener() {
+        binding.findPwdNumberBackIv.setOnClickListener {
+            finish()
+        }
+
         binding.findPwdNumberRequestBtn.setOnClickListener {
             var bottomSheetTitleContent = BottomSheetTitleContent()
             var bundle = Bundle()
-            var bottomSheetTag = ""
             bundle.putString("title", "인증번호를 전송했어요")
             bundle.putString("content", "3분 내 인증번호를 입력해주세요 :)")
-            bottomSheetTag = "BottomSheetNumberRequest"
 
             bottomSheetTitleContent.arguments = bundle
-            bottomSheetTitleContent.show(supportFragmentManager, bottomSheetTag)
+            bottomSheetTitleContent.show(supportFragmentManager, "BottomSheetNumberRequest")
         }
 
         binding.findPwdChangeBtn.setOnClickListener {
@@ -49,18 +51,15 @@ class ChangePwdSecondActivity: AppCompatActivity() {
                 // MEMO: If 인증번호가 맞았다면
                 var intent = Intent(this@ChangePwdSecondActivity, ChangePwdThirdActivity::class.java)
                 startActivity(intent)
-                finish()
             } else {
                 // MEMO: If 인증번호가 틀렸다면
                 var bottomSheetTitleContent = BottomSheetTitleContent()
                 var bundle = Bundle()
-                var bottomSheetTag = ""
                 bundle.putString("title", "올바르지 않은 인증번호에요")
                 bundle.putString("content", "인증번호를 확인해주세요 :(")
-                bottomSheetTag = "BottomSheetNumberFail"
 
                 bottomSheetTitleContent.arguments = bundle
-                bottomSheetTitleContent.show(supportFragmentManager, bottomSheetTag)
+                bottomSheetTitleContent.show(supportFragmentManager, "BottomSheetNumberFail")
             }
 
             // UPDATE: 아래 부분 삭제하기!

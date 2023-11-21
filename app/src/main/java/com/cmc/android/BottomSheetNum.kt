@@ -14,10 +14,10 @@ class BottomSheetNum: BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomSheetNumBinding
     private lateinit var dialogFinishListener: OnDialogFinishListener
-    private var result: String = ""
+    private var result: Boolean = false
 
     interface OnDialogFinishListener {
-        fun finish(result: String)
+        fun finish(result: Boolean)
     }
 
     fun setOnDialogFinishListener(listener: OnDialogFinishListener) {
@@ -54,7 +54,10 @@ class BottomSheetNum: BottomSheetDialogFragment() {
     }
 
     private fun initClickListener() {
-
+        binding.bottomSheetNumNextBtn.setOnClickListener {
+            result = true
+            dismiss()
+        }
     }
 
     override fun onDestroyView() {

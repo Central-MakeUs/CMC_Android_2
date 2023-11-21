@@ -48,6 +48,7 @@
         app:layout_constraintBottom_toTopOf="@id/qr_stroke_iv" />
 
     <TextView
+        android:id="@+id/qr_bottom_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="💡 QR 코드가 입력되지 않을 경우 여기를 클릭해주세요"
