@@ -3,4 +3,5 @@
     <string name="find_id"><u>아이디 찾기</u></string>
     <string name="find_pwd"><u>비밀번호 재설정하기</u></string>
     <string name="go_signup"><u>회원가입하기</u></string>
+    <string name="member_leave"><u>회원탈퇴</u></string>
 </resources>
