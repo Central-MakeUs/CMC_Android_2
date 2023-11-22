@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background_1"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_attendance_info_cl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/item_attendance_check_cl">
+
+        <TextView
+            android:id="@+id/item_attendance_week_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0주차"
+            android:textSize="20dp"
+            android:textColor="@color/gray_50"
+            android:fontFamily="@font/pretendard_bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+        
+        <ImageView
+            android:id="@+id/item_attendance_time_iv"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:src="@drawable/ic_time"
+            android:layout_marginTop="13dp"
+            app:layout_constraintTop_toBottomOf="@id/item_attendance_week_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/item_attendance_time_tv" />
+
+        <TextView
+            android:id="@+id/item_attendance_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mm.dd-hh:mm"
+            android:textSize="13sp"
+            android:fontFamily="@font/pretendard_medium"
+            android:textColor="@color/gray_700"
+            android:layout_marginStart="11dp"
+            app:layout_constraintTop_toTopOf="@id/item_attendance_time_iv"
+            app:layout_constraintStart_toEndOf="@id/item_attendance_time_iv"
+            app:layout_constraintBottom_toBottomOf="@id/item_attendance_time_iv" />
+
+        <TextView
+            android:id="@+id/item_attendance_how_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Online"
+            android:textSize="11dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:textColor="@color/gray_300"
+            android:background="@drawable/login_round_5_x"
+            android:padding="4dp"
+            android:gravity="center"
+            android:layout_marginTop="11dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_attendance_time_iv"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_attendance_check_cl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/item_attendance_info_cl"
+        app:layout_constraintTop_toTopOf="@id/item_attendance_info_cl"
+        app:layout_constraintBottom_toBottomOf="@id/item_attendance_info_cl">
+
+        <ImageView
+            android:id="@+id/item_attendance_first_iv"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_attendance_default"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/item_attendance_line"/>
+
+        <TextView
+            android:id="@+id/item_attendance_first_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1차"
+            android:textSize="13sp"
+            android:fontFamily="@font/pretendard_medium"
+            android:textColor="@color/gray_300"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="@id/item_attendance_first_iv"
+            app:layout_constraintEnd_toEndOf="@id/item_attendance_first_iv"
+            app:layout_constraintTop_toBottomOf="@id/item_attendance_first_iv" />
+        
+        <View
+            android:id="@+id/item_attendance_line"
+            android:layout_width="55dp"
+            android:layout_height="2dp"
+            android:background="@color/gray_800"
+            android:layout_marginHorizontal="11dp"
+            app:layout_constraintStart_toEndOf="@id/item_attendance_first_iv"
+            app:layout_constraintEnd_toStartOf="@id/item_attendance_second_iv"
+            app:layout_constraintTop_toTopOf="@id/item_attendance_first_iv"
+            app:layout_constraintBottom_toBottomOf="@id/item_attendance_first_iv" />
+
+        <ImageView
+            android:id="@+id/item_attendance_second_iv"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_attendance_default"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_attendance_line"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/item_attendance_second_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2차"
+            android:textSize="13sp"
+            android:fontFamily="@font/pretendard_medium"
+            android:textColor="@color/gray_300"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="@id/item_attendance_second_iv"
+            app:layout_constraintEnd_toEndOf="@id/item_attendance_second_iv"
+            app:layout_constraintTop_toBottomOf="@id/item_attendance_second_iv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/gray_900"
+        android:layout_marginTop="25dp"
+        android:layout_marginHorizontal="24dp"
+        app:layout_constraintTop_toBottomOf="@id/item_attendance_info_cl"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
