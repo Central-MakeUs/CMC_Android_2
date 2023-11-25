@@ -1,6 +1,7 @@
 package com.cmc.android
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
@@ -13,6 +14,7 @@ class SignupFirstActivity: AppCompatActivity() {
     lateinit var binding: ActivitySignupFirstBinding
     private var radioStatus = arrayListOf(false, false, false, false, false)
     private lateinit var imageArray: ArrayList<ImageView>
+    private lateinit var arrowImages: ArrayList<ImageView>
     private var checkNum = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +24,10 @@ class SignupFirstActivity: AppCompatActivity() {
         imageArray = arrayListOf(
             binding.signupFirstAllIv, binding.signupFirstServiceIv, binding.signupFirstPersonalIv,
             binding.signupFirstLocationIv, binding.signupFirstMarketingIv
+        )
+        arrowImages = arrayListOf(
+            binding.signupFirstServiceArrow, binding.signupFirstLocationArrow,
+            binding.signupFirstMarketingArrow, binding.signupFirstPersonalArrow
         )
 
         initClickListener()
@@ -52,6 +58,15 @@ class SignupFirstActivity: AppCompatActivity() {
 
         binding.signupFirstMarketingIv.setOnClickListener {
             radioCheckListener(4)
+        }
+
+        arrowImages.forEach {
+            it.setOnClickListener {
+                // 약관동의 사이트
+                val url = "https://makeus-challenge.notion.site/ce8e31baeee9444382e69a87bae418f2?pvs=4"
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(intent)
+            }
         }
 
         binding.signupFirstNextBtn.setOnClickListener {
