@@ -42,7 +42,9 @@
         <activity android:name=".ChangePwdSecondActivity"
             android:windowSoftInputMode="adjustResize"
         />
-        <activity android:name=".ChangePwdThirdActivity" />
+        <activity android:name=".ChangePwdThirdActivity"
+            android:windowSoftInputMode="adjustResize"
+        />
         <activity android:name=".SignupFirstActivity" />
         <activity android:name=".SignupSecondActivity"
             android:windowSoftInputMode="adjustResize"

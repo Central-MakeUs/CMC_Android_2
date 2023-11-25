@@ -1,6 +1,6 @@
-package com.cmc.android.network
+package com.cmc.android.network.auth
 
-import com.cmc.android.data.AuthResult
+import com.cmc.android.domain.auth.AuthResult
 
 interface LoginView {
     fun loginSuccessView(result: AuthResult)

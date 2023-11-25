@@ -1,4 +1,4 @@
-package com.cmc.android.data
+package com.cmc.android.domain.base
 
 data class ErrorResponse(
     var isSuccess: Boolean,

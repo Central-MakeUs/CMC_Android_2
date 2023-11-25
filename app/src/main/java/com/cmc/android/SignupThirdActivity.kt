@@ -7,11 +7,11 @@ import android.text.TextWatcher
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.cmc.android.data.AuthResult
-import com.cmc.android.data.SignupRequest
+import com.cmc.android.domain.auth.AuthResult
+import com.cmc.android.domain.auth.req.SignupRequest
 import com.cmc.android.databinding.ActivitySignupThirdBinding
-import com.cmc.android.network.AuthService
-import com.cmc.android.network.SignupView
+import com.cmc.android.network.auth.AuthService
+import com.cmc.android.network.auth.SignupView
 import com.cmc.android.utils.partConvert
 import com.cmc.android.utils.saveAccessToken
 import com.cmc.android.utils.saveRefreshToken

@@ -9,11 +9,11 @@ import android.text.method.PasswordTransformationMethod
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.cmc.android.data.AuthResult
-import com.cmc.android.data.LoginRequest
+import com.cmc.android.domain.auth.AuthResult
+import com.cmc.android.domain.auth.req.LoginRequest
 import com.cmc.android.databinding.ActivityLoginDetailBinding
-import com.cmc.android.network.AuthService
-import com.cmc.android.network.LoginView
+import com.cmc.android.network.auth.AuthService
+import com.cmc.android.network.auth.LoginView
 import com.cmc.android.utils.saveAccessToken
 import com.cmc.android.utils.saveRefreshToken
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent.setEventListener

@@ -13,8 +13,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.cmc.android.databinding.ActivitySignupSecondBinding
-import com.cmc.android.network.AuthService
-import com.cmc.android.network.EmailView
+import com.cmc.android.network.auth.AuthService
+import com.cmc.android.network.auth.EmailView
 
 
 class SignupSecondActivity: AppCompatActivity(), EmailView {

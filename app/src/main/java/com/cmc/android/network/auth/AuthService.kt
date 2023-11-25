@@ -1,11 +1,11 @@
-package com.cmc.android.network
+package com.cmc.android.network.auth
 
 import android.util.Log
-import com.cmc.android.data.AuthResponse
-import com.cmc.android.data.EmailResponse
-import com.cmc.android.data.ErrorResponse
-import com.cmc.android.data.LoginRequest
-import com.cmc.android.data.SignupRequest
+import com.cmc.android.domain.base.ResponseWrapper
+import com.cmc.android.domain.auth.AuthResult
+import com.cmc.android.domain.auth.req.SignupRequest
+import com.cmc.android.domain.base.ErrorResponse
+import com.cmc.android.domain.auth.req.LoginRequest
 import com.cmc.android.utils.NetworkModule
 import com.google.gson.Gson
 import retrofit2.Call
@@ -14,7 +14,7 @@ import retrofit2.Response
 
 class AuthService {
 
-    private var authService = NetworkModule.getInstance()?.create(AuthInterfaces::class.java)
+    private var authService = NetworkModule.getInstance()?.create(AuthInterface::class.java)
 
     private lateinit var loginView: LoginView
     private lateinit var signupView: SignupView
@@ -31,8 +31,8 @@ class AuthService {
     }
 
     fun login(loginRequest: LoginRequest) {
-        authService?.login(loginRequest)?.enqueue(object: Callback<AuthResponse> {
-            override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
+        authService?.login(loginRequest)?.enqueue(object: Callback<ResponseWrapper<AuthResult>> {
+            override fun onResponse(call: Call<ResponseWrapper<AuthResult>>, response: Response<ResponseWrapper<AuthResult>>) {
                 if (response.code() == 200) {
                     val authResponse = response.body()
                     if (authResponse?.isSuccess == true) {
@@ -46,15 +46,15 @@ class AuthService {
                     loginView.loginFailureView()
                 }
             }
-            override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseWrapper<AuthResult>>, t: Throwable) {
                 Log.d("API-ERROR", "AuthService_login_failure")
             }
         })
     }
 
     fun signup(signupRequest: SignupRequest) {
-        authService?.signup(signupRequest)?.enqueue(object: Callback<AuthResponse> {
-            override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
+        authService?.signup(signupRequest)?.enqueue(object: Callback<ResponseWrapper<AuthResult>> {
+            override fun onResponse(call: Call<ResponseWrapper<AuthResult>>, response: Response<ResponseWrapper<AuthResult>>) {
                 if (response.code() == 200) {
                     val authResponse = response.body()
                     if (authResponse?.isSuccess == true) {
@@ -68,15 +68,15 @@ class AuthService {
                     signupView.signupFailureView(response.body()!!.message)
                 }
             }
-            override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseWrapper<AuthResult>>, t: Throwable) {
                 Log.d("API-ERROR", "AuthService_signup_failure")
             }
         })
     }
 
     fun checkEmail(email: String) {
-        authService?.checkEmail(email)?.enqueue(object: Callback<EmailResponse> {
-            override fun onResponse(call: Call<EmailResponse>, response: Response<EmailResponse>) {
+        authService?.checkEmail(email)?.enqueue(object: Callback<ResponseWrapper<String>> {
+            override fun onResponse(call: Call<ResponseWrapper<String>>, response: Response<ResponseWrapper<String>>) {
                 if (response.code() == 200) {
                     val emailResponse = response.body()
                     if (emailResponse?.isSuccess == true) {
@@ -90,7 +90,7 @@ class AuthService {
                     Log.d("API-ERROR", "checkEmail errorResponse = $errorResponse")
                 }
             }
-            override fun onFailure(call: Call<EmailResponse>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseWrapper<String>>, t: Throwable) {
                 Log.d("API-ERROR", "AuthService_email_failure")
             }
         })
