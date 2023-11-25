@@ -18,6 +18,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+
         android:theme="@style/Theme.CMC_Android"
         tools:targetApi="31"
         android:hardwareAccelerated="true"
@@ -37,7 +38,9 @@
         <activity android:name=".ChangePwdSecondActivity" />
         <activity android:name=".ChangePwdThirdActivity" />
         <activity android:name=".SignupFirstActivity" />
-        <activity android:name=".SignupSecondActivity" />
+        <activity android:name=".SignupSecondActivity"
+            android:windowSoftInputMode="adjustResize"
+        />
         <activity android:name=".SignupThirdActivity" />
         <activity android:name=".ResultActivity" />
         <activity android:name=".MainActivity" />

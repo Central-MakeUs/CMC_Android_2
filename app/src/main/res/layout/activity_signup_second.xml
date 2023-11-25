@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background_1"
-    android:fitsSystemWindows="true" >
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/signup_second_top_bar"
@@ -91,7 +92,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signup_second_title_tv" >
 
@@ -130,6 +132,7 @@
                     android:fontFamily="@font/pretendard_medium"
                     android:paddingHorizontal="5dp"
                     android:paddingVertical="0dp"
+                    android:singleLine="true"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="8dp"
                     android:background="@android:color/transparent"
@@ -438,6 +441,8 @@
                     android:layout_marginTop="10dp"
                     android:background="@android:color/transparent"
                     android:textCursorDrawable="@drawable/bg_et_cursor"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
                     android:maxLines="1"
                     android:textSize="15sp"
                     app:layout_constraintTop_toBottomOf="@id/signup_second_name_tv"
@@ -455,24 +460,25 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/signup_second_next_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/login_round_5_x"
-                android:fontFamily="@font/pretendard_bold"
-                android:paddingVertical="16dp"
-                android:text="다음"
-                android:textAlignment="center"
-                android:textColor="@color/gray_700"
-                android:textSize="18sp"
-                android:enabled="false"
-                app:layout_constraintBottom_toBottomOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/signup_second_next_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/login_round_5_x"
+        android:fontFamily="@font/pretendard_bold"
+        android:paddingVertical="16dp"
+        android:text="다음"
+        android:textAlignment="center"
+        android:textColor="@color/gray_700"
+        android:textSize="18sp"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</LinearLayout>

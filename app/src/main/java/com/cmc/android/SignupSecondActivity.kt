@@ -9,6 +9,7 @@ import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.cmc.android.databinding.ActivitySignupSecondBinding
@@ -174,10 +175,12 @@ class SignupSecondActivity: AppCompatActivity(), EmailView {
 
     override fun emailSuccessView(result: String) {
         validationCheck[0] = true
+        Toast.makeText(this@SignupSecondActivity, "중복확인이 완료되었습니다.", Toast.LENGTH_LONG).show()
         checkNext()
     }
 
     override fun emailFailureView(message: String) {
+        Toast.makeText(this@SignupSecondActivity, "중복된 이메일입니다.", Toast.LENGTH_LONG).show()
         validationCheck[1] = false
     }
 }
