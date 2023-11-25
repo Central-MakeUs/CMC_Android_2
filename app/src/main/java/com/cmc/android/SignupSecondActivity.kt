@@ -6,7 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import com.cmc.android.databinding.ActivitySignupSecondBinding
 import com.cmc.android.network.AuthService
 import com.cmc.android.network.EmailView
+
 
 class SignupSecondActivity: AppCompatActivity(), EmailView {
 
@@ -41,13 +42,26 @@ class SignupSecondActivity: AppCompatActivity(), EmailView {
         emailService.setEmailView(this)
     }
 
+    private fun isValidEmail(email: String): Boolean {
+        val emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+        return Regex(emailRegex).matches(email)
+    }
+
     private fun initClickListener() {
         binding.signupSecondBackIv.setOnClickListener {
             finish()
         }
 
         binding.signupSecondEmailCheckTv.setOnClickListener {
-            emailService.checkEmail(binding.signupSecondEmailEt.text.toString())
+            if(isValidEmail(binding.signupSecondEmailEt.text.toString())){
+                (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(
+                    currentFocus!!.windowToken,
+                    InputMethodManager.HIDE_NOT_ALWAYS
+                )
+                emailService.checkEmail(binding.signupSecondEmailEt.text.toString())
+            } else{
+                Toast.makeText(this@SignupSecondActivity, "이메일 형식을 맞춰주세요.", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.signupSecondPwdModeIv1.setOnClickListener {
