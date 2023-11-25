@@ -33,9 +33,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
-        <activity android:name=".LoginDetailActivity" />
-        <activity android:name=".ChangePwdFirstActivity" />
-        <activity android:name=".ChangePwdSecondActivity" />
+        <activity android:name=".LoginDetailActivity"
+            android:windowSoftInputMode="adjustResize"
+            />
+        <activity android:name=".ChangePwdFirstActivity"
+            android:windowSoftInputMode="adjustResize"
+        />
+        <activity android:name=".ChangePwdSecondActivity"
+            android:windowSoftInputMode="adjustResize"
+        />
         <activity android:name=".ChangePwdThirdActivity" />
         <activity android:name=".SignupFirstActivity" />
         <activity android:name=".SignupSecondActivity"

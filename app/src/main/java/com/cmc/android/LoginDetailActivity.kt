@@ -6,15 +6,18 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.cmc.android.data.AuthResult
 import com.cmc.android.data.LoginRequest
+import com.cmc.android.databinding.ActivityLoginDetailBinding
 import com.cmc.android.network.AuthService
 import com.cmc.android.network.LoginView
-import com.cmc.android.databinding.ActivityLoginDetailBinding
 import com.cmc.android.utils.saveAccessToken
 import com.cmc.android.utils.saveRefreshToken
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent.setEventListener
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 
 
 class LoginDetailActivity: AppCompatActivity(), LoginView {
@@ -31,7 +34,7 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
         initClickListener()
         initFocusListener()
         initChangeListener()
-
+        initKeyboardListner()
         setContentView(binding.root)
     }
 
@@ -123,6 +126,20 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
             binding.loginDetailLoginBtn.setTextColor(ContextCompat.getColor(this@LoginDetailActivity, R.color.gray_700))
             binding.loginDetailLoginBtn.isEnabled = false
         }
+    }
+    private fun initKeyboardListner() {
+        setEventListener(
+            this@LoginDetailActivity,
+            KeyboardVisibilityEventListener { isOpen: Boolean ->
+                if (isOpen) {
+                    binding.loginGoSignupTv.visibility = View.INVISIBLE
+                    binding.loginCheckAccountTv.visibility = View.INVISIBLE
+                } else {
+                    binding.loginGoSignupTv.visibility = View.VISIBLE
+                    binding.loginCheckAccountTv.visibility = View.VISIBLE
+                }
+            }
+        )
     }
 
     override fun loginSuccessView(result: AuthResult) {
