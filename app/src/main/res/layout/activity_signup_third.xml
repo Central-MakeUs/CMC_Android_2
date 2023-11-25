@@ -127,7 +127,7 @@
 
         <TextView
             android:id="@+id/signup_third_generation_tv"
-            android:layout_width="312dp"
+            android:layout_width="0dp"
             android:layout_height="48dp"
             android:gravity="center_vertical"
             android:fontFamily="@font/pretendard_bold"
@@ -173,7 +173,7 @@
 
         <TextView
             android:id="@+id/signup_third_part_tv"
-            android:layout_width="312dp"
+            android:layout_width="0dp"
             android:layout_height="48dp"
             android:gravity="center_vertical"
             android:fontFamily="@font/pretendard_bold"
