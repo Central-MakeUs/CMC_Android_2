@@ -31,7 +31,7 @@ class ResultActivity: AppCompatActivity() {
 
     private fun initClickListener() {
         binding.activityResultBtn.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
+            startActivity(Intent(this, LoginDetailActivity::class.java))
             finishAffinity()
         }
     }
