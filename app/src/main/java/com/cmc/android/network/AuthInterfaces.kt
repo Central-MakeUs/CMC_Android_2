@@ -12,12 +12,12 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface AuthInterfaces {
-    @POST("auth/logIn")
+    @POST("auth/log-in")
     fun login(
         @Body loginRequest: LoginRequest
     ): Call<AuthResponse>
 
-    @POST("/auth/signUp")
+    @POST("/auth/sign-up")
     fun signup(
         @Body signupRequest: SignupRequest
     ): Call<AuthResponse>
