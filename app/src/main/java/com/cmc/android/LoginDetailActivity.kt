@@ -19,7 +19,6 @@ import com.cmc.android.utils.saveRefreshToken
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent.setEventListener
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 
-
 class LoginDetailActivity: AppCompatActivity(), LoginView {
 
     private lateinit var binding: ActivityLoginDetailBinding
@@ -36,6 +35,9 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
         initChangeListener()
         initKeyboardListner()
         setContentView(binding.root)
+
+        // UPDATE: 임의로 넣은 부분
+        authService.login(LoginRequest("string", "string"))
     }
 
     private fun initService() {
@@ -79,8 +81,7 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
         }
 
         binding.loginDetailLoginBtn.setOnClickListener {
-            var request = LoginRequest("luna123@naver.com", "12345qwe")
-            // var request = LoginRequest(binding.loginDetailEmailEt.text.toString(), binding.loginDetailPwdEt.text.toString())
+            var request = LoginRequest(binding.loginDetailEmailEt.text.toString(), binding.loginDetailPwdEt.text.toString())
             authService.login(request)
         }
     }

@@ -15,7 +15,6 @@ import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -68,6 +67,10 @@ class MainActivity : AppCompatActivity() {
             options.setBarcodeImageEnabled(true)
             options.setBeepEnabled(false)
             barcodeLauncher.launch(options)
+        }
+
+        binding.mainAttendCheckCl.setOnClickListener {
+            startActivity(Intent(this, AttendanceCheckActivity::class.java))
         }
     }
 

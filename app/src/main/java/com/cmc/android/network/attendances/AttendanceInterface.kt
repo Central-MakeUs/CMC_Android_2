@@ -1,6 +1,7 @@
 package com.cmc.android.network.attendances
 
 import com.cmc.android.domain.attendance.AttendanceInfo
+import com.cmc.android.domain.attendance.req.AttendanceResult
 import com.cmc.android.domain.attendance.req.CodeDto
 import com.cmc.android.domain.base.ResponseWrapper
 import retrofit2.Call
@@ -13,7 +14,7 @@ interface AttendanceInterface {
 
     /** 출석 현황 조회 */
     @GET("attendances")
-    fun getAttendances(): Call<ResponseWrapper<List<AttendanceInfo>>>
+    fun getAttendances(): Call<ResponseWrapper<AttendanceResult>>
 
     /** 출석 체크 진행 */
     @POST("attendances")
