@@ -2,15 +2,20 @@ package com.cmc.android
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.cmc.android.databinding.ActivityQrBinding
+import com.cmc.android.network.attendances.AttendanceSendView
+import com.cmc.android.network.attendances.AttendanceService
 import com.journeyapps.barcodescanner.CaptureManager
 
-class QRActivity : AppCompatActivity() {
+class QRActivity : AppCompatActivity(), AttendanceSendView {
 
     lateinit var binding: ActivityQrBinding
     private var capture: CaptureManager? = null
+    private lateinit var attendanceService: AttendanceService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +23,7 @@ class QRActivity : AppCompatActivity() {
 
         initQRSetting(savedInstanceState)
         initClickListener()
+        initService()
 
         setContentView(binding.root)
     }
@@ -48,6 +54,11 @@ class QRActivity : AppCompatActivity() {
                 }
             })
         }
+    }
+
+    private fun initService() {
+        attendanceService = AttendanceService()
+        attendanceService.setAttendanceSendView(this)
     }
 
     override fun onResume() {
@@ -81,5 +92,18 @@ class QRActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         capture!!.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    override fun attendanceSendSuccessView() {
+        var intent = Intent(this@QRActivity, ResultActivity::class.java)
+        intent.putExtra("title", "00님의 \n출석이 완료되었어요!")
+        intent.putExtra("content", "잠시 후 시작되는 세션에 집중해주세요 :)")
+        intent.putExtra("btnText", "완료")
+        startActivity(intent)
+        finish()
+    }
+
+    override fun attendanceSendFailureView() {
+        TODO("Not yet implemented")
     }
 }

@@ -6,3 +6,8 @@ interface AttendanceCheckView {
     fun attendanceCheckSuccessView(result: AttendanceResult)
     fun attendanceCheckFailureView()
 }
+
+interface AttendanceSendView {
+    fun attendanceSendSuccessView()
+    fun attendanceSendFailureView()
+}

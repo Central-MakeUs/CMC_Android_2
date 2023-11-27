@@ -2,6 +2,7 @@ package com.cmc.android.network.attendances
 
 import android.util.Log
 import com.cmc.android.domain.attendance.req.AttendanceResult
+import com.cmc.android.domain.attendance.req.CodeRequest
 import com.cmc.android.domain.base.ResponseWrapper
 import com.cmc.android.domain.base.ErrorResponse
 import com.cmc.android.utils.NetworkModule
@@ -15,9 +16,13 @@ class AttendanceService {
     private var attendanceService = NetworkModule.getInstance()?.create(AttendanceInterface::class.java)
 
     private lateinit var attendanceCheckView: AttendanceCheckView
+    private lateinit var attendanceSendView: AttendanceSendView
 
     fun setAttendanceCheckView(attendanceCheckView: AttendanceCheckView) {
         this.attendanceCheckView = attendanceCheckView
+    }
+    fun setAttendanceSendView(attendanceSendView: AttendanceSendView) {
+        this.attendanceSendView = attendanceSendView
     }
 
     fun getAttendances() {
@@ -38,6 +43,28 @@ class AttendanceService {
             }
             override fun onFailure(call: Call<ResponseWrapper<AttendanceResult>>, t: Throwable) {
                 Log.d("API-ERROR", "AttendanceService_getAttendances_failure\nt = $t")
+            }
+        })
+    }
+
+    fun sendAttendance(code: String) {
+        attendanceService?.postAttendances(CodeRequest(code))?.enqueue(object: Callback<ResponseWrapper<String>> {
+            override fun onResponse(call: Call<ResponseWrapper<String>>, response: Response<ResponseWrapper<String>>) {
+                if (response.code() == 200) {
+                    val attendanceResponse = response.body()
+                    if (attendanceResponse?.isSuccess == true) {
+                        attendanceSendView.attendanceSendSuccessView()
+                    }
+                } else {
+                    val gson = Gson()
+                    val errorResponse = gson.fromJson(response.errorBody()?.string(), ErrorResponse::class.java)
+                    Log.d("API-ERROR", "sendAttendance errorResponse = $errorResponse")
+
+                    attendanceSendView.attendanceSendFailureView()
+                }
+            }
+            override fun onFailure(call: Call<ResponseWrapper<String>>, t: Throwable) {
+                Log.d("API-ERROR", "AttendanceService_sendAttendance_failure\nt = $t")
             }
         })
     }

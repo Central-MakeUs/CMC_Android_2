@@ -1,5 +1,5 @@
 package com.cmc.android.domain.attendance.req
 
-data class CodeDto(
+data class CodeRequest(
     val code: String
 )
