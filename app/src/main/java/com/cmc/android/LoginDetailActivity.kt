@@ -33,7 +33,7 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
         initClickListener()
         initFocusListener()
         initChangeListener()
-        initKeyboardListner()
+        initKeyboardListener()
         setContentView(binding.root)
 
         // UPDATE: 임의로 넣은 부분
@@ -128,7 +128,8 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
             binding.loginDetailLoginBtn.isEnabled = false
         }
     }
-    private fun initKeyboardListner() {
+
+    private fun initKeyboardListener() {
         setEventListener(
             this@LoginDetailActivity,
             KeyboardVisibilityEventListener { isOpen: Boolean ->

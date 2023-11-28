@@ -1,10 +1,12 @@
 package com.cmc.android
 
 import android.app.Dialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import com.cmc.android.databinding.BottomSheetNumBinding
 import com.cmc.android.network.attendances.AttendanceSendView
 import com.cmc.android.network.attendances.AttendanceService
@@ -75,10 +77,14 @@ class BottomSheetNum: BottomSheetDialogFragment(), AttendanceSendView {
 
     override fun attendanceSendSuccessView() {
         result = true
+        binding.bottomSheetNumResultTv.visibility = View.INVISIBLE
+        binding.bottomSheetNumLine.setBackgroundColor(Color.parseColor("#FF7B7F83"))
         dismiss()
     }
 
     override fun attendanceSendFailureView() {
         result = false
+        binding.bottomSheetNumResultTv.visibility = View.VISIBLE
+        binding.bottomSheetNumLine.setBackgroundColor(Color.parseColor("#FFFF2633"))
     }
 }
