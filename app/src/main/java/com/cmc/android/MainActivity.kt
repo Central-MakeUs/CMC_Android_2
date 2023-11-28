@@ -103,6 +103,6 @@ class MainActivity : AppCompatActivity(), AttendanceSendView {
     }
 
     override fun attendanceSendFailureView() {
-
+        Toast.makeText(this@MainActivity, "연결 성공", Toast.LENGTH_LONG).show()
     }
 }

@@ -3,6 +3,7 @@ package com.cmc.android.network.auth
 import android.util.Log
 import com.cmc.android.domain.base.ResponseWrapper
 import com.cmc.android.domain.auth.AuthResult
+import com.cmc.android.domain.auth.req.EmailAndCodeRequest
 import com.cmc.android.domain.auth.req.SignupRequest
 import com.cmc.android.domain.base.ErrorResponse
 import com.cmc.android.domain.auth.req.LoginRequest
@@ -19,6 +20,8 @@ class AuthService {
     private lateinit var loginView: LoginView
     private lateinit var signupView: SignupView
     private lateinit var emailView: EmailView
+    private lateinit var sendEmailView: SendEmailView
+    private lateinit var checkEmailValidationView: CheckEmailValidationView
 
     fun setLoginView(loginView: LoginView) {
         this.loginView = loginView
@@ -28,6 +31,12 @@ class AuthService {
     }
     fun setEmailView(emailView: EmailView) {
         this.emailView = emailView
+    }
+    fun setSendEmailView(sendEmailView: SendEmailView) {
+        this.sendEmailView = sendEmailView
+    }
+    fun setCheckEmailValidationView(checkEmailValidationView: CheckEmailValidationView) {
+        this.checkEmailValidationView = checkEmailValidationView
     }
 
     fun login(loginRequest: LoginRequest) {
@@ -92,6 +101,53 @@ class AuthService {
             }
             override fun onFailure(call: Call<ResponseWrapper<String>>, t: Throwable) {
                 Log.d("API-ERROR", "AuthService_email_failure")
+            }
+        })
+    }
+
+    fun sendEmail(email: String) {
+        authService?.sendEmailPassword(email)?.enqueue(object: Callback<ResponseWrapper<String>> {
+            override fun onResponse(call: Call<ResponseWrapper<String>>, response: Response<ResponseWrapper<String>>) {
+                if (response.code() == 200) {
+                    val emailResponse = response.body()
+                    if (emailResponse?.isSuccess == true) {
+                        sendEmailView.sendEmailSuccessView()
+                    } else {
+                        sendEmailView.sendEmailFailureView()
+                    }
+                } else {
+                    val gson = Gson()
+                    val errorResponse = gson.fromJson(response.errorBody()?.string(), ErrorResponse::class.java)
+                    Log.d("API-ERROR", "sendEmail errorResponse = $errorResponse")
+                    sendEmailView.sendEmailFailureView()
+                }
+            }
+            override fun onFailure(call: Call<ResponseWrapper<String>>, t: Throwable) {
+                Log.d("API-ERROR", "AuthService_send_email_failure")
+            }
+        })
+    }
+
+    fun checkEmailValidation(email: String, code: String) {
+        authService?.checkEmailValidate(EmailAndCodeRequest(email, code))?.enqueue(object: Callback<ResponseWrapper<String>> {
+            override fun onResponse(call: Call<ResponseWrapper<String>>, response: Response<ResponseWrapper<String>>) {
+                Log.d("API-TEST", "response = $response")
+                if (response.code() == 200) {
+                    val emailResponse = response.body()
+                    if (emailResponse?.isSuccess == true) {
+                        checkEmailValidationView.checkEmailValidationSuccessView()
+                    } else {
+                        checkEmailValidationView.checkEmailValidationFailureView()
+                    }
+                } else {
+                    val gson = Gson()
+                    val errorResponse = gson.fromJson(response.errorBody()?.string(), ErrorResponse::class.java)
+                    Log.d("API-ERROR", "checkEmailValidation errorResponse = $errorResponse")
+                    checkEmailValidationView.checkEmailValidationFailureView()
+                }
+            }
+            override fun onFailure(call: Call<ResponseWrapper<String>>, t: Throwable) {
+                Log.d("API-ERROR", "AuthService_checkEmailValidation_failure")
             }
         })
     }

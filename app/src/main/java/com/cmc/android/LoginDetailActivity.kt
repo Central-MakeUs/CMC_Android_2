@@ -37,7 +37,7 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
         setContentView(binding.root)
 
         // UPDATE: 임의로 넣은 부분
-        authService.login(LoginRequest("string", "string"))
+        // authService.login(LoginRequest("string", "string"))
     }
 
     private fun initService() {
@@ -76,7 +76,7 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
         }
 
         binding.loginGoSignupTv.setOnClickListener {
-            var intent = Intent(this, ChangePwdFirstActivity::class.java)
+            var intent = Intent(this, SignupFirstActivity::class.java)
             startActivity(intent)
         }
 

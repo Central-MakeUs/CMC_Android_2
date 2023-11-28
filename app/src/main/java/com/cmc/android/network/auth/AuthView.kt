@@ -16,3 +16,13 @@ interface EmailView {
     fun emailSuccessView(result: String)
     fun emailFailureView(message: String)
 }
+
+interface SendEmailView {
+    fun sendEmailSuccessView()
+    fun sendEmailFailureView()
+}
+
+interface CheckEmailValidationView {
+    fun checkEmailValidationSuccessView()
+    fun checkEmailValidationFailureView()
+}

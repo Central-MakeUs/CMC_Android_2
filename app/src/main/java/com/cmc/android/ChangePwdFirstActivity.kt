@@ -7,21 +7,30 @@ import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.cmc.android.databinding.ActivityChangePwdFirstBinding
+import com.cmc.android.network.auth.AuthService
+import com.cmc.android.network.auth.SendEmailView
 
-class ChangePwdFirstActivity: AppCompatActivity() {
+class ChangePwdFirstActivity: AppCompatActivity(), SendEmailView {
 
     private lateinit var binding: ActivityChangePwdFirstBinding
     private var account = false
+    private lateinit var authService: AuthService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChangePwdFirstBinding.inflate(layoutInflater)
 
+        initService()
         initClickListener()
         initFocusListener()
         initChangeListener()
 
         setContentView(binding.root)
+    }
+
+    private fun initService() {
+        authService = AuthService()
+        authService.setSendEmailView(this)
     }
 
     private fun initClickListener() {
@@ -30,36 +39,7 @@ class ChangePwdFirstActivity: AppCompatActivity() {
         }
 
         binding.findPwdEmailBtn.setOnClickListener {
-            // UPDATE: API 연동 후 수정
-            var bottomSheetTitleContent = BottomSheetTitleContent()
-            var bundle = Bundle()
-            var bottomSheetTag = ""
-
-            if (account) {
-                // MEMO: If 계정이 있다면
-                bundle.putString("title", "인증번호를 전송했어요")
-                bundle.putString("content", "3분 내 인증번호를 입력해주세요 :)")
-                bottomSheetTag = "BottomSheetSuccess"
-            } else {
-                // MEMO: If 계정이 없다면
-                bundle.putString("title", "존재하지 않는 계정이에요")
-                bundle.putString("content", "아이디 또는 비밀번호를 확인해주세요!")
-                bottomSheetTag = "BottomSheetNoAccount"
-            }
-
-            bottomSheetTitleContent.arguments = bundle
-            bottomSheetTitleContent.show(supportFragmentManager, bottomSheetTag)
-            bottomSheetTitleContent.setOnDialogFinishListener(object: BottomSheetTitleContent.OnDialogFinishListener {
-                override fun finish(result: Boolean?) {
-                    if (result == true) {
-                        var intent = Intent(this@ChangePwdFirstActivity, ChangePwdSecondActivity::class.java)
-                        startActivity(intent)
-                    }
-                }
-            })
-
-            // UPDATE: 아래 부분 삭제하기!
-            account = !account
+            authService.sendEmail(binding.findPwdEmailEt.text.toString())
         }
     }
 
@@ -89,5 +69,40 @@ class ChangePwdFirstActivity: AppCompatActivity() {
             }
             override fun afterTextChanged(p0: Editable?) { }
         })
+    }
+
+    override fun sendEmailSuccessView() {
+        var bottomSheetTitleContent = BottomSheetTitleContent()
+        var bundle = Bundle()
+        var bottomSheetTag = ""
+
+        bundle.putString("title", "인증번호를 전송했어요")
+        bundle.putString("content", "3분 내 인증번호를 입력해주세요 :)")
+        bottomSheetTag = "BottomSheetSuccess"
+
+        bottomSheetTitleContent.arguments = bundle
+        bottomSheetTitleContent.show(supportFragmentManager, bottomSheetTag)
+        bottomSheetTitleContent.setOnDialogFinishListener(object: BottomSheetTitleContent.OnDialogFinishListener {
+            override fun finish(result: Boolean?) {
+                if (result == true) {
+                    var intent = Intent(this@ChangePwdFirstActivity, ChangePwdSecondActivity::class.java)
+                    intent.putExtra("email", binding.findPwdEmailEt.text.toString())
+                    startActivity(intent)
+                }
+            }
+        })
+    }
+
+    override fun sendEmailFailureView() {
+        var bottomSheetTitleContent = BottomSheetTitleContent()
+        var bundle = Bundle()
+        var bottomSheetTag = ""
+
+        bundle.putString("title", "존재하지 않는 계정이에요")
+        bundle.putString("content", "아이디 또는 비밀번호를 확인해주세요!")
+        bottomSheetTag = "BottomSheetNoAccount"
+
+        bottomSheetTitleContent.arguments = bundle
+        bottomSheetTitleContent.show(supportFragmentManager, bottomSheetTag)
     }
 }

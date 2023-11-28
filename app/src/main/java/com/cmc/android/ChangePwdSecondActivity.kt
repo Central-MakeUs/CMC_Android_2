@@ -7,21 +7,29 @@ import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.cmc.android.databinding.ActivityChangePwdSecondBinding
+import com.cmc.android.network.auth.AuthService
+import com.cmc.android.network.auth.CheckEmailValidationView
+import com.cmc.android.network.auth.SendEmailView
 import java.text.DecimalFormat
 import java.util.Timer
 import kotlin.concurrent.timer
 
-class ChangePwdSecondActivity: AppCompatActivity() {
+class ChangePwdSecondActivity: AppCompatActivity(), SendEmailView, CheckEmailValidationView {
 
     private lateinit var binding: ActivityChangePwdSecondBinding
     private var timer: Timer? = null
     private var remainTime = 180
     private var checkNumber = false
+    private lateinit var authService: AuthService
+    private var email = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChangePwdSecondBinding.inflate(layoutInflater)
 
+        email = intent.getStringExtra("email").toString()
+
+        initService()
         initClickListener()
         initFocusListener()
         initChangeListener()
@@ -30,45 +38,23 @@ class ChangePwdSecondActivity: AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    private fun initService() {
+        authService = AuthService()
+        authService.setSendEmailView(this)
+        authService.setCheckEmailValidationView(this)
+    }
+
     private fun initClickListener() {
         binding.findPwdNumberBackIv.setOnClickListener {
             finish()
         }
 
-        binding.findPwdNumberRequestBtn.setOnClickListener {
-            var bottomSheetTitleContent = BottomSheetTitleContent()
-            var bundle = Bundle()
-            bundle.putString("title", "인증번호를 전송했어요")
-            bundle.putString("content", "3분 내 인증번호를 입력해주세요 :)")
-
-            bottomSheetTitleContent.arguments = bundle
-            bottomSheetTitleContent.show(supportFragmentManager, "BottomSheetNumberRequest")
-        }
-
         binding.findPwdChangeBtn.setOnClickListener {
-            // UPDATE: API 연동 후 수정
-            if (checkNumber) {
-                // MEMO: If 인증번호가 맞았다면
-                var intent = Intent(this@ChangePwdSecondActivity, ChangePwdThirdActivity::class.java)
-                startActivity(intent)
-            } else {
-                // MEMO: If 인증번호가 틀렸다면
-                var bottomSheetTitleContent = BottomSheetTitleContent()
-                var bundle = Bundle()
-                bundle.putString("title", "올바르지 않은 인증번호에요")
-                bundle.putString("content", "인증번호를 확인해주세요 :(")
-
-                bottomSheetTitleContent.arguments = bundle
-                bottomSheetTitleContent.show(supportFragmentManager, "BottomSheetNumberFail")
-            }
-
-            // UPDATE: 아래 부분 삭제하기!
-            checkNumber = !checkNumber
+            authService.checkEmailValidation(email, binding.findPwdNumberNumberEt.text.toString())
         }
 
         binding.findPwdNumberRequestBtn.setOnClickListener {
-            timer?.cancel()
-            startTimer()
+            authService.sendEmail(email)
         }
     }
 
@@ -117,5 +103,52 @@ class ChangePwdSecondActivity: AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         timer?.cancel()
+    }
+
+    override fun sendEmailSuccessView() {
+        timer?.cancel()
+        startTimer()
+
+        var bottomSheetTitleContent = BottomSheetTitleContent()
+        var bundle = Bundle()
+        var bottomSheetTag = ""
+
+        bundle.putString("title", "인증번호를 전송했어요")
+        bundle.putString("content", "3분 내 인증번호를 입력해주세요 :)")
+        bottomSheetTag = "BottomSheetSuccess"
+
+        bottomSheetTitleContent.arguments = bundle
+        bottomSheetTitleContent.show(supportFragmentManager, bottomSheetTag)
+        bottomSheetTitleContent.setOnDialogFinishListener(object: BottomSheetTitleContent.OnDialogFinishListener {
+            override fun finish(result: Boolean?) {}
+        })
+    }
+
+    override fun sendEmailFailureView() {
+        var bottomSheetTitleContent = BottomSheetTitleContent()
+        var bundle = Bundle()
+        var bottomSheetTag = ""
+
+        bundle.putString("title", "존재하지 않는 계정이에요")
+        bundle.putString("content", "아이디 또는 비밀번호를 확인해주세요!")
+        bottomSheetTag = "BottomSheetNoAccount"
+
+        bottomSheetTitleContent.arguments = bundle
+        bottomSheetTitleContent.show(supportFragmentManager, bottomSheetTag)
+    }
+
+    override fun checkEmailValidationSuccessView() {
+        var intent = Intent(this@ChangePwdSecondActivity, ChangePwdThirdActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun checkEmailValidationFailureView() {
+        var bottomSheetTitleContent = BottomSheetTitleContent()
+        var bundle = Bundle()
+        bundle.putString("title", "올바르지 않은 인증번호에요")
+        bundle.putString("content", "인증번호를 확인해주세요 :(")
+
+        bottomSheetTitleContent.arguments = bundle
+        bottomSheetTitleContent.show(supportFragmentManager, "BottomSheetNumberFail")
     }
 }

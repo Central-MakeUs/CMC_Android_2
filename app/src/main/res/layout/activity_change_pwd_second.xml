@@ -152,7 +152,7 @@
         android:background="@drawable/login_round_5_x"
         android:fontFamily="@font/pretendard_bold"
         android:paddingVertical="16dp"
-        android:text="비밀번호 재설정"
+        android:text="인증번호 확인"
         android:textAlignment="center"
         android:textColor="@color/gray_700"
         android:textSize="18sp"
