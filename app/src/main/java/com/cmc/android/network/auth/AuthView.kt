@@ -26,3 +26,8 @@ interface CheckEmailValidationView {
     fun checkEmailValidationSuccessView()
     fun checkEmailValidationFailureView()
 }
+
+interface ChangePasswordView {
+    fun changePasswordSuccessView()
+    fun changePasswordFailureView()
+}

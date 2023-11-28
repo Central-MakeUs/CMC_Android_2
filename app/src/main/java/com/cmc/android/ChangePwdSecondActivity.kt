@@ -139,6 +139,7 @@ class ChangePwdSecondActivity: AppCompatActivity(), SendEmailView, CheckEmailVal
 
     override fun checkEmailValidationSuccessView() {
         var intent = Intent(this@ChangePwdSecondActivity, ChangePwdThirdActivity::class.java)
+        intent.putExtra("email", email)
         startActivity(intent)
     }
 

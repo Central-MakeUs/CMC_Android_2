@@ -46,7 +46,7 @@ interface AuthInterface {
 
     /** 비밀번호 변경 */
     @PATCH("/auth/password")
-    fun changePassworld(
+    fun changePassword(
         @Body loginRequest: LoginRequest
     ): Call<ResponseWrapper<String>>
 

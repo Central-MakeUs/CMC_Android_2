@@ -22,6 +22,7 @@ class AuthService {
     private lateinit var emailView: EmailView
     private lateinit var sendEmailView: SendEmailView
     private lateinit var checkEmailValidationView: CheckEmailValidationView
+    private lateinit var changePasswordView: ChangePasswordView
 
     fun setLoginView(loginView: LoginView) {
         this.loginView = loginView
@@ -37,6 +38,9 @@ class AuthService {
     }
     fun setCheckEmailValidationView(checkEmailValidationView: CheckEmailValidationView) {
         this.checkEmailValidationView = checkEmailValidationView
+    }
+    fun setChangePasswordView(changePasswordView: ChangePasswordView) {
+        this.changePasswordView = changePasswordView
     }
 
     fun login(loginRequest: LoginRequest) {
@@ -131,7 +135,6 @@ class AuthService {
     fun checkEmailValidation(email: String, code: String) {
         authService?.checkEmailValidate(EmailAndCodeRequest(email, code))?.enqueue(object: Callback<ResponseWrapper<String>> {
             override fun onResponse(call: Call<ResponseWrapper<String>>, response: Response<ResponseWrapper<String>>) {
-                Log.d("API-TEST", "response = $response")
                 if (response.code() == 200) {
                     val emailResponse = response.body()
                     if (emailResponse?.isSuccess == true) {
@@ -148,6 +151,29 @@ class AuthService {
             }
             override fun onFailure(call: Call<ResponseWrapper<String>>, t: Throwable) {
                 Log.d("API-ERROR", "AuthService_checkEmailValidation_failure")
+            }
+        })
+    }
+
+    fun changePassword(email: String, password: String) {
+        authService?.changePassword(LoginRequest(email, password))?.enqueue(object: Callback<ResponseWrapper<String>> {
+            override fun onResponse(call: Call<ResponseWrapper<String>>, response: Response<ResponseWrapper<String>>) {
+                if (response.code() == 200) {
+                    val changePasswordResponse = response.body()
+                    if (changePasswordResponse?.isSuccess == true) {
+                        changePasswordView.changePasswordSuccessView()
+                    } else {
+                        changePasswordView.changePasswordFailureView()
+                    }
+                } else {
+                    val gson = Gson()
+                    val errorResponse = gson.fromJson(response.errorBody()?.string(), ErrorResponse::class.java)
+                    Log.d("API-ERROR", "changePassword errorResponse = $errorResponse")
+                    changePasswordView.changePasswordFailureView()
+                }
+            }
+            override fun onFailure(call: Call<ResponseWrapper<String>>, t: Throwable) {
+                Log.d("API-ERROR", "AuthService_changePassword_failure")
             }
         })
     }

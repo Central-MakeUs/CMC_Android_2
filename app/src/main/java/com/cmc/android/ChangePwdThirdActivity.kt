@@ -11,22 +11,35 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.cmc.android.databinding.ActivityChangePwdThirdBinding
+import com.cmc.android.network.auth.AuthInterface
+import com.cmc.android.network.auth.AuthService
+import com.cmc.android.network.auth.ChangePasswordView
 
-class ChangePwdThirdActivity: AppCompatActivity() {
+class ChangePwdThirdActivity: AppCompatActivity(), ChangePasswordView {
 
     private lateinit var binding: ActivityChangePwdThirdBinding
     private var firstPwdMode = false
     private var secondPwdMode = false
+    private var email = ""
+    private lateinit var authService: AuthService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChangePwdThirdBinding.inflate(layoutInflater)
 
+        email = intent.getStringExtra("email").toString()
+
+        initService()
         initClickListener()
         initFocusListener()
         initChangeListener()
 
         setContentView(binding.root)
+    }
+
+    private fun initService() {
+        authService = AuthService()
+        authService.setChangePasswordView(this)
     }
 
     private fun initClickListener() {
@@ -57,21 +70,7 @@ class ChangePwdThirdActivity: AppCompatActivity() {
         }
 
         binding.changePwdNextBtn.setOnClickListener {
-            // UPDATE: API 연동 후 변경
-            var bottomSheetTopBottomTitle = BottomSheetTopBottomTitle()
-            var bundle = Bundle()
-            bundle.putString("topTitle", "비밀번호가 변경되었어요")
-            bundle.putString("bottomTitle", "다시 로그인해주세요 :)")
-            bottomSheetTopBottomTitle.arguments = bundle
-            bottomSheetTopBottomTitle.show(supportFragmentManager, "BottomSheetChangePwd")
-            bottomSheetTopBottomTitle.setOnDialogFinishListener(object: BottomSheetTopBottomTitle.OnDialogFinishListener {
-                override fun finish(result: Boolean?) {
-                    if (result == true) {
-                        startActivity(Intent(this@ChangePwdThirdActivity, LoginActivity::class.java))
-                        finishAffinity()
-                    }
-                }
-            })
+            authService.changePassword(email, binding.changePwdEt1.text.toString())
         }
     }
 
@@ -140,5 +139,26 @@ class ChangePwdThirdActivity: AppCompatActivity() {
             imageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_check_x))
             textView.setTextColor(ContextCompat.getColor(this, R.color.gray_700))
         }
+    }
+
+    override fun changePasswordSuccessView() {
+        var bottomSheetTopBottomTitle = BottomSheetTopBottomTitle()
+        var bundle = Bundle()
+        bundle.putString("topTitle", "비밀번호가 변경되었어요")
+        bundle.putString("bottomTitle", "다시 로그인해주세요 :)")
+        bottomSheetTopBottomTitle.arguments = bundle
+        bottomSheetTopBottomTitle.show(supportFragmentManager, "BottomSheetChangePwd")
+        bottomSheetTopBottomTitle.setOnDialogFinishListener(object: BottomSheetTopBottomTitle.OnDialogFinishListener {
+            override fun finish(result: Boolean?) {
+                if (result == true) {
+                    startActivity(Intent(this@ChangePwdThirdActivity, LoginActivity::class.java))
+                    finishAffinity()
+                }
+            }
+        })
+    }
+
+    override fun changePasswordFailureView() {
+
     }
 }
