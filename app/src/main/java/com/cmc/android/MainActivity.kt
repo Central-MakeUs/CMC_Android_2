@@ -5,41 +5,36 @@ import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.cmc.android.databinding.ActivityMainBinding
+import com.cmc.android.domain.req.UserInfoResponse
 import com.cmc.android.network.attendances.AttendanceSendView
 import com.cmc.android.network.attendances.AttendanceService
+import com.cmc.android.network.user.UserService
+import com.cmc.android.network.user.UserView
+import com.cmc.android.utils.partConvertFromServer
 import com.google.zxing.client.android.Intents
 import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
 
-class MainActivity : AppCompatActivity(), AttendanceSendView {
+class MainActivity : AppCompatActivity(), UserView, AttendanceSendView {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var nickname: String
     private var generation: Int = 0
     private lateinit var part: String
     private lateinit var attendanceService: AttendanceService
+    private lateinit var userService: UserService
     private lateinit var attendanceCode: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-
-        // UPDATE: 파트 글자 보라색 설정 코드
-        nickname = "루나"
-        generation = 12
-        part = "Android"
-
-        val textData = "${nickname}은\nCMC ${generation}기 ${part}로\n참여중이에요"
-        val builder = SpannableStringBuilder(textData)
-        val colorBlueSpan = ForegroundColorSpan(ContextCompat.getColor(this, R.color.main))
-        builder.setSpan(colorBlueSpan, textData.length - 8 - part.length, textData.length - 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        binding.mainTitle.text = builder
 
         initService()
         initClickListener()
@@ -50,6 +45,9 @@ class MainActivity : AppCompatActivity(), AttendanceSendView {
     private fun initService() {
         attendanceService = AttendanceService()
         attendanceService.setAttendanceSendView(this)
+        userService = UserService()
+        userService.setUserView(this)
+        userService.getUserInfo()
     }
 
     private val barcodeLauncher = registerForActivityResult(ScanContract()) { result: ScanIntentResult ->
@@ -104,5 +102,25 @@ class MainActivity : AppCompatActivity(), AttendanceSendView {
 
     override fun attendanceSendFailureView() {
         Toast.makeText(this@MainActivity, "연결 성공", Toast.LENGTH_LONG).show()
+    }
+
+    override fun getUserInfoSuccessView(result: UserInfoResponse) {
+        Log.d("API-TEST", "result = $result")
+
+
+        // UPDATE: 파트 글자 보라색 설정 코드
+        nickname = result.nickname
+        generation = result.generation
+        part = partConvertFromServer(result.part)
+
+        val textData = "${nickname}은\nCMC ${generation}기 ${part}로\n참여중이에요"
+        val builder = SpannableStringBuilder(textData)
+        val colorBlueSpan = ForegroundColorSpan(ContextCompat.getColor(this, R.color.main))
+        builder.setSpan(colorBlueSpan, textData.length - 8 - part.length, textData.length - 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        binding.mainTitle.text = builder
+    }
+
+    override fun getUserInfoFailureView() {
+
     }
 }

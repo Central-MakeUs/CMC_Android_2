@@ -12,7 +12,7 @@ import com.cmc.android.domain.auth.req.SignupRequest
 import com.cmc.android.databinding.ActivitySignupThirdBinding
 import com.cmc.android.network.auth.AuthService
 import com.cmc.android.network.auth.SignupView
-import com.cmc.android.utils.partConvert
+import com.cmc.android.utils.partConvertToServer
 import com.cmc.android.utils.saveAccessToken
 import com.cmc.android.utils.saveRefreshToken
 
@@ -74,7 +74,7 @@ class SignupThirdActivity: AppCompatActivity(), SignupView {
                 override fun finish(partData: String) {
                     if (partData != "") {
                         binding.signupThirdPartTv.text = partData
-                        part = partConvert(partData)
+                        part = partConvertToServer(partData)
                     }
 
                     checkNext()
