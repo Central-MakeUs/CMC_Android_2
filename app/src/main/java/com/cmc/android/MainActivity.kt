@@ -16,6 +16,7 @@ import com.cmc.android.network.attendances.AttendanceService
 import com.cmc.android.network.user.UserService
 import com.cmc.android.network.user.UserView
 import com.cmc.android.utils.partConvertFromServer
+import com.cmc.android.utils.saveNickname
 import com.google.zxing.client.android.Intents
 import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.ScanContract
@@ -80,6 +81,10 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView {
         binding.mainAttendCheckCl.setOnClickListener {
             startActivity(Intent(this, AttendanceCheckActivity::class.java))
         }
+
+        binding.mainSettingIv.setOnClickListener {
+            startActivity(Intent(this, MyPageActivity::class.java))
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
@@ -105,11 +110,9 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView {
     }
 
     override fun getUserInfoSuccessView(result: UserInfoResponse) {
-        Log.d("API-TEST", "result = $result")
-
-
-        // UPDATE: 파트 글자 보라색 설정 코드
+        // UPDATE: 앞 글자 맞춰서 "은/는" 코드 추가하기!
         nickname = result.nickname
+        saveNickname(nickname)
         generation = result.generation
         part = partConvertFromServer(result.part)
 

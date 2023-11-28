@@ -6,3 +6,8 @@ interface UserView {
     fun getUserInfoSuccessView(result: UserInfoResponse)
     fun getUserInfoFailureView()
 }
+
+interface LeaveUserView {
+    fun leaveUserSuccessView()
+    fun leaveUserFailureView()
+}

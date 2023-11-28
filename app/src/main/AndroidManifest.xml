@@ -63,6 +63,10 @@
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".WebViewActivity"
             android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".MyPageActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".MyPageInfoActivity"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

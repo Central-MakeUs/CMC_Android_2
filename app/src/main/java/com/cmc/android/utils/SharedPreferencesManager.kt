@@ -30,5 +30,19 @@ fun saveRefreshToken(token: String?) {
     editor.apply()
 }
 
+// Nickname
+fun removeNickname() {
+    val editor = mSharedPreferences.edit()
+    editor.remove("nickname")
+    editor.commit()
+}
+
+fun saveNickname(nickname: String?) {
+    val editor = mSharedPreferences.edit()
+    editor.putString("nickname", nickname)
+    editor.apply()
+}
+
 fun getAccessToken(): String? = mSharedPreferences.getString("accessToken", null)
 fun getRefreshToken(): String? = mSharedPreferences.getString("refreshToken", null)
+fun getNickname(): String? = mSharedPreferences.getString("nickname", null)

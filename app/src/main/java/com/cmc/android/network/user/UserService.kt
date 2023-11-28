@@ -15,9 +15,13 @@ class UserService {
     private var userService = NetworkModule.getInstance()?.create(UserInterface::class.java)
 
     private lateinit var userView: UserView
+    private lateinit var leaveUserView: LeaveUserView
 
     fun setUserView(userView: UserView) {
         this.userView = userView
+    }
+    fun setLeaveUserView(leaveUserView: LeaveUserView) {
+        this.leaveUserView = leaveUserView
     }
 
     fun getUserInfo() {
@@ -38,6 +42,30 @@ class UserService {
             }
             override fun onFailure(call: Call<ResponseWrapper<UserInfoResponse>>, t: Throwable) {
                 Log.d("API-ERROR", "UserService_getUserInfo_failure")
+            }
+        })
+    }
+
+    fun deleteUser() {
+        userService?.deleteUser()?.enqueue(object: Callback<ResponseWrapper<String>> {
+            override fun onResponse(call: Call<ResponseWrapper<String>>, response: Response<ResponseWrapper<String>>) {
+                if (response.code() == 200) {
+                    val userResponse = response.body()
+                    if (userResponse?.isSuccess == true) {
+                        leaveUserView.leaveUserSuccessView()
+                    } else {
+                        leaveUserView.leaveUserFailureView()
+                    }
+                } else {
+                    val gson = Gson()
+                    val errorResponse = gson.fromJson(response.errorBody()?.string(), ErrorResponse::class.java)
+                    Log.d("API-ERROR", "deleteUser errorResponse = $errorResponse")
+
+                    leaveUserView.leaveUserFailureView()
+                }
+            }
+            override fun onFailure(call: Call<ResponseWrapper<String>>, t: Throwable) {
+                Log.d("API-ERROR", "UserService_deleteUser_failure")
             }
         })
     }

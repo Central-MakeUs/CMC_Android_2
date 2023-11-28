@@ -229,10 +229,10 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/my_page_member_leave_tv"
+        android:id="@+id/my_page_leave_user_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/member_leave"
+        android:text="@string/leave_user"
         android:layout_marginTop="12dp"
         android:layout_marginStart="24dp"
         android:textSize="13sp"
