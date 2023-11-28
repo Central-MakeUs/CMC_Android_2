@@ -9,18 +9,22 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.cmc.android.databinding.ActivityMainBinding
+import com.cmc.android.network.attendances.AttendanceSendView
+import com.cmc.android.network.attendances.AttendanceService
 import com.google.zxing.client.android.Intents
 import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AttendanceSendView {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var nickname: String
     private var generation: Int = 0
     private lateinit var part: String
+    private lateinit var attendanceService: AttendanceService
+    private lateinit var attendanceCode: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,9 +41,15 @@ class MainActivity : AppCompatActivity() {
         builder.setSpan(colorBlueSpan, textData.length - 8 - part.length, textData.length - 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.mainTitle.text = builder
 
+        initService()
         initClickListener()
 
         setContentView(binding.root)
+    }
+
+    private fun initService() {
+        attendanceService = AttendanceService()
+        attendanceService.setAttendanceSendView(this)
     }
 
     private val barcodeLauncher = registerForActivityResult(ScanContract()) { result: ScanIntentResult ->
@@ -78,7 +88,21 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, intent)
         if (resultCode == RESULT_OK) {
             val scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent)
+            attendanceCode = scanResult.contents
+            attendanceService.sendAttendance(attendanceCode)
             Toast.makeText(this, scanResult.contents, Toast.LENGTH_LONG).show()
         }
+    }
+
+    override fun attendanceSendSuccessView() {
+        var intent = Intent(this@MainActivity, ResultActivity::class.java)
+        intent.putExtra("title", "00님의 \n출석이 완료되었어요!")
+        intent.putExtra("content", "잠시 후 시작되는 세션에 집중해주세요 :)")
+        intent.putExtra("btnText", "완료")
+        startActivity(intent)
+    }
+
+    override fun attendanceSendFailureView() {
+
     }
 }

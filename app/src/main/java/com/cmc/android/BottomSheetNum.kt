@@ -6,15 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.cmc.android.databinding.BottomSheetNumBinding
+import com.cmc.android.network.attendances.AttendanceSendView
+import com.cmc.android.network.attendances.AttendanceService
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomSheetNum: BottomSheetDialogFragment() {
+class BottomSheetNum: BottomSheetDialogFragment(), AttendanceSendView {
 
     private lateinit var binding: BottomSheetNumBinding
     private lateinit var dialogFinishListener: OnDialogFinishListener
     private var result: Boolean = false
+    private lateinit var attendanceService: AttendanceService
 
     interface OnDialogFinishListener {
         fun finish(result: Boolean)
@@ -32,6 +35,7 @@ class BottomSheetNum: BottomSheetDialogFragment() {
         binding = BottomSheetNumBinding.inflate(layoutInflater)
 
         initClickListener()
+        initService()
 
         return binding.root
     }
@@ -55,13 +59,26 @@ class BottomSheetNum: BottomSheetDialogFragment() {
 
     private fun initClickListener() {
         binding.bottomSheetNumNextBtn.setOnClickListener {
-            result = true
-            dismiss()
+            attendanceService.sendAttendance(binding.bottomSheetNumEt.text.toString())
         }
+    }
+
+    private fun initService() {
+        attendanceService = AttendanceService()
+        attendanceService.setAttendanceSendView(this)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         dialogFinishListener.finish(result)
+    }
+
+    override fun attendanceSendSuccessView() {
+        result = true
+        dismiss()
+    }
+
+    override fun attendanceSendFailureView() {
+        result = false
     }
 }

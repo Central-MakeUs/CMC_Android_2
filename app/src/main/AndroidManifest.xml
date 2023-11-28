@@ -61,6 +61,8 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".AttendanceCheckActivity"
             android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".WebViewActivity"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
