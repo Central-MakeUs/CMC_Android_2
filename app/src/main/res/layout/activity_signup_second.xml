@@ -139,6 +139,7 @@
                     android:textCursorDrawable="@drawable/bg_et_cursor"
                     android:maxLines="1"
                     android:textSize="15sp"
+                    android:inputType="textWebEmailAddress"
                     app:layout_constraintTop_toBottomOf="@id/signup_second_email_tv"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/signup_second_email_check_cv" />

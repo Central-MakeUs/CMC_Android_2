@@ -50,6 +50,7 @@ class AttendanceService {
     fun sendAttendance(code: String) {
         attendanceService?.postAttendances(CodeRequest(code))?.enqueue(object: Callback<ResponseWrapper<String>> {
             override fun onResponse(call: Call<ResponseWrapper<String>>, response: Response<ResponseWrapper<String>>) {
+                Log.d("API-TEST", "response = $response")
                 if (response.code() == 200) {
                     val attendanceResponse = response.body()
                     if (attendanceResponse?.isSuccess == true) {

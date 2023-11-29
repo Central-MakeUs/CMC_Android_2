@@ -45,7 +45,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintHorizontal_weight="0.5"
-        android:text="확인"
+        android:text="돌아가기"
         android:fontFamily="@font/pretendard_bold"
         android:textSize="18sp"
         android:textColor="@color/gray_50"

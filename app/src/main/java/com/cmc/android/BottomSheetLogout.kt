@@ -20,7 +20,6 @@ class BottomSheetLogout: BottomSheetDialogFragment() {
     private var result: Boolean = false
 
     interface OnDialogFinishListener {
-
         fun finish(result: Boolean)
     }
 
@@ -64,6 +63,7 @@ class BottomSheetLogout: BottomSheetDialogFragment() {
         }
         binding.bottomSheetLogoutBtn.setOnClickListener {
             result = true
+            dismiss()
         }
     }
 

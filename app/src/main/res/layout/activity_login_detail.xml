@@ -79,6 +79,7 @@
                 android:textCursorDrawable="@drawable/bg_et_cursor"
                 android:maxLines="1"
                 android:textSize="15sp"
+                android:inputType="textWebEmailAddress"
                 app:layout_constraintTop_toBottomOf="@id/login_detail_email_tv"
                 app:layout_constraintStart_toStartOf="parent" />
 
