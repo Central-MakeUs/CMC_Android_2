@@ -20,7 +20,7 @@ android {
         applicationId = "com.cmc.android"
         minSdk = 24
         targetSdk = 33
-        versionCode = 1
+        versionCode = 2
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -71,4 +71,10 @@ dependencies {
 
     // Keyboard Listener
     implementation("net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:3.0.0-RC3")
+
+    // ViewPager2
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+
+    // CircleIndicator
+    implementation("me.relex:circleindicator:2.1.6")
 }

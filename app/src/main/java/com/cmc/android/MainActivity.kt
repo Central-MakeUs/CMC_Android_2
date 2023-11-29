@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.viewpager2.widget.ViewPager2
 import com.cmc.android.databinding.ActivityMainBinding
 import com.cmc.android.domain.req.UserInfoResponse
 import com.cmc.android.network.attendances.AttendanceSendView
@@ -32,12 +33,15 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView {
     private lateinit var attendanceService: AttendanceService
     private lateinit var userService: UserService
     private lateinit var attendanceCode: String
+    private var informList = arrayListOf<String>()
+    private lateinit var vpAdapter: InformRVAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         initService()
+        initViewPager()
         initClickListener()
 
         setContentView(binding.root)
@@ -49,6 +53,13 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView {
         userService = UserService()
         userService.setUserView(this)
         userService.getUserInfo()
+    }
+
+    private fun initViewPager() {
+        informList.addAll(arrayListOf("a", "b", "c"))
+        vpAdapter = InformRVAdapter(informList)
+        binding.mainInformVp.adapter = vpAdapter
+        binding.mainInformVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
     }
 
     private val barcodeLauncher = registerForActivityResult(ScanContract()) { result: ScanIntentResult ->

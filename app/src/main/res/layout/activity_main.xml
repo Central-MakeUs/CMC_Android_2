@@ -53,7 +53,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main_inform_cl"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/login_round_10"
         android:layout_marginTop="15dp"
         android:layout_marginHorizontal="24dp"
@@ -80,6 +80,29 @@
             app:layout_constraintStart_toEndOf="@id/main_pin_iv"
             app:layout_constraintTop_toTopOf="@id/main_pin_iv"
             app:layout_constraintBottom_toBottomOf="@id/main_pin_iv" />
+        
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/main_inform_vp"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="17dp"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/main_pin_iv"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+<!--        <me.relex.circleindicator.CircleIndicator3-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="4dp"-->
+<!--            android:layout_marginTop="17dp"-->
+<!--            android:layout_marginBottom="15dp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/main_inform_vp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
