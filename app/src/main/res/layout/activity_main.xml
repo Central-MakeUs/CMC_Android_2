@@ -94,15 +94,18 @@
             app:layout_constraintTop_toBottomOf="@id/main_pin_iv"
             app:layout_constraintBottom_toBottomOf="parent" />
 
-<!--        <me.relex.circleindicator.CircleIndicator3-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="4dp"-->
-<!--            android:layout_marginTop="17dp"-->
-<!--            android:layout_marginBottom="15dp"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/main_inform_vp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent" />-->
+        <me.relex.circleindicator.CircleIndicator3
+            android:id="@+id/main_inform_ci"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="15dp"
+            app:ci_drawable_unselected="@drawable/indicator_default"
+            app:ci_drawable="@drawable/indicator_selected"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/main_inform_vp"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

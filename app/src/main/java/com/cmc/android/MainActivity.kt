@@ -2,6 +2,8 @@ package com.cmc.android
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
@@ -35,6 +37,8 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView {
     private lateinit var attendanceCode: String
     private var informList = arrayListOf<String>()
     private lateinit var vpAdapter: InformRVAdapter
+    private var currentPage = 0
+    private lateinit var handler: Handler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +47,13 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView {
         initService()
         initViewPager()
         initClickListener()
+
+        handler = Handler(Looper.getMainLooper()) {
+            setPage()
+            true
+        }
+
+        Thread(PagerRunnable()).start()
 
         setContentView(binding.root)
     }
@@ -60,6 +71,28 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView {
         vpAdapter = InformRVAdapter(informList)
         binding.mainInformVp.adapter = vpAdapter
         binding.mainInformVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        binding.mainInformCi.setViewPager(binding.mainInformVp)
+    }
+
+    private fun setPage() {
+        if (currentPage == 3) {
+            currentPage = 0
+        }
+        binding.mainInformVp.setCurrentItem(currentPage, true)
+        currentPage += 1
+    }
+
+    inner class PagerRunnable:Runnable{
+        override fun run() {
+            while(true){
+                try {
+                    Thread.sleep(5000)
+                    handler.sendEmptyMessage(0)
+                } catch (e : InterruptedException){
+                    Log.e("ViewPager", "e = $e")
+                }
+            }
+        }
     }
 
     private val barcodeLauncher = registerForActivityResult(ScanContract()) { result: ScanIntentResult ->
