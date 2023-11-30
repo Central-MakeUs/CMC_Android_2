@@ -72,3 +72,5 @@ fun saveNickname(nickname: String?) {
 fun getAccessToken(): String? = mSharedPreferences.getString("accessToken", null)
 fun getRefreshToken(): String? = mSharedPreferences.getString("refreshToken", null)
 fun getNickname(): String? = mSharedPreferences.getString("nickname", null)
+fun getEmail(): String? = mSharedPreferences.getString("email", null)
+fun getPassword(): String? = mSharedPreferences.getString("password", null)

@@ -32,7 +32,8 @@ class MyPageActivity: AppCompatActivity() {
         }
 
         binding.myPageMyInfoCl.setOnClickListener {
-            startActivity(Intent(this, MyPageInfoActivity::class.java))
+            var intent = Intent(this, MyPageInfoActivity::class.java)
+            startActivity(intent)
         }
 
         binding.myPageRuleCl.setOnClickListener {
@@ -49,7 +50,8 @@ class MyPageActivity: AppCompatActivity() {
         }
 
         binding.myPageChangePwdCl.setOnClickListener {
-            startActivity(Intent(this, ChangePwdFirstActivity::class.java))
+            var intent = Intent(this, ChangePwdFirstActivity::class.java)
+            startActivity(intent)
         }
 
         binding.myPageLogoutCl.setOnClickListener {
@@ -64,7 +66,9 @@ class MyPageActivity: AppCompatActivity() {
                         removePassword()
                         removeNickname()
 
-                        startActivity(Intent(this@MyPageActivity, LoginActivity::class.java))
+
+                        var intent = Intent(this@MyPageActivity, LoginActivity::class.java)
+                        startActivity(intent)
                         finishAffinity()
                     }
                 }

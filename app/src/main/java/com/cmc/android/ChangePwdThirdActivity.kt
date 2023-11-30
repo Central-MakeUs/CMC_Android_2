@@ -151,7 +151,8 @@ class ChangePwdThirdActivity: AppCompatActivity(), ChangePasswordView {
         bottomSheetTopBottomTitle.setOnDialogFinishListener(object: BottomSheetTopBottomTitle.OnDialogFinishListener {
             override fun finish(result: Boolean?) {
                 if (result == true) {
-                    startActivity(Intent(this@ChangePwdThirdActivity, LoginActivity::class.java))
+                    var intent = Intent(this@ChangePwdThirdActivity, LoginActivity::class.java)
+                    startActivity(intent)
                     finishAffinity()
                 }
             }

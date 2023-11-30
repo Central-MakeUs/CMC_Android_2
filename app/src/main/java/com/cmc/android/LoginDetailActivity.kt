@@ -148,8 +148,9 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
         savePassword(binding.loginDetailPwdEt.text.toString())
         saveAccessToken(result.accessToken)
         saveRefreshToken(result.refreshToken)
-        startActivity(Intent(this, MainActivity::class.java))
-        finishAffinity()
+
+        var intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
     override fun loginFailureView() {

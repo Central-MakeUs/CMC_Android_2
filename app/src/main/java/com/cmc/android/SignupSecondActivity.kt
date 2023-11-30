@@ -92,6 +92,7 @@ class SignupSecondActivity: AppCompatActivity(), EmailView {
             intent.putExtra("email", binding.signupSecondEmailEt.text.toString())
             intent.putExtra("password", binding.signupSecondPwdEt1.text.toString())
             intent.putExtra("name", binding.signupSecondNameEt.text.toString())
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
             finish()
         }

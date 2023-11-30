@@ -6,34 +6,69 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.cmc.android.databinding.ActivitySplashBinding
+import com.cmc.android.domain.auth.AuthResult
+import com.cmc.android.domain.auth.req.LoginRequest
+import com.cmc.android.network.auth.AuthService
+import com.cmc.android.network.auth.LoginView
+import com.cmc.android.utils.getEmail
+import com.cmc.android.utils.getPassword
+import com.cmc.android.utils.saveAccessToken
+import com.cmc.android.utils.saveEmail
+import com.cmc.android.utils.savePassword
+import com.cmc.android.utils.saveRefreshToken
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : AppCompatActivity(), LoginView {
 
     private lateinit var binding: ActivitySplashBinding
     private var autoLogin: Boolean = false
+    private lateinit var authService: AuthService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
 
-        // UPDATE: 로그인 OR 홈 (자동 로그인)
+        initService()
+        checkAutoLogin()
         splashAnimation()
 
         setContentView(binding.root)
+    }
+
+    private fun initService() {
+        authService = AuthService()
+        authService.setLoginView(this)
+    }
+
+    private fun checkAutoLogin() {
+        autoLogin = getEmail() != null && getPassword() != null
     }
 
     private fun splashAnimation() {
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed({
             if (autoLogin) {
-                changeActivity(MainActivity::class.java)
+                var request = LoginRequest(getEmail().toString(), getPassword().toString())
+                authService.login(request)
             } else changeActivity(LoginActivity::class.java)
-
-            finish()
         }, 1500)
     }
 
+    override fun loginSuccessView(result: AuthResult) {
+        saveAccessToken(result.accessToken)
+        saveRefreshToken(result.refreshToken)
+
+        var intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun loginFailureView() {
+        changeActivity(LoginActivity::class.java)
+        finish()
+    }
+
     private fun changeActivity(activity: Class<*>) {
-        startActivity(Intent(this, activity))
+        var intent = Intent(this, activity)
+        startActivity(intent)
+        finish()
     }
 }

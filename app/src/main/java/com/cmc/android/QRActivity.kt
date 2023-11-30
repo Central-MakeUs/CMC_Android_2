@@ -49,6 +49,7 @@ class QRActivity : AppCompatActivity(), AttendanceSendView {
                         intent.putExtra("title", "${getNickname()}님의 \n출석이 완료되었어요!")
                         intent.putExtra("content", "잠시 후 시작되는 세션에 집중해주세요 :)")
                         intent.putExtra("btnText", "완료")
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                         startActivity(intent)
                         finish()
                     }

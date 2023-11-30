@@ -62,6 +62,7 @@ class SignupFirstActivity: AppCompatActivity() {
 
     private fun connectUrl(url: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)
     }
 

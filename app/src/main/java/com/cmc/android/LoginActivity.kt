@@ -20,11 +20,13 @@ class LoginActivity: AppCompatActivity() {
 
     private fun initClickListener() {
         binding.loginBtn.setOnClickListener {
-            startActivity(Intent(this, LoginDetailActivity::class.java))
+            var intent = Intent(this, LoginDetailActivity::class.java)
+            startActivity(intent)
         }
 
         binding.signupBtn.setOnClickListener {
-            startActivity(Intent(this, SignupFirstActivity::class.java))
+            var intent = Intent(this, SignupFirstActivity::class.java)
+            startActivity(intent)
         }
     }
 }

@@ -125,11 +125,13 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView {
         }
 
         binding.mainAttendCheckCl.setOnClickListener {
-            startActivity(Intent(this, AttendanceCheckActivity::class.java))
+            var intent = Intent(this, AttendanceCheckActivity::class.java)
+            startActivity(intent)
         }
 
         binding.mainSettingIv.setOnClickListener {
-            startActivity(Intent(this, MyPageActivity::class.java))
+            var intent = Intent(this, MyPageActivity::class.java)
+            startActivity(intent)
         }
 
         binding.mainAllInformCl.setOnClickListener {
@@ -179,7 +181,9 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView {
         generation = result.generation
         part = partConvertFromServer(result.part)
 
-        val textData = "${nickname}은\nCMC ${generation}기 ${part}로\n참여중이에요"
+        var lastLetterCheck = checkLastLetter(nickname, "은", "는")
+
+        val textData = "${nickname}${lastLetterCheck}\nCMC ${generation}기 ${part}로\n참여중이에요"
         val builder = SpannableStringBuilder(textData)
         val colorBlueSpan = ForegroundColorSpan(ContextCompat.getColor(this, R.color.main))
         builder.setSpan(colorBlueSpan, textData.length - 8 - part.length, textData.length - 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
@@ -188,5 +192,16 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView {
 
     override fun getUserInfoFailureView() {
 
+    }
+
+    fun checkLastLetter(name: String, firstValue: String, secondValue: String?): String {
+        val lastName = name[name.length - 1]
+
+        if (lastName.code < 0xAC00 || lastName.code > 0xD7A3) {
+            return name
+        }
+
+        val selectedValue = if ((lastName.code - 0xAC00) % 28 > 0) firstValue else secondValue!!
+        return name + selectedValue
     }
 }

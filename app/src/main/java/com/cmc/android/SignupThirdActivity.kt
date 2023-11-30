@@ -129,6 +129,7 @@ class SignupThirdActivity: AppCompatActivity(), SignupView {
             putExtra("content", "신청이 수락될 때까지 조금만 기다려주세요 :)")
             putExtra("btnText", "확인")
         }
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)
         finishAffinity()
     }
