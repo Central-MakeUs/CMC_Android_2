@@ -97,6 +97,7 @@
             android:fontFamily="@font/pretendard_medium"
             android:hint="닉네임을 입력해주세요"
             android:maxLines="1"
+            android:singleLine="true"
             android:paddingHorizontal="5dp"
             android:paddingVertical="0dp"
             android:textColor="@color/gray_200"
