@@ -5,6 +5,10 @@
         <item name="windowNoTitle">true</item>
         <!-- 상태바 투명 설정 부분 -->
         <item name="android:windowTranslucentStatus">true</item>
+        <!-- 기본 Splash 제거 -->
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="S">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <style name="Theme.CMC_Android" parent="Base.Theme.CMC_Android" />

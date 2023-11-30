@@ -46,6 +46,7 @@ class AuthService {
     fun login(loginRequest: LoginRequest) {
         authService?.login(loginRequest)?.enqueue(object: Callback<ResponseWrapper<AuthResult>> {
             override fun onResponse(call: Call<ResponseWrapper<AuthResult>>, response: Response<ResponseWrapper<AuthResult>>) {
+                Log.d("API-TEST", "response = $response")
                 if (response.code() == 200) {
                     val authResponse = response.body()
                     if (authResponse?.isSuccess == true) {
@@ -60,6 +61,7 @@ class AuthService {
                 }
             }
             override fun onFailure(call: Call<ResponseWrapper<AuthResult>>, t: Throwable) {
+                loginView.loginFailureView()
                 Log.d("API-ERROR", "AuthService_login_failure")
             }
         })
