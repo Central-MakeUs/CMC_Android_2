@@ -25,48 +25,63 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".SplashActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".LoginDetailActivity"
             android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
             />
         <activity android:name=".ChangePwdFirstActivity"
             android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
         />
         <activity android:name=".ChangePwdSecondActivity"
             android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
         />
         <activity android:name=".ChangePwdThirdActivity"
             android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
         />
-        <activity android:name=".SignupFirstActivity" />
+        <activity android:name=".SignupFirstActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".SignupSecondActivity"
             android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
         />
-        <activity android:name=".SignupThirdActivity" />
-        <activity android:name=".ResultActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".SignupThirdActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ResultActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
         <activity android:name=".QRActivity"
-            android:screenOrientation="portrait"
             android:stateNotNeeded="true"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:screenOrientation="portrait" />
         <activity android:name=".AttendanceCheckActivity"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait" />
         <activity android:name=".WebViewActivity"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait" />
         <activity android:name=".MyPageActivity"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait" />
         <activity android:name=".MyPageInfoActivity"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
