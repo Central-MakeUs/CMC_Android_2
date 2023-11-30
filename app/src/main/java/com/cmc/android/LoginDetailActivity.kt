@@ -15,6 +15,8 @@ import com.cmc.android.databinding.ActivityLoginDetailBinding
 import com.cmc.android.network.auth.AuthService
 import com.cmc.android.network.auth.LoginView
 import com.cmc.android.utils.saveAccessToken
+import com.cmc.android.utils.saveEmail
+import com.cmc.android.utils.savePassword
 import com.cmc.android.utils.saveRefreshToken
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent.setEventListener
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
@@ -35,9 +37,6 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
         initChangeListener()
         initKeyboardListener()
         setContentView(binding.root)
-
-        // UPDATE: 임의로 넣은 부분
-        authService.login(LoginRequest("string", "string"))
     }
 
     private fun initService() {
@@ -145,6 +144,8 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
     }
 
     override fun loginSuccessView(result: AuthResult) {
+        saveEmail(binding.loginDetailEmailEt.text.toString())
+        savePassword(binding.loginDetailPwdEt.text.toString())
         saveAccessToken(result.accessToken)
         saveRefreshToken(result.refreshToken)
         startActivity(Intent(this, MainActivity::class.java))

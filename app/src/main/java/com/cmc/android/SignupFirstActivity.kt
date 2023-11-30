@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.cmc.android.databinding.ActivitySignupFirstBinding
+import java.net.URL
 
 class SignupFirstActivity: AppCompatActivity() {
 
@@ -40,34 +41,16 @@ class SignupFirstActivity: AppCompatActivity() {
             finish()
         }
 
-        binding.signupFirstAllIv.setOnClickListener {
-            changeAllRadio()
-        }
+        binding.signupFirstAllIv.setOnClickListener { changeAllRadio() }
+        binding.signupFirstServiceIv.setOnClickListener { radioCheckListener(1) }
+        binding.signupFirstPersonalIv.setOnClickListener { radioCheckListener(2) }
+        binding.signupFirstLocationIv.setOnClickListener { radioCheckListener(3) }
+        binding.signupFirstMarketingIv.setOnClickListener { radioCheckListener(4) }
 
-        binding.signupFirstServiceIv.setOnClickListener {
-            radioCheckListener(1)
-        }
-
-        binding.signupFirstPersonalIv.setOnClickListener {
-            radioCheckListener(2)
-        }
-
-        binding.signupFirstLocationIv.setOnClickListener {
-            radioCheckListener(3)
-        }
-
-        binding.signupFirstMarketingIv.setOnClickListener {
-            radioCheckListener(4)
-        }
-
-        arrowImages.forEach {
-            it.setOnClickListener {
-                // 약관동의 사이트
-                val url = "https://makeus-challenge.notion.site/ce8e31baeee9444382e69a87bae418f2?pvs=4"
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                startActivity(intent)
-            }
-        }
+        binding.signupFirstServiceArrow.setOnClickListener { connectUrl("https://makeus-challenge.notion.site/ce8e31baeee9444382e69a87bae418f2") }
+        binding.signupFirstPersonalArrow.setOnClickListener { connectUrl("https://makeus-challenge.notion.site/be7d5901cf834befafe088e03e362c96") }
+        binding.signupFirstLocationArrow.setOnClickListener { connectUrl("https://makeus-challenge.notion.site/28a562a7a37c4962b50f45a0ce59d9b2") }
+        binding.signupFirstMarketingArrow.setOnClickListener { connectUrl("https://makeus-challenge.notion.site/1096cea2c98e4f07b8211f95cf4ab93c") }
 
         binding.signupFirstNextBtn.setOnClickListener {
             var intent = Intent(this, SignupSecondActivity::class.java)
@@ -75,6 +58,11 @@ class SignupFirstActivity: AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+    }
+
+    private fun connectUrl(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
     }
 
     private fun radioCheckListener(index: Int) {

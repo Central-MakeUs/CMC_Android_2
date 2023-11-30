@@ -1,12 +1,15 @@
 package com.cmc.android
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.cmc.android.databinding.ActivityMyPageBinding
 import com.cmc.android.utils.getNickname
 import com.cmc.android.utils.removeAccessToken
+import com.cmc.android.utils.removeEmail
 import com.cmc.android.utils.removeNickname
+import com.cmc.android.utils.removePassword
 import com.cmc.android.utils.removeRefreshToken
 
 class MyPageActivity: AppCompatActivity() {
@@ -34,15 +37,14 @@ class MyPageActivity: AppCompatActivity() {
 
         binding.myPageRuleCl.setOnClickListener {
             // UPDATE: 노션 연결
-            var intent = Intent(this, WebViewActivity::class.java)
-            intent.putExtra("url", "https://www.naver.com")
+            var url = "https://www.notion.so/makeus-challenge/CMC-d25e04ac02d64182a0b1dadefc8543a9?pvs=4"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         }
 
         binding.myPagePersonalCl.setOnClickListener { 
-            // UPDATE: 노션 연결
-            var intent = Intent(this, WebViewActivity::class.java)
-            intent.putExtra("url", "https://www.naver.com")
+            var url = "https://makeus-challenge.notion.site/be7d5901cf834befafe088e03e362c96"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         }
 
@@ -58,6 +60,8 @@ class MyPageActivity: AppCompatActivity() {
                     if (result) {
                         removeAccessToken()
                         removeRefreshToken()
+                        removeEmail()
+                        removePassword()
                         removeNickname()
 
                         startActivity(Intent(this@MyPageActivity, LoginActivity::class.java))

@@ -1,6 +1,7 @@
 package com.cmc.android
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -18,6 +19,7 @@ import com.cmc.android.network.attendances.AttendanceSendView
 import com.cmc.android.network.attendances.AttendanceService
 import com.cmc.android.network.user.UserService
 import com.cmc.android.network.user.UserView
+import com.cmc.android.utils.getNickname
 import com.cmc.android.utils.partConvertFromServer
 import com.cmc.android.utils.saveNickname
 import com.google.zxing.client.android.Intents
@@ -129,6 +131,24 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView {
         binding.mainSettingIv.setOnClickListener {
             startActivity(Intent(this, MyPageActivity::class.java))
         }
+
+        binding.mainAllInformCl.setOnClickListener {
+            var url = "https://makeus-challenge.notion.site/2591216dc54f4928a0ebfce2d6ec4cfe"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        }
+
+        binding.mainKakaoTalkCl.setOnClickListener {
+            var url = "https://pf.kakao.com/_xcwDJT/chat"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        }
+
+        binding.mainCmcWebCl.setOnClickListener {
+            var url = "https://cmc.makeus.in/"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
@@ -137,13 +157,12 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView {
             val scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent)
             attendanceCode = scanResult.contents
             attendanceService.sendAttendance(attendanceCode)
-            Toast.makeText(this, scanResult.contents, Toast.LENGTH_LONG).show()
         }
     }
 
     override fun attendanceSendSuccessView() {
         var intent = Intent(this@MainActivity, ResultActivity::class.java)
-        intent.putExtra("title", "00님의 \n출석이 완료되었어요!")
+        intent.putExtra("title", "${getNickname()}님의 \n출석이 완료되었어요!")
         intent.putExtra("content", "잠시 후 시작되는 세션에 집중해주세요 :)")
         intent.putExtra("btnText", "완료")
         startActivity(intent)

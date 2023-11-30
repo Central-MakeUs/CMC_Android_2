@@ -30,6 +30,32 @@ fun saveRefreshToken(token: String?) {
     editor.apply()
 }
 
+// Email
+fun removeEmail() {
+    val editor = mSharedPreferences.edit()
+    editor.remove("email")
+    editor.commit()
+}
+
+fun saveEmail(email: String?) {
+    val editor = mSharedPreferences.edit()
+    editor.putString("email", email)
+    editor.apply()
+}
+
+// Password
+fun removePassword() {
+    val editor = mSharedPreferences.edit()
+    editor.remove("password")
+    editor.commit()
+}
+
+fun savePassword(password: String?) {
+    val editor = mSharedPreferences.edit()
+    editor.putString("password", password)
+    editor.apply()
+}
+
 // Nickname
 fun removeNickname() {
     val editor = mSharedPreferences.edit()

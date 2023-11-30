@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.cmc.android.databinding.ActivityQrBinding
 import com.cmc.android.network.attendances.AttendanceSendView
 import com.cmc.android.network.attendances.AttendanceService
+import com.cmc.android.utils.getNickname
 import com.journeyapps.barcodescanner.CaptureManager
 
 class QRActivity : AppCompatActivity(), AttendanceSendView {
@@ -45,7 +46,7 @@ class QRActivity : AppCompatActivity(), AttendanceSendView {
                 override fun finish(result: Boolean) {
                     if (result) {
                         var intent = Intent(this@QRActivity, ResultActivity::class.java)
-                        intent.putExtra("title", "00님의 \n출석이 완료되었어요!")
+                        intent.putExtra("title", "${getNickname()}님의 \n출석이 완료되었어요!")
                         intent.putExtra("content", "잠시 후 시작되는 세션에 집중해주세요 :)")
                         intent.putExtra("btnText", "완료")
                         startActivity(intent)
@@ -96,7 +97,7 @@ class QRActivity : AppCompatActivity(), AttendanceSendView {
 
     override fun attendanceSendSuccessView() {
         var intent = Intent(this@QRActivity, ResultActivity::class.java)
-        intent.putExtra("title", "00님의 \n출석이 완료되었어요!")
+        intent.putExtra("title", "${getNickname()}님의 \n출석이 완료되었어요!")
         intent.putExtra("content", "잠시 후 시작되는 세션에 집중해주세요 :)")
         intent.putExtra("btnText", "완료")
         startActivity(intent)
