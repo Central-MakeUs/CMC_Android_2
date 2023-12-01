@@ -38,13 +38,14 @@ class MyPageActivity: AppCompatActivity() {
 
         binding.myPageRuleCl.setOnClickListener {
             // UPDATE: 노션 연결
-            var url = "https://www.notion.so/makeus-challenge/CMC-d25e04ac02d64182a0b1dadefc8543a9?pvs=4"
+            var url = "https://makeus-challenge.notion.site/43da7aedefaf4eb5a227dd9a1c66be5b?pvs=4"
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         }
 
-        binding.myPagePersonalCl.setOnClickListener { 
-            var url = "https://makeus-challenge.notion.site/be7d5901cf834befafe088e03e362c96"
+        binding.myPagePersonalCl.setOnClickListener {
+            // UPDATE: 나중에 수정 필요!
+            var url = "https://makeus-challenge.notion.site/28a562a7a37c4962b50f45a0ce59d9b2?pvs=4"
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         }

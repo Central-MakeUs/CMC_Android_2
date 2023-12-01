@@ -14,9 +14,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.cmc.android.databinding.ActivityMainBinding
+import com.cmc.android.domain.notification.NotificationResult
 import com.cmc.android.domain.req.UserInfoResponse
 import com.cmc.android.network.attendances.AttendanceSendView
 import com.cmc.android.network.attendances.AttendanceService
+import com.cmc.android.network.notification.NotificationService
+import com.cmc.android.network.notification.NotificationView
 import com.cmc.android.network.user.UserService
 import com.cmc.android.network.user.UserView
 import com.cmc.android.utils.getNickname
@@ -28,7 +31,7 @@ import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
 
-class MainActivity : AppCompatActivity(), UserView, AttendanceSendView {
+class MainActivity : AppCompatActivity(), UserView, AttendanceSendView, NotificationView {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var nickname: String
@@ -36,8 +39,9 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView {
     private lateinit var part: String
     private lateinit var attendanceService: AttendanceService
     private lateinit var userService: UserService
+    private lateinit var notificationService: NotificationService
     private lateinit var attendanceCode: String
-    private var informList = arrayListOf<String>()
+    private var informList = arrayListOf<NotificationResult>()
     private lateinit var vpAdapter: InformRVAdapter
     private var currentPage = 0
     private lateinit var handler: Handler
@@ -66,14 +70,23 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView {
         userService = UserService()
         userService.setUserView(this)
         userService.getUserInfo()
+        notificationService = NotificationService()
+        notificationService.setNotificationView(this)
+        notificationService.getNotifications()
     }
 
     private fun initViewPager() {
-        informList.addAll(arrayListOf("a", "b", "c"))
         vpAdapter = InformRVAdapter(informList)
         binding.mainInformVp.adapter = vpAdapter
         binding.mainInformVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         binding.mainInformCi.setViewPager(binding.mainInformVp)
+        vpAdapter.setOnItemClickListener(object: InformRVAdapter.OnItemClickListener {
+            override fun onItemClick(data: NotificationResult, position: Int) {
+                var intent = Intent(this@MainActivity, WebViewActivity::class.java)
+                intent.putExtra("url", data.notionUrl)
+                startActivity(intent)
+            }
+        })
     }
 
     private fun setPage() {
@@ -185,8 +198,8 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView {
 
         val textData = "${nickname}${lastLetterCheck}\nCMC ${generation}기 ${part}로\n참여중이에요"
         val builder = SpannableStringBuilder(textData)
-        val colorBlueSpan = ForegroundColorSpan(ContextCompat.getColor(this, R.color.main))
-        builder.setSpan(colorBlueSpan, textData.length - 8 - part.length, textData.length - 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        val colorSpan = ForegroundColorSpan(ContextCompat.getColor(this, R.color.main))
+        builder.setSpan(colorSpan, textData.length - 8 - part.length, textData.length - 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.mainTitle.text = builder
     }
 
@@ -203,5 +216,13 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView {
 
         val selectedValue = if ((lastName.code - 0xAC00) % 28 > 0) firstValue else secondValue!!
         return name + selectedValue
+    }
+
+    override fun getNotificationSuccessView(result: NotificationResult) {
+        vpAdapter.addItem(result)
+    }
+
+    override fun getNotificationFailureView() {
+
     }
 }

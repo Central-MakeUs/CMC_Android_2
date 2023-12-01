@@ -49,6 +49,7 @@ class UserService {
     fun deleteUser() {
         userService?.deleteUser()?.enqueue(object: Callback<ResponseWrapper<String>> {
             override fun onResponse(call: Call<ResponseWrapper<String>>, response: Response<ResponseWrapper<String>>) {
+                Log.d("API-TEST", "response = $response")
                 if (response.code() == 200) {
                     val userResponse = response.body()
                     if (userResponse?.isSuccess == true) {
