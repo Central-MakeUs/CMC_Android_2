@@ -11,6 +11,7 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+    <!-- BottomSheet 키보드 위로 올리기 -->
     <style name="DialogStyle" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
         <item name="android:statusBarColor">@android:color/transparent</item>

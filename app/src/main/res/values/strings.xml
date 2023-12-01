@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CMC_Android</string>
+    <string name="app_name">CMC - 수익형 앱 런칭 동아리</string>
     <string name="find_id"><u>아이디 찾기</u></string>
     <string name="find_pwd"><u>비밀번호 재설정하기</u></string>
     <string name="go_signup"><u>회원가입하기</u></string>
