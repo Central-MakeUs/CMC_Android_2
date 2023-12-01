@@ -3,6 +3,7 @@ package com.cmc.android.network.auth
 import android.util.Log
 import com.cmc.android.domain.base.ResponseWrapper
 import com.cmc.android.domain.auth.AuthResult
+import com.cmc.android.domain.auth.TokenResult
 import com.cmc.android.domain.auth.req.EmailAndCodeRequest
 import com.cmc.android.domain.auth.req.SignupRequest
 import com.cmc.android.domain.base.ErrorResponse
@@ -23,6 +24,7 @@ class AuthService {
     private lateinit var sendEmailView: SendEmailView
     private lateinit var checkEmailValidationView: CheckEmailValidationView
     private lateinit var changePasswordView: ChangePasswordView
+    private lateinit var getNewTokenView: GetNewTokenView
 
     fun setLoginView(loginView: LoginView) {
         this.loginView = loginView
@@ -41,6 +43,9 @@ class AuthService {
     }
     fun setChangePasswordView(changePasswordView: ChangePasswordView) {
         this.changePasswordView = changePasswordView
+    }
+    fun setGetNewTokenView(getNewTokenView: GetNewTokenView) {
+        this.getNewTokenView = getNewTokenView
     }
 
     fun login(loginRequest: LoginRequest) {
@@ -174,6 +179,29 @@ class AuthService {
             }
             override fun onFailure(call: Call<ResponseWrapper<String>>, t: Throwable) {
                 Log.d("API-ERROR", "AuthService_changePassword_failure")
+            }
+        })
+    }
+
+    fun getNewToken(refreshToken: String) {
+        authService?.getNewToken(refreshToken)?.enqueue(object: Callback<ResponseWrapper<TokenResult>> {
+            override fun onResponse(call: Call<ResponseWrapper<TokenResult>>, response: Response<ResponseWrapper<TokenResult>>) {
+                if (response.code() == 200) {
+                    val getNewTokenResponse = response.body()
+                    if (getNewTokenResponse?.isSuccess == true) {
+                        getNewTokenView.getNewTokenSuccessView(getNewTokenResponse.result!!)
+                    } else {
+                        getNewTokenView.getNewTokenFailureView()
+                    }
+                } else {
+                    val gson = Gson()
+                    val errorResponse = gson.fromJson(response.errorBody()?.string(), ErrorResponse::class.java)
+                    Log.d("API-ERROR", "getNewToken errorResponse = $errorResponse")
+                    getNewTokenView.getNewTokenFailureView()
+                }
+            }
+            override fun onFailure(call: Call<ResponseWrapper<TokenResult>>, t: Throwable) {
+                Log.d("API-ERROR", "AuthService_getNewToken_failure")
             }
         })
     }

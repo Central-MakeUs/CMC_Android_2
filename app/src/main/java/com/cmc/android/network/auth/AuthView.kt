@@ -1,6 +1,7 @@
 package com.cmc.android.network.auth
 
 import com.cmc.android.domain.auth.AuthResult
+import com.cmc.android.domain.auth.TokenResult
 
 interface LoginView {
     fun loginSuccessView(result: AuthResult)
@@ -30,4 +31,9 @@ interface CheckEmailValidationView {
 interface ChangePasswordView {
     fun changePasswordSuccessView()
     fun changePasswordFailureView()
+}
+
+interface GetNewTokenView {
+    fun getNewTokenSuccessView(result: TokenResult)
+    fun getNewTokenFailureView()
 }
