@@ -28,7 +28,7 @@ class ApplicationClass: Application() {
         val client: OkHttpClient = OkHttpClient.Builder()
             .readTimeout(30000, TimeUnit.MILLISECONDS)
             .connectTimeout(30000, TimeUnit.MILLISECONDS)
-            // .addNetworkInterceptor(AuthorizationTokenInterceptor())
+            .addNetworkInterceptor(AuthorizationTokenInterceptor())
             .build()
 
         retrofit = Retrofit.Builder()

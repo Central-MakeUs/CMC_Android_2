@@ -2,12 +2,14 @@ package com.cmc.android.network.auth
 
 import com.cmc.android.domain.base.ResponseWrapper
 import com.cmc.android.domain.auth.AuthResult
+import com.cmc.android.domain.auth.TokenResult
 import com.cmc.android.domain.auth.req.EmailAndCodeRequest
 import com.cmc.android.domain.auth.req.LoginRequest
 import com.cmc.android.domain.auth.req.SignupRequest
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -50,4 +52,9 @@ interface AuthInterface {
         @Body loginRequest: LoginRequest
     ): Call<ResponseWrapper<String>>
 
+    /** 새로운 토큰 발급 */
+    @GET("/auth/refresh")
+    fun getNewToken(
+        @Header("X-REFRESH-TOKEN") refreshToken: String
+    ): Call<ResponseWrapper<TokenResult>>
 }

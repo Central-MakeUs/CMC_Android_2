@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -144,6 +145,7 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
     }
 
     override fun loginSuccessView(result: AuthResult) {
+        Log.d("API-TEST", "result = $result")
         saveEmail(binding.loginDetailEmailEt.text.toString())
         savePassword(binding.loginDetailPwdEt.text.toString())
         saveAccessToken(result.accessToken)

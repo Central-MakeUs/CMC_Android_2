@@ -27,6 +27,7 @@ class UserService {
     fun getUserInfo() {
         userService?.getUserInfo()?.enqueue(object: Callback<ResponseWrapper<UserInfoResponse>> {
             override fun onResponse(call: Call<ResponseWrapper<UserInfoResponse>>, response: Response<ResponseWrapper<UserInfoResponse>>) {
+                Log.d("API-TEST", "response = $response")
                 if (response.code() == 200) {
                     val userResponse = response.body()
                     if (userResponse?.isSuccess == true) {
