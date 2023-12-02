@@ -153,6 +153,7 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
 
         var intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     override fun loginFailureView() {
