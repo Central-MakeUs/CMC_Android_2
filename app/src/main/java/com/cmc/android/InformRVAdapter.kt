@@ -55,4 +55,9 @@ class InformRVAdapter(private var informList: ArrayList<NotificationResult>): Re
         informList.add(item)
         this.notifyDataSetChanged()
     }
+
+    fun addAllItems(items: ArrayList<NotificationResult>) {
+        informList.addAll(items)
+        this.notifyDataSetChanged()
+    }
 }

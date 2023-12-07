@@ -9,5 +9,5 @@ interface NotificationInterface {
 
     /** 공지사항 조회 */
     @GET("notifications/latest")
-    fun getNotifications(): Call<ResponseWrapper<NotificationResult>>
+    fun getNotifications(): Call<ResponseWrapper<ArrayList<NotificationResult>>>
 }

@@ -21,10 +21,8 @@ class NotificationService {
     }
 
     fun getNotifications() {
-        notificationService?.getNotifications()?.enqueue(object: Callback<ResponseWrapper<NotificationResult>> {
-            override fun onResponse(call: Call<ResponseWrapper<NotificationResult>>, response: Response<ResponseWrapper<NotificationResult>>) {
-                Log.d("API-TEST", "response = $response")
-
+        notificationService?.getNotifications()?.enqueue(object: Callback<ResponseWrapper<ArrayList<NotificationResult>>> {
+                override fun onResponse(call: Call<ResponseWrapper<ArrayList<NotificationResult>>>, response: Response<ResponseWrapper<ArrayList<NotificationResult>>>) {
                 if (response.code() == 200) {
                     val notificationResponse = response.body()
                     if (notificationResponse?.isSuccess == true) {
@@ -38,7 +36,7 @@ class NotificationService {
                     notificationView.getNotificationFailureView()
                 }
             }
-            override fun onFailure(call: Call<ResponseWrapper<NotificationResult>>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseWrapper<ArrayList<NotificationResult>>>, t: Throwable) {
                 Log.d("API-ERROR", "NotificationService_getNotifications_failure")
             }
         })

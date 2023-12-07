@@ -188,7 +188,6 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView, Notifica
     }
 
     override fun getUserInfoSuccessView(result: UserInfoResponse) {
-        // UPDATE: 앞 글자 맞춰서 "은/는" 코드 추가하기!
         nickname = result.nickname
         saveNickname(nickname)
         generation = result.generation
@@ -207,7 +206,7 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView, Notifica
 
     }
 
-    fun checkLastLetter(name: String, firstValue: String, secondValue: String?): String {
+    private fun checkLastLetter(name: String, firstValue: String, secondValue: String?): String {
         val lastName = name[name.length - 1]
 
         if (lastName.code < 0xAC00 || lastName.code > 0xD7A3) {
@@ -218,8 +217,8 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView, Notifica
         return name + selectedValue
     }
 
-    override fun getNotificationSuccessView(result: NotificationResult) {
-        vpAdapter.addItem(result)
+    override fun getNotificationSuccessView(result: ArrayList<NotificationResult>) {
+        vpAdapter.addAllItems(result)
     }
 
     override fun getNotificationFailureView() {
