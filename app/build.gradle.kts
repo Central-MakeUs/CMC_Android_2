@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.cmc.android"
+    namespace = "com.cmc.android_pt"
     compileSdk = 34
 
     buildFeatures {
@@ -17,7 +17,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.cmc.android"
+        applicationId = "com.cmc.android_pt"
         minSdk = 24
         targetSdk = 33
         versionCode = 1
