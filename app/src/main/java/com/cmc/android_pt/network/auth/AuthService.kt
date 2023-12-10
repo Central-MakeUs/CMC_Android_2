@@ -96,6 +96,7 @@ class AuthService {
     fun checkEmail(email: String) {
         authService?.checkEmail(email)?.enqueue(object: Callback<ResponseWrapper<String>> {
             override fun onResponse(call: Call<ResponseWrapper<String>>, response: Response<ResponseWrapper<String>>) {
+                Log.d("API-TEST", "response = $response")
                 if (response.code() == 200) {
                     val emailResponse = response.body()
                     if (emailResponse?.isSuccess == true) {

@@ -164,7 +164,8 @@
                         android:textSize="14sp"
                         android:layout_marginVertical="7dp"
                         android:layout_marginHorizontal="12dp"
-                        android:textColor="@color/gray_500" />
+                        android:textColor="@color/gray_500"
+                        android:enabled="false" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -215,6 +216,7 @@
                     android:paddingVertical="0dp"
                     android:layout_marginTop="10dp"
                     android:background="@android:color/transparent"
+                    android:textCursorDrawable="@drawable/bg_et_cursor"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true"
@@ -353,6 +355,7 @@
                     android:paddingVertical="0dp"
                     android:layout_marginTop="10dp"
                     android:background="@android:color/transparent"
+                    android:textCursorDrawable="@drawable/bg_et_cursor"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true"

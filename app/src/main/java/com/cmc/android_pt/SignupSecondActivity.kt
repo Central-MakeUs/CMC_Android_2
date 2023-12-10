@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
@@ -53,7 +54,8 @@ class SignupSecondActivity: AppCompatActivity(), EmailView {
             finish()
         }
 
-        binding.signupSecondEmailCheckTv.setOnClickListener {
+        binding.signupSecondEmailCheckCv.setOnClickListener {
+            Log.d("API-TEST", "클릭")
             if(isValidEmail(binding.signupSecondEmailEt.text.toString())){
                 (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(
                     currentFocus!!.windowToken,
@@ -120,7 +122,11 @@ class SignupSecondActivity: AppCompatActivity(), EmailView {
     private fun initChangeListener() {
         binding.signupSecondEmailEt.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { validationCheck[0] = false }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                validationCheck[0] = false
+
+                // binding.signupSecondEmailEt.isEnabled = binding.signupSecondEmailEt.text.isNotEmpty()
+            }
             override fun afterTextChanged(p0: Editable?) { }
         })
         binding.signupSecondPwdEt1.addTextChangedListener(object: TextWatcher {
