@@ -30,7 +30,7 @@ class InformRVAdapter(private var informList: ArrayList<NotificationResult>): Re
     }
 
     override fun onBindViewHolder(holder: InformRVAdapter.ViewHolder, position: Int) {
-        holder.binding.mainInformArrowIv.setOnClickListener {
+        holder.binding.root.setOnClickListener {
             itemClickListener.onItemClick(informList[position], position)
         }
         holder.bind(informList[position], position)
@@ -40,6 +40,7 @@ class InformRVAdapter(private var informList: ArrayList<NotificationResult>): Re
 
     inner class ViewHolder(val binding: ItemInformBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(notification: NotificationResult, position: Int) {
+            index = position
             val textData = notification.title
             val builder = SpannableStringBuilder(textData)
             val colorSpan = ForegroundColorSpan(ContextCompat.getColor(binding.root.context, R.color.main))
@@ -58,5 +59,9 @@ class InformRVAdapter(private var informList: ArrayList<NotificationResult>): Re
     fun addAllItems(items: ArrayList<NotificationResult>) {
         informList.addAll(items)
         this.notifyDataSetChanged()
+    }
+
+    fun returnIndex(): NotificationResult {
+        return informList[index]
     }
 }

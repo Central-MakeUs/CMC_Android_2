@@ -83,9 +83,7 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView, Notifica
         binding.mainInformCi.setViewPager(binding.mainInformVp)
         vpAdapter.setOnItemClickListener(object: InformRVAdapter.OnItemClickListener {
             override fun onItemClick(data: NotificationResult, position: Int) {
-                var intent = Intent(this@MainActivity, WebViewActivity::class.java)
-                intent.putExtra("url", data.notionUrl)
-                startActivity(intent)
+
             }
         })
     }
@@ -123,6 +121,12 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView, Notifica
     }
 
     private fun initClickListener() {
+        binding.mainInformCl.setOnClickListener {
+            var informData = vpAdapter.returnIndex()
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(informData.notionUrl))
+            startActivity(intent)
+        }
+
         // UPDATE: Deprecated 함수들 수정
         binding.mainAttendCl.setOnClickListener {
             val integrator = IntentIntegrator(this)
