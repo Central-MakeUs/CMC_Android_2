@@ -189,11 +189,12 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView, Notifica
     }
 
     override fun attendanceSendFailureView() {
-        Toast.makeText(this@MainActivity, "연결 성공", Toast.LENGTH_LONG).show()
+        Toast.makeText(this@MainActivity, "출석 체크를 실패했습니다.", Toast.LENGTH_LONG).show()
     }
 
     override fun getUserInfoSuccessView(result: UserInfoResponse) {
         nickname = result.nickname
+        Log.d("API-TEST", "nickname = $nickname")
         saveNickname(nickname)
         generation = result.generation
         part = partConvertFromServer(result.part)
@@ -214,8 +215,10 @@ class MainActivity : AppCompatActivity(), UserView, AttendanceSendView, Notifica
     private fun checkLastLetter(name: String, firstValue: String, secondValue: String?): String {
         val lastName = name[name.length - 1]
 
+        Log.d("API-TEST", "lastName = $lastName")
+
         if (lastName.code < 0xAC00 || lastName.code > 0xD7A3) {
-            return name
+            return "은"
         }
 
         val selectedValue = if ((lastName.code - 0xAC00) % 28 > 0) firstValue else secondValue!!
