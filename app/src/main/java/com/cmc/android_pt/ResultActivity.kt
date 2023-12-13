@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.cmc.android_pt.databinding.ActivityResultBinding
+import com.cmc.android_pt.utils.getNickname
 
 class ResultActivity: AppCompatActivity() {
 
@@ -31,9 +32,15 @@ class ResultActivity: AppCompatActivity() {
 
     private fun initClickListener() {
         binding.activityResultBtn.setOnClickListener {
-            var intent = Intent(this, LoginDetailActivity::class.java)
-            startActivity(intent)
-            finishAffinity()
+            if (title == "${getNickname()}님의 \n출석이 완료되었어요!") {
+                var intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finishAffinity()
+            } else {
+                var intent = Intent(this, LoginDetailActivity::class.java)
+                startActivity(intent)
+                finishAffinity()
+            }
         }
     }
 }
