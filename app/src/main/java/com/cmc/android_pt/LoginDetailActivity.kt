@@ -154,7 +154,7 @@ class LoginDetailActivity: AppCompatActivity(), LoginView {
 
         var intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        finish()
+        finishAffinity()
     }
 
     override fun loginFailureView() {
