@@ -107,7 +107,7 @@ class AuthService {
                 } else {
                     val gson = Gson()
                     val errorResponse = gson.fromJson(response.errorBody()?.string(), ErrorResponse::class.java)
-                    Log.d("API-ERROR", "checkEmail errorResponse = $errorResponse")
+                    emailView.emailFailureView(errorResponse.message)
                 }
             }
             override fun onFailure(call: Call<ResponseWrapper<String>>, t: Throwable) {
